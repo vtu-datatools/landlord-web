@@ -10,3 +10,6 @@ class Marker(models.Model):
     def __str__(self):
         """Return string representation."""
         return self.name
+
+    def __unicode__(self):
+        return self.name, self.location
