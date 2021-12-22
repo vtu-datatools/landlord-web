@@ -1,0 +1,20 @@
+name: Django Tests
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Triggered by a ${{ github.event_name }} event."
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Build the Django Image and run Django teats
+        run: docker-compose -f docker-local.yaml run django sh -c "python manage.py test && flake8 --exclude markers/migrations,web/settings.py"

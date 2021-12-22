@@ -32,8 +32,11 @@ FROM python as python-run-stage
 ARG BUILD_ENVIRONMENT=local
 ARG APP_HOME=/app
 
+# Prevents Python from buffering stdout and stderr
 ENV PYTHONUNBUFFERED 1
+# Prevents Python from writing pyc files to disc
 ENV PYTHONDONTWRITEBYTECODE 1
+
 ENV BUILD_ENV ${BUILD_ENVIRONMENT}
 
 WORKDIR ${APP_HOME}
