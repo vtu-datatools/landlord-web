@@ -19,6 +19,6 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Build the Django Image
-        run: docker-compose -f docker-production.yaml build
+        run: docker-compose -f docker-local.yaml build
       - name: Run Django tests
-        run: docker-compose -f docker-production.yaml run django sh -c "python manage.py test && flake8 --exclude markers/migrations,web/settings.py"
+        run: docker-compose -f docker-local.yaml run django sh -c "python manage.py test && flake8 --exclude markers/migrations,web/settings.py"
