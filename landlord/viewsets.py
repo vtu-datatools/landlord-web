@@ -2,8 +2,8 @@
 from rest_framework import viewsets
 from rest_framework_gis import filters
 
-from markers.models import Marker
-from markers.serializers import MarkerSerializer
+from landlord.models import Marker
+from landlord.serializers import MarkerSerializer
 
 
 class MarkerViewSet(viewsets.ReadOnlyModelViewSet):

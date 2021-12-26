@@ -2,7 +2,7 @@
 
 from django.contrib.gis import admin
 
-from markers.models import Marker
+from landlord.models import Marker
 
 
 @admin.register(Marker)
