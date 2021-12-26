@@ -26,4 +26,4 @@ jobs:
       - name: Build the Django Image
         run: docker-compose -f docker-local.yaml build
       - name: Run Django tests
-        run: docker-compose -f docker-local.yaml run django sh -c "python manage.py test && flake8 --exclude landlord/migrations,web/settings.py"
+        run: docker-compose -f docker-local.yaml run django sh -c "python manage.py test && flake8 --exclude landlord/migrations,config/settings"
