@@ -2,7 +2,7 @@
 
 from rest_framework_gis import serializers
 
-from markers.models import Marker
+from landlord.models import Marker
 
 
 class MarkerSerializer(serializers.GeoFeatureModelSerializer):
