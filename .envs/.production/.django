@@ -4,9 +4,9 @@ IPYTHONDIR=/app/.ipython
 
 # AWS
 # ------------------------------------------------------------------------------
-DJANGO_AWS_ACCESS_KEY_ID=
-DJANGO_AWS_SECRET_ACCESS_KEY=
-DJANGO_AWS_STORAGE_BUCKET_NAME=vtu_assets
+DJANGO_AWS_ACCESS_KEY_ID=AKIAQLNPDCEARAHXLKF6
+DJANGO_AWS_SECRET_ACCESS_KEY=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
+DJANGO_AWS_STORAGE_BUCKET_NAME=vtu-assets
 
 
 # General
