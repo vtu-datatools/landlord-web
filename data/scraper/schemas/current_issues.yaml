@@ -1,0 +1,18 @@
+---
+files:
+  -
+    url: https://opendata.vancouver.ca/explore/dataset/rental-standards-current-issues/download/?format=csv
+    dest: current_issues.csv
+schema:
+  table_name: current_issues
+  fields:
+    businessoperator: text
+    detailurl: text
+    streetnumber: text
+    street: text
+    totaloutstanding: integer
+    totalunits: integer
+    location: geom
+    area: text
+sql:
+  - current_issues.sql

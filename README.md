@@ -7,23 +7,7 @@ One must first install:
 
 ## Python Setup
 `pip install -r requirements/base.txt`
+#### Local Development Requirements:
 `pip install -r requirements/local.txt`
-## Setup Environment Variables
-Setup the environment variables in the following structure:
-```
-root
-│   README.md
-│   docker-local.yaml
-|   docker-production.yaml
-|   ...
-|
-└───.envs
-    │
-    └───.local
-    │       .django
-    │       .postgres
-    │ 
-    └───.production
-            .django
-            .postgres
-```
+#### Production requirements:
+`pip install -r requirements/production.txt`

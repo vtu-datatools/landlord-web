@@ -272,7 +272,3 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # ACCOUNT_ADAPTER = "landlord.users.adapters.AccountAdapter"
 # # https://django-allauth.readthedocs.io/en/latest/configuration.html
 # SOCIALACCOUNT_ADAPTER = "landlord.users.adapters.SocialAccountAdapter"
-
-
-# Your stuff...
-# ------------------------------------------------------------------------------
