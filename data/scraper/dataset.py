@@ -9,6 +9,7 @@ from . import sql
 from .database import Database
 from .file import File
 from .utility import list_wrap, merge
+from .datasets import datasets
 
 BATCH_SIZE = 1000
 
@@ -24,19 +25,17 @@ class Dataset:
         current_issues.db_import()
     """
 
-    def __init__(self, dataset_name, args=None):
+    def __init__(self, dataset_name, root_dir= './data'):
         self.name = dataset_name
-        self.args = args
+        self.root_dir = root_dir
         self.db = None
-
-        if self.args:
-            self.root_dir = self.args.root_dir
-        else:
-            self.root_dir = './data'
-
-        self.dataset = dataset_name
+        
+        self.dataset = datasets()[dataset_name]
         self.files = self._files()
         self.schemas = list_wrap(self.dataset['schema'])
+
+    def __str__(self):
+        return "Dataset Name: {}. Files: {}".format(self.name, self.files)
 
     def _files(self):
         return [File(file_dict, folder=self.name, root_dir=self.root_dir) for file_dict in self.dataset['files']]
@@ -48,7 +47,7 @@ class Dataset:
         See ./file.py for more details.
         """
         for f in self.files:
-            f.download(hide_progress=self.args.hide_progress)
+            f.download()
 
 
     def db_import(self):

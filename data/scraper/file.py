@@ -80,6 +80,9 @@ class File:
         self.url = file_dict['url']
         self.dest = self._dest(file_dict)
 
+    def __repr__(self):
+        return "Download URL: {}. Destination: {}".format(self.url, self.dest)
+
     def download(self, hide_progress=False):
         download_file(self.url, self.dest, hide_progress=hide_progress)
         return self
