@@ -14,21 +14,21 @@ class Database:
         args is a Namespace that must contain: user, password, database, host, and port
         """
         self.conn = psycopg2.connect(
-            user=args.user,
-            password=args.password,
-            host=args.host,
-            database=args.database,
-            port=args.port
+            user=args['user'],
+            password=args['password'],
+            host=args['host'],
+            database=args['database'],
+            port=args['port']
         )
 
         self.table_name = table_name
 
         self.connection_params = {
-            'user': args.user,
-            'password': args.password,
-            'host': args.host,
-            'database': args.database,
-            'port': args.port
+            'user': args['user'],
+            'password': args['password'],
+            'host': args['host'],
+            'database': args['database'],
+            'port': args['port']
         }
 
     def sql(self, SQL):

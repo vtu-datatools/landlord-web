@@ -12,7 +12,7 @@ schema:
     street: text
     totaloutstanding: integer
     totalunits: integer
-    location: geom
-    area: text
+    geom: geometry
+    geo_local_area: text
 sql:
   - current_issues.sql

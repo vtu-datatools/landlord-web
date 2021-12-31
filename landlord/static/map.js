@@ -9,7 +9,7 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
 }).addTo(map);
 
 async function load_markers() {
-    const markers_url = `/api/markers/?in_bbox=${map.getBounds().toBBoxString()}`
+    const markers_url = `/api/landlord/?in_bbox=${map.getBounds().toBBoxString()}`
     const response = await fetch(markers_url)
     const geojson = await response.json()
     return geojson
@@ -18,7 +18,7 @@ async function load_markers() {
 async function render_markers() {
     const markers = await load_markers();
     L.geoJSON(markers)
-        .bindPopup((layer) => layer.feature.properties.name)
+        .bindPopup((layer) => layer.feature.properties.businessoperator)
         .addTo(map);
 }
 

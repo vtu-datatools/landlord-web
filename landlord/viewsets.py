@@ -2,14 +2,14 @@
 from rest_framework import viewsets
 from rest_framework_gis import filters
 
-from landlord.models import Marker
-from landlord.serializers import MarkerSerializer
+from landlord.models import CurrentEvents
+from landlord.serializers import CurrentEventsSerializer
 
 
-class MarkerViewSet(viewsets.ReadOnlyModelViewSet):
+class CurrentEventsViewSet(viewsets.ReadOnlyModelViewSet):
     """Marker view set."""
 
-    bbox_filter_field = "location"
-    filter_backends = (filters.InBBoxFilter,)
-    queryset = Marker.objects.all()
-    serializer_class = MarkerSerializer
+    # bbox_filter_field = "geom"
+    # filter_backends = (filters.InBBoxFilter,)
+    queryset = CurrentEvents.objects.all()
+    serializer_class = CurrentEventsSerializer

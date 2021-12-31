@@ -1,7 +1,7 @@
 from django.views.generic.base import TemplateView
 
 
-class MarkersMapView(TemplateView):
-    """Markers map view."""
+class CurrentEventsMapView(TemplateView):
+    """CurrentEvents map view."""
 
     template_name = "map.html"

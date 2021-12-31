@@ -2,15 +2,15 @@
 
 from rest_framework_gis import serializers
 
-from landlord.models import Marker
+from landlord.models import CurrentEvents
 
 
-class MarkerSerializer(serializers.GeoFeatureModelSerializer):
+class CurrentEventsSerializer(serializers.GeoFeatureModelSerializer):
     """Marker GeoJSON serializer."""
 
     class Meta:
         """Marker serializer meta class."""
 
-        fields = ("id", "name")
-        geo_field = "location"
-        model = Marker
+        fields = ("businessoperator", "detailurl", "totaloutstanding")
+        geo_field = "geom"
+        model = CurrentEvents

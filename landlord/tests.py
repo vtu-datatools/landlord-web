@@ -1,15 +1,20 @@
 from django.contrib.gis.geos import Point
 from django.test import TestCase
 
-from .models import Marker
+from .models import CurrentEvents
 
 
-class MarkerTestCase(TestCase):
+class CurrentEventsTestCase(TestCase):
     def set_up(self):
-        return Marker.objects.create(name='City Hall', location=Point(1, 1))
+        return CurrentEvents.objects.create(
+            businessoperator='Sahotas',
+            geom=Point(1, 1),
+            detailurl='http://www.google.com',
+            totaloutstanding=10
+        )
 
-    def test_marker_creation(self):
+    def test_current_event_creation(self):
         m = self.set_up()
-        self.assertTrue(isinstance(m, Marker))
-        self.assertEqual(m.__str__(), m.name)
-        self.assertEqual(m.__unicode__(), (m.name, m.location))
+        self.assertTrue(isinstance(m, CurrentEvents))
+        self.assertEqual(m.__str__(), m.businessoperator)
+        self.assertEqual(m.__unicode__(), (m.businessoperator, m.geom))

@@ -3,13 +3,17 @@ import logging
 import itertools
 import os
 import subprocess
+import types
+import csv
 from tqdm import tqdm
+import psycopg2
 
 from . import sql
 from .database import Database
 from .file import File
 from .utility import list_wrap, merge
 from .datasets import datasets
+from .typecast import Typecast
 
 BATCH_SIZE = 1000
 
@@ -50,12 +54,12 @@ class Dataset:
             f.download()
 
 
-    def db_import(self):
+    def db_import(self, db_dict):
         """
         Inserts the dataset in the postgres.
         Output:  True | Throws
         """
-        self.setup_db()
+        self.setup_db(db_dict)
         self.create_schema()
 
         for schema in self.schemas:
@@ -76,6 +80,20 @@ class Dataset:
         else:
             logging.debug('no index files exist for this dataset')
 
+    def transform(self, schema):
+        """
+        Calls the function in dataset_transformation with the same name
+        as the schema.
+        If no function exists with the same name as the schema table, it tries
+        to call the function with the same name as the dataset
+        Input: dict
+        Output: generator
+        """
+        tc = Typecast(schema)
+
+        rows = to_csv(self.files[0].dest)
+
+        return tc.cast_rows(rows)
 
     def import_schema(self, schema):
         """
@@ -83,7 +101,7 @@ class Dataset:
         """
         rows = self.transform(schema)
 
-        pbar = tqdm(unit='rows', disable=self.args.hide_progress)
+        pbar = tqdm(unit='rows')
         while True:
             batch = list(itertools.islice(rows, 0, BATCH_SIZE))
             if len(batch) == 0:
@@ -110,12 +128,12 @@ class Dataset:
             for f in self.dataset['sql']:
                 self.db.execute_sql_file(f)
 
-    def setup_db(self):
+    def setup_db(self, db_dict):
         """
         Establishes the Database object. Used to lazy-load self.db.
         """
         if self.db is None:
-            self.db = Database(self.args, table_name=self.name)
+            self.db = Database(db_dict, table_name=self.name)
 
 
     def dump(self):
@@ -143,3 +161,28 @@ class Dataset:
                 'POSTGRES_DB': self.args.database,
                 'POSTGRES_PASSWORD': self.args.password
             })
+
+def to_csv(file_path_or_generator):
+    """
+    Reads firstline as the headers and converts input into a stream of dicts
+    String | Generator --> Generator
+    """
+    if isinstance(file_path_or_generator, types.GeneratorType):
+        f = io.StringIO(''.join(list(file_path_or_generator)))
+    elif isinstance(file_path_or_generator, str):
+        f = open(file_path_or_generator, mode='r', encoding='utf-8', errors='replace')
+    else:
+        raise ValueError("to_csv accepts Strings or Generators")
+
+    with f:
+        headers = clean_headers(f.readline())
+        for row in csv.DictReader(f, fieldnames=headers, delimiter=';'):
+            yield row
+
+def clean_headers(headers):
+    """
+    parses header csv line and fixes some common issues with column names
+    String --> [String]
+    """
+    s = headers.replace('\n', '').lower()
+    return [x for x in s.split(';')]

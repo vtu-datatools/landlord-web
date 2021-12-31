@@ -2,9 +2,9 @@
 
 from rest_framework import routers
 
-from landlord.viewsets import MarkerViewSet
+from landlord.viewsets import CurrentEventsViewSet
 
 router = routers.DefaultRouter()
-router.register(r"markers", MarkerViewSet)
+router.register(r"landlord", CurrentEventsViewSet)
 
 urlpatterns = router.urls
