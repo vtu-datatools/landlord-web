@@ -2,6 +2,7 @@ import datetime
 import logging
 import itertools
 import os
+import io
 import subprocess
 import types
 import csv

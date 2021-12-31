@@ -1,10 +1,10 @@
 """CurrentEvents urls."""
 from django.urls import path
 
-from .views import CurrentEventsMapView
+from .views import CurrentIssuesMapView
 
 app_name = "landlord"
 
 urlpatterns = [
-    path("map/", CurrentEventsMapView.as_view()),
+    path("map/", CurrentIssuesMapView.as_view()),
 ]

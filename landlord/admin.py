@@ -2,10 +2,10 @@
 
 from django.contrib.gis import admin
 
-from landlord.models import CurrentEvents
+from landlord.models import CurrentIssues
 
 
-@admin.register(CurrentEvents)
+@admin.register(CurrentIssues)
 class CurrentEventsAdmin(admin.OSMGeoAdmin):
     """Marker admin."""
 
