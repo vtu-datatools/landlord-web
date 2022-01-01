@@ -18,7 +18,7 @@ class CurrentIssuesSerializer(serializers.GeoFeatureModelSerializer):
             "street",
             "totaloutstanding",
             "totalunits",
-            "geo_local_area"
+            "geo_local_area",
         )
         geo_field = "geom"
         model = CurrentIssues

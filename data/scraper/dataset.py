@@ -1,20 +1,21 @@
+import csv
 import datetime
-import logging
-import itertools
-import os
 import io
+import itertools
+import logging
+import os
 import subprocess
 import types
-import csv
-from tqdm import tqdm
+
 import psycopg2
+from tqdm import tqdm
 
 from . import sql
 from .database import Database
-from .file import File
-from .utility import list_wrap, merge
 from .datasets import datasets
+from .file import File
 from .typecast import Typecast
+from .utility import list_wrap, merge
 
 BATCH_SIZE = 1000
 
@@ -30,21 +31,23 @@ class Dataset:
         current_issues.db_import()
     """
 
-    def __init__(self, dataset_name, root_dir= './data'):
+    def __init__(self, dataset_name, root_dir="./data"):
         self.name = dataset_name
         self.root_dir = root_dir
         self.db = None
-        
+
         self.dataset = datasets()[dataset_name]
         self.files = self._files()
-        self.schemas = list_wrap(self.dataset['schema'])
+        self.schemas = list_wrap(self.dataset["schema"])
 
     def __str__(self):
         return "Dataset Name: {}. Files: {}".format(self.name, self.files)
 
     def _files(self):
-        return [File(file_dict, folder=self.name, root_dir=self.root_dir) for file_dict in self.dataset['files']]
-
+        return [
+            File(file_dict, folder=self.name, root_dir=self.root_dir)
+            for file_dict in self.dataset["files"]
+        ]
 
     def download_files(self):
         """
@@ -53,7 +56,6 @@ class Dataset:
         """
         for f in self.files:
             f.download()
-
 
     def db_import(self, db_dict):
         """
@@ -75,11 +77,11 @@ class Dataset:
         This method creates those indices.
         It does nothing if the dataset has no additional indexes
         """
-        if 'index' in self.dataset:
-            for sql_file in self.dataset['index']:
+        if "index" in self.dataset:
+            for sql_file in self.dataset["index"]:
                 self.db.execute_sql_file(sql_file)
         else:
-            logging.debug('no index files exist for this dataset')
+            logging.debug("no index files exist for this dataset")
 
     def transform(self, schema):
         """
@@ -102,14 +104,14 @@ class Dataset:
         """
         rows = self.transform(schema)
 
-        pbar = tqdm(unit='rows')
+        pbar = tqdm(unit="rows")
         while True:
             batch = list(itertools.islice(rows, 0, BATCH_SIZE))
             if len(batch) == 0:
                 break
             else:
                 pbar.update(len(batch))
-                self.db.insert_rows(batch, table_name=schema['table_name'])
+                self.db.insert_rows(batch, table_name=schema["table_name"])
         pbar.close()
 
     def create_schema(self):
@@ -119,14 +121,14 @@ class Dataset:
         create_table = lambda name, fields: self.db.sql(sql.create_table(name, fields))
 
         for s in self.schemas:
-            create_table(s['table_name'], s['fields'])
+            create_table(s["table_name"], s["fields"])
 
     def sql_files(self):
         """
         Executes all sql files for the dataset.
         """
-        if 'sql' in self.dataset:
-            for f in self.dataset['sql']:
+        if "sql" in self.dataset:
+            for f in self.dataset["sql"]:
                 self.db.execute_sql_file(f)
 
     def setup_db(self, db_dict):
@@ -136,15 +138,20 @@ class Dataset:
         if self.db is None:
             self.db = Database(db_dict, table_name=self.name)
 
-
     def dump(self):
         """
         Creates .sql dump file of the datasets.
         Saves the file with the format [DATASET_NAME]-DATE.sql
         """
-        tables = ['--table={}'.format(s['table_name']) for s in self.schemas]
-        file_arg = '--file=./{}-{}.sql'.format(self.name, datetime.date.today().isoformat())
-        cmd = ["pg_dump", "--no-owner", "--clean", "--if-exists", "-w"] + tables + [file_arg]
+        tables = ["--table={}".format(s["table_name"]) for s in self.schemas]
+        file_arg = "--file=./{}-{}.sql".format(
+            self.name, datetime.date.today().isoformat()
+        )
+        cmd = (
+            ["pg_dump", "--no-owner", "--clean", "--if-exists", "-w"]
+            + tables
+            + [file_arg]
+        )
         subprocess.run(cmd, env=self.pg_env(), check=True)
 
     def pg_env(self):
@@ -156,12 +163,14 @@ class Dataset:
         return merge(
             os.environ.copy(),
             {
-                'POSTGRES_HOST': self.args.host,
-                'POSTGRES_PORT': self.args.port,
-                'POSTGRES_USER': self.args.user,
-                'POSTGRES_DB': self.args.database,
-                'POSTGRES_PASSWORD': self.args.password
-            })
+                "POSTGRES_HOST": self.args.host,
+                "POSTGRES_PORT": self.args.port,
+                "POSTGRES_USER": self.args.user,
+                "POSTGRES_DB": self.args.database,
+                "POSTGRES_PASSWORD": self.args.password,
+            },
+        )
+
 
 def to_csv(file_path_or_generator):
     """
@@ -169,21 +178,22 @@ def to_csv(file_path_or_generator):
     String | Generator --> Generator
     """
     if isinstance(file_path_or_generator, types.GeneratorType):
-        f = io.StringIO(''.join(list(file_path_or_generator)))
+        f = io.StringIO("".join(list(file_path_or_generator)))
     elif isinstance(file_path_or_generator, str):
-        f = open(file_path_or_generator, mode='r', encoding='utf-8', errors='replace')
+        f = open(file_path_or_generator, mode="r", encoding="utf-8", errors="replace")
     else:
         raise ValueError("to_csv accepts Strings or Generators")
 
     with f:
         headers = clean_headers(f.readline())
-        for row in csv.DictReader(f, fieldnames=headers, delimiter=';'):
+        for row in csv.DictReader(f, fieldnames=headers, delimiter=";"):
             yield row
+
 
 def clean_headers(headers):
     """
     parses header csv line and fixes some common issues with column names
     String --> [String]
     """
-    s = headers.replace('\n', '').lower()
-    return [x for x in s.split(';')]
+    s = headers.replace("\n", "").lower()
+    return [x for x in s.split(";")]

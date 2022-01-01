@@ -13,7 +13,6 @@ class CurrentIssues(models.Model):
     geom = models.PointField(blank=True, null=True)
     geo_local_area = models.CharField(max_length=255, blank=True, null=True)
 
-
     def __str__(self):
         """Return string representation."""
         return self.businessoperator

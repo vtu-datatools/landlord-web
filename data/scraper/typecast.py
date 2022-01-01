@@ -7,13 +7,42 @@ for how psycopg2 converts python types into postgres types
 """
 
 import copy
-import re
 import datetime
+import re
 from decimal import Decimal, InvalidOperation
 
-YES_VALUES = [1, True, 'T', 't', 'true', 'True', 'TRUE', '1', 'y', 'Y', "YES", 'Yes', 'x', 'X']
-NO_VALUES = ['0', 0, False, 'False', 'f', 'F', 'false', 'FALSE', 'N', 'n', 'NO', 'No', 'no']
-INTEGER_TYPES = ['integer', 'smallint', 'bigint', 'int']
+YES_VALUES = [
+    1,
+    True,
+    "T",
+    "t",
+    "true",
+    "True",
+    "TRUE",
+    "1",
+    "y",
+    "Y",
+    "YES",
+    "Yes",
+    "x",
+    "X",
+]
+NO_VALUES = [
+    "0",
+    0,
+    False,
+    "False",
+    "f",
+    "F",
+    "false",
+    "FALSE",
+    "N",
+    "n",
+    "NO",
+    "No",
+    "no",
+]
+INTEGER_TYPES = ["integer", "smallint", "bigint", "int"]
 
 
 def downcase_fields_and_values(d):
@@ -28,31 +57,33 @@ def integer(i):
     if isinstance(i, int):
         return i
     try:
-        int_str = i.strip().replace('$', '')
+        int_str = i.strip().replace("$", "")
 
-        if int_str == '.' or int_str == '':
+        if int_str == "." or int_str == "":
             return None
-        elif '.' in i:
-            return int(int_str.split('.')[0])
+        elif "." in i:
+            return int(int_str.split(".")[0])
         else:
             return int(int_str)
 
     except ValueError:
         return None
 
+
 def geometry(x):
     if x is None:
         return None
-    if x == '':
+    if x == "":
         return None
     else:
         return x
+
 
 def text(x):
     if x is None:
         return None
     s = str(x).strip()
-    if s == '':
+    if s == "":
         return None
     else:
         return s
@@ -87,9 +118,10 @@ def to_float(x):
     except ValueError:
         return None
 
+
 def mm_dd_yyyy(date_str):
     try:
-        month, day, year = map(int, date_str[0:10].split('/'))
+        month, day, year = map(int, date_str[0:10].split("/"))
         return datetime.date(year, month, day)
     except ValueError:
         return None
@@ -101,22 +133,22 @@ def date(x):
     if isinstance(x, (datetime.date, datetime.datetime)):
         return x
     # checks for 2018-12-31 date input
-    if re.match(r'\d{4}-\d{1,2}-\d{1,2}', x):
+    if re.match(r"\d{4}-\d{1,2}-\d{1,2}", x):
         try:
-            return datetime.datetime.strptime(x, '%Y-%m-%d').date()
+            return datetime.datetime.strptime(x, "%Y-%m-%d").date()
         except ValueError:
             return None
     # checks for 20181231 date input
-    elif re.match(r'[0-9]{8}', x):
+    elif re.match(r"[0-9]{8}", x):
         try:
-            return datetime.datetime.strptime(x, '%Y%m%d').date()
+            return datetime.datetime.strptime(x, "%Y%m%d").date()
         except ValueError:
             return None
     # checks for 12/31/2018 date input
-    elif len(x) == 10 and len(x.split('/')) == 3:
+    elif len(x) == 10 and len(x.split("/")) == 3:
         return mm_dd_yyyy(x)
     # checks for 12/31/2018 12:00:00 AM date input
-    elif len(x) == 22 and len(x[0:10].split('/')) == 3:
+    elif len(x) == 22 and len(x[0:10].split("/")) == 3:
         return mm_dd_yyyy(x)
     else:
         return None
@@ -129,12 +161,14 @@ def time(x):
     """
     if isinstance(x, datetime.time):
         return x
-    if isinstance(x, str) and re.match(r'^\d{1,2}:\d{1,2}:\d{1,2}(\s+[AP]M)?$', x.strip(), flags=re.IGNORECASE):
+    if isinstance(x, str) and re.match(
+        r"^\d{1,2}:\d{1,2}:\d{1,2}(\s+[AP]M)?$", x.strip(), flags=re.IGNORECASE
+    ):
         try:
-            time = re.search(r'(\d{1,2}):(\d{1,2}):(\d{1,2})', x.strip())
-            pm = True if re.match(r'^.*?PM$', x.strip(), flags=re.IGNORECASE) else False
+            time = re.search(r"(\d{1,2}):(\d{1,2}):(\d{1,2})", x.strip())
+            pm = True if re.match(r"^.*?PM$", x.strip(), flags=re.IGNORECASE) else False
             hour, minute, second = map(int, time.groups())
-            return datetime.time(hour+(pm*12), minute, second)
+            return datetime.time(hour + (pm * 12), minute, second)
         except ValueError:
             return None
 
@@ -146,7 +180,7 @@ def timestamp(x):
     """
     if isinstance(x, datetime.datetime):
         return x
-    x_parts = x.strip().split(' ', 1)
+    x_parts = x.strip().split(" ", 1)
     if len(x_parts) == 2:
         try:
             return datetime.datetime.combine(date(x_parts[0]), time(x_parts[1]))
@@ -178,9 +212,9 @@ def char_cast(n):
     return to_char
 
 
-class Typecast():
+class Typecast:
     def __init__(self, schema):
-        self.fields = downcase_fields_and_values(schema['fields'])
+        self.fields = downcase_fields_and_values(schema["fields"])
         self.cast = self.generate_cast()
 
     def cast_rows(self, rows):
@@ -213,30 +247,30 @@ class Typecast():
         """
         d = {}
         for k, v in self.fields.items():
-            if 'serial' in v:
+            if "serial" in v:
                 continue
-            elif v[0:4] == 'char':
-                n = int(re.match(r'char\((\d+)\)', v).group(1))
+            elif v[0:4] == "char":
+                n = int(re.match(r"char\((\d+)\)", v).group(1))
                 d[k] = char_cast(n)
             elif v in INTEGER_TYPES:
                 d[k] = lambda x: integer(x)
-            elif v == 'text':
+            elif v == "text":
                 d[k] = lambda x: text(x)
-            elif v == 'geometry':
+            elif v == "geometry":
                 d[k] = lambda x: geometry(x)
-            elif v == 'boolean':
+            elif v == "boolean":
                 d[k] = lambda x: boolean(x)
-            elif 'timestamp' in v:
+            elif "timestamp" in v:
                 d[k] = lambda x: timestamp(x)
-            elif v == 'date':
+            elif v == "date":
                 d[k] = lambda x: date(x)
-            elif 'time' in v:
+            elif "time" in v:
                 d[k] = lambda x: time(x)
-            elif v in ['real', 'double precision']:
+            elif v in ["real", "double precision"]:
                 d[k] = lambda x: to_float(x)
-            elif v == 'numeric':
+            elif v == "numeric":
                 d[k] = lambda x: numeric(x)
-            elif v == 'text[]':
+            elif v == "text[]":
                 d[k] = lambda x: text_array(x)
             else:
                 d[k] = lambda x: x

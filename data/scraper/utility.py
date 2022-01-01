@@ -1,16 +1,17 @@
 import os
 from pathlib import Path
+
 import yaml
 
 
 def read_yml(file):
     """Reads a yaml file and outputs a Dictionary"""
-    with open(file, 'r') as yaml_file:
+    with open(file, "r") as yaml_file:
         return yaml.load(yaml_file, Loader=yaml.FullLoader)
 
 
 def mkdir(file_path):
-    """ Creates all parent directories"""
+    """Creates all parent directories"""
     Path(os.path.dirname(file_path)).mkdir(parents=True, exist_ok=True)
 
 

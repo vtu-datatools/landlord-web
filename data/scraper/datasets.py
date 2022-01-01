@@ -1,8 +1,9 @@
 import os
-
 from functools import lru_cache
 from pathlib import Path
+
 from .utility import read_yml
+
 
 @lru_cache()
 def datasets():
@@ -11,7 +12,9 @@ def datasets():
     """
     dataset_dictionary = {}
 
-    for yaml_file in Path(os.path.dirname(__file__)).absolute().glob('./schemas/*.yaml'):
+    for yaml_file in (
+        Path(os.path.dirname(__file__)).absolute().glob("./schemas/*.yaml")
+    ):
         dataset_dictionary[yaml_file.stem] = read_yml(yaml_file)
 
     return dataset_dictionary
