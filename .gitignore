@@ -61,6 +61,7 @@ coverage.xml
 local_settings.py
 db.sqlite3
 landlord/migrations/
+data/
 
 # Flask stuff:
 instance/
