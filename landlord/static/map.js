@@ -8,7 +8,8 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
     zoomOffset: -1
 }).addTo(map);
 
-async function load_markers() {
+async function fetch_markers() {
+    // Fetch geoJSON containing markers in view 
     const markers_url = `/api/landlord/?in_bbox=${map.getBounds().toBBoxString()}`
     const response = await fetch(markers_url)
     const geojson = await response.json()
@@ -16,10 +17,16 @@ async function load_markers() {
 }
 
 async function render_markers() {
-    const markers = await load_markers();
-    L.geoJSON(markers)
-        .bindPopup((layer) => layer.feature.properties.businessoperator)
-        .addTo(map);
-}
+    // Render markers in marker clusters
+    const markersJson = await fetch_markers();
+    var markers = L.markerClusterGroup();
+    var markersLayer = L.geoJson(markersJson, {
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup(feature.properties.businessoperator);
+        }
+    });
+    markers.addLayer(markersLayer);
+    map.addLayer(markers);
+};
 
 map.on("moveend", render_markers);

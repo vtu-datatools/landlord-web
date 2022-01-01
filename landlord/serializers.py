@@ -11,6 +11,14 @@ class CurrentIssuesSerializer(serializers.GeoFeatureModelSerializer):
     class Meta:
         """Marker serializer meta class."""
 
-        fields = ("businessoperator", "detailurl", "totaloutstanding")
+        fields = (
+            "businessoperator",
+            "detailurl",
+            "streetnumber",
+            "street",
+            "totaloutstanding",
+            "totalunits",
+            "geo_local_area"
+        )
         geo_field = "geom"
         model = CurrentIssues

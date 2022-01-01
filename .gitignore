@@ -63,10 +63,6 @@ db.sqlite3
 landlord/migrations/
 data/
 
-# Flask stuff:
-instance/
-.webassets-cache
-
 # Scrapy stuff:
 .scrapy
 
