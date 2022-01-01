@@ -6,17 +6,15 @@ env:
 
 on:
   pull_request:
-    branches: [ "master", "main" ]
-    paths-ignore: [ "docs/**" ]
+    branches: ["master", "main"]
+    paths-ignore: ["docs/**"]
 
   push:
-    branches: [ "master", "main" ]
-    paths-ignore: [ "docs/**" ]
+    branches: ["master", "main"]
+    paths-ignore: ["docs/**"]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -26,4 +24,4 @@ jobs:
       - name: Build the Django Image
         run: docker-compose -f docker-local.yaml build
       - name: Run Django tests
-        run: docker-compose -f docker-local.yaml run django sh -c "python manage.py test && flake8 --exclude landlord/migrations,config/settings"
+        run: docker-compose -f docker-local.yaml run django sh -c "python manage.py test"
