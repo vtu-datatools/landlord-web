@@ -14,6 +14,10 @@ class CurrentEventsModelTest(TestCase):
             geom=Point(1, 1),
             detailurl="http://www.google.com",
             totaloutstanding=10,
+            totalunits=100,
+            streetnumber=1,
+            street="Main St.",
+            geo_local_area="Downtown",
         )
 
     def test_current_event_creation(self):
