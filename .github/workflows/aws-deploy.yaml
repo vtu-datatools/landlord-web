@@ -21,7 +21,7 @@ jobs:
           DJANGO_AWS_ACCESS_KEY_ID: ${{ secrets.DJANGO_AWS_ACCESS_KEY_ID  }}
           DJANGO_AWS_SECRET_ACCESS_KEY: ${{ secrets.DJANGO_AWS_SECRET_ACCESS_KEY  }}
           DJANGO_AWS_STORAGE_BUCKET_NAME: ${{ secrets.DJANGO_AWS_STORAGE_BUCKET_NAME  }}
-        run: docker-compose -f docker-production.yaml --build
+        run: docker-compose -f docker-production.yaml build
 
   deploy:
     needs: build
