@@ -1,0 +1,33 @@
+name: Deploy to AWS
+
+env:
+  DOCKER_BUILDKIT: 1
+  COMPOSE_DOCKER_CLI_BUILD: 1
+
+on:
+  pull_request:
+    branches: ["master", "main"]
+    paths-ignore: ["docs/**"]
+
+  push:
+    branches: ["master", "main"]
+    paths-ignore: ["docs/**"]
+
+deploy:
+  stage: deploy
+  before_script:
+    - eval `ssh-agent`
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - ssh-keyscan -H 18.0.0.82 >> ~/.ssh/known_hosts
+  script:
+    - echo $CI_REGISTRY_PASSWORD > docker_password
+    - scp docker_password ubuntu@18.0.0.82:~/tmp/docker_password
+    - ssh ubuntu@18.0.0.82 "cat ~/tmp/docker_password | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY; docker pull $CI_REGISTRY_IMAGE${tag}; cd /home/crud_app; docker-compose up -d; docker logout; rm -f ~/tmp/docker_password"
+  after_script:
+    - kill $SSH_AGENT_PID
+    - rm docker_password
+  rules:
+    - if: $CI_COMMIT_BRANCH
+      exists:
+        - Dockerfile
