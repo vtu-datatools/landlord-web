@@ -61,6 +61,8 @@ coverage.xml
 local_settings.py
 db.sqlite3
 data/test.py
+landlord/migrations/*
+!landlord/migrations/__init__.py
 
 # Scrapy stuff:
 .scrapy
@@ -85,8 +87,6 @@ celerybeat-schedule
 
 # Environments
 .env
-.envs
-.envs/
 .venv
 env/
 venv/

@@ -1,0 +1,4 @@
+DEBUG=1
+SECRET_KEY=fake_key
+USE_DOCKER=yes
+IPYTHONDIR=/app/.ipython
