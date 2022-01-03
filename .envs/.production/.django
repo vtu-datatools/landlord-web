@@ -2,13 +2,6 @@ USE_DOCKER=yes
 SECRET_KEY=fake_key
 IPYTHONDIR=/app/.ipython
 
-# AWS
-# ------------------------------------------------------------------------------
-DJANGO_AWS_ACCESS_KEY_ID=AKIAQLNPDCEA6JK6I5HT
-DJANGO_AWS_SECRET_ACCESS_KEY=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
-DJANGO_AWS_STORAGE_BUCKET_NAME=vtu-assets
-
-
 # General
 # ------------------------------------------------------------------------------
 # DJANGO_READ_DOT_ENV_FILE=True
