@@ -30,17 +30,10 @@ jobs:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
           HOSTNAME: ${{ secrets.AWS_HOSTNAME  }}
           USER_NAME: ${{ secrets.AWS_USER_NAME  }}
-
+          DJANGO_AWS_ACCESS_KEY_ID: ${{ secrets.DJANGO_AWS_ACCESS_KEY_ID  }}
+          DJANGO_AWS_SECRET_ACCESS_KEY: ${{ secrets.DJANGO_AWS_SECRET_ACCESS_KEY  }}
+          DJANGO_AWS_STORAGE_BUCKET_NAME: ${{ secrets.DJANGO_AWS_STORAGE_BUCKET_NAME  }}
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} "
-            export DJANGO_AWS_ACCESS_KEY_ID=${DJANGO_AWS_ACCESS_KEY_ID} &&
-            export DJANGO_AWS_SECRET_ACCESS_KEY=${DJANGO_AWS_SECRET_ACCESS_KEY} &&
-            export DJANGO_AWS_STORAGE_BUCKET_NAME=${DJANGO_AWS_STORAGE_BUCKET_NAME} &&
-            cd app &&
-            git checkout main &&
-            git fetch --all &&
-            git reset --hard origin/main &&
-            git pull origin main &&
-            docker-compose -f docker-production.yaml up -d --build
-          "
+          chmod +x ./deploy.sh
+          ./deploy.sh DJANGO_AWS_ACCESS_KEY_ID DJANGO_AWS_SECRET_ACCESS_KEY DJANGO_AWS_STORAGE_BUCKET_NAME
+        shell: bash

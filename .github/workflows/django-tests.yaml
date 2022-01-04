@@ -14,7 +14,7 @@ on:
     paths-ignore: ["docs/**"]
 
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-latest
 
     steps:
