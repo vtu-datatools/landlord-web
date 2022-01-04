@@ -9,9 +9,9 @@ SSH="ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME}"
 
 # SSH onto EC2, pull latest main branch and deploy
 $SSH << EOF
-    export DJANGO_AWS_ACCESS_KEY_ID="${DJANGO_AWS_ACCESS_KEY_ID}" &&
-    export DJANGO_AWS_SECRET_ACCESS_KEY="${DJANGO_AWS_SECRET_ACCESS_KEY}" &&
-    export DJANGO_AWS_STORAGE_BUCKET_NAME="${DJANGO_AWS_STORAGE_BUCKET_NAME}" &&
+    export DJANGO_AWS_ACCESS_KEY_ID="$DJANGO_AWS_ACCESS_KEY_ID" &&
+    export DJANGO_AWS_SECRET_ACCESS_KEY="$DJANGO_AWS_SECRET_ACCESS_KEY" &&
+    export DJANGO_AWS_STORAGE_BUCKET_NAME="$DJANGO_AWS_STORAGE_BUCKET_NAME" &&
     cd app &&
     git checkout main &&
     git fetch --all &&
