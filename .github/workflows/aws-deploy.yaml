@@ -17,10 +17,6 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build the docker_compose
-        env:
-          DJANGO_AWS_ACCESS_KEY_ID: ${{ secrets.DJANGO_AWS_ACCESS_KEY_ID  }}
-          DJANGO_AWS_SECRET_ACCESS_KEY: ${{ secrets.DJANGO_AWS_SECRET_ACCESS_KEY  }}
-          DJANGO_AWS_STORAGE_BUCKET_NAME: ${{ secrets.DJANGO_AWS_STORAGE_BUCKET_NAME  }}
         run: docker-compose -f docker-production.yaml build
 
   deploy:
@@ -34,6 +30,9 @@ jobs:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
           HOSTNAME: ${{ secrets.AWS_HOSTNAME  }}
           USER_NAME: ${{ secrets.AWS_USER_NAME  }}
+          DJANGO_AWS_ACCESS_KEY_ID: ${{ secrets.DJANGO_AWS_ACCESS_KEY_ID  }}
+          DJANGO_AWS_SECRET_ACCESS_KEY: ${{ secrets.DJANGO_AWS_SECRET_ACCESS_KEY  }}
+          DJANGO_AWS_STORAGE_BUCKET_NAME: ${{ secrets.DJANGO_AWS_STORAGE_BUCKET_NAME  }}
 
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
@@ -44,5 +43,5 @@ jobs:
             git fetch --all &&
             git reset --hard origin/main &&
             git pull origin main &&
-            docker-compose -f docker-production.yaml up --build
+            docker-compose -f docker-production.yaml up -d --build
           '
