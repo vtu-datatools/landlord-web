@@ -17,8 +17,8 @@ $SSH << EOF
     git fetch --all 
     git reset --hard origin/main 
     git pull origin main 
-    echo "DJANGO_AWS_ACCESS_KEY_ID=$DJANGO_AWS_ACCESS_KEY_ID" >> app/.envs/.production/.django
-    echo "DJANGO_AWS_SECRET_ACCESS=$DJANGO_AWS_SECRET_ACCESS" >> app/.envs/.production/.django
-    echo "DJANGO_AWS_STORAGE_BUCKET_NAME=$DJANGO_AWS_STORAGE_BUCKET_NAME" >> app/.envs/.production/.django
+    echo "DJANGO_AWS_ACCESS_KEY_ID=$DJANGO_AWS_ACCESS_KEY_ID" >> .envs/.production/.django
+    echo "DJANGO_AWS_SECRET_ACCESS=$DJANGO_AWS_SECRET_ACCESS" >> .envs/.production/.django
+    echo "DJANGO_AWS_STORAGE_BUCKET_NAME=$DJANGO_AWS_STORAGE_BUCKET_NAME" >> gs.envs/.production/.django
     docker-compose -f docker-production.yaml up -d --build
 EOF
