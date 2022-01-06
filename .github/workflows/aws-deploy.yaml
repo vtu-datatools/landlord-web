@@ -30,8 +30,5 @@ jobs:
             export DJANGO_AWS_SECRET_ACCESS_KEY=$DJANGO_AWS_SECRET_ACCESS_KEY
             export DJANGO_AWS_STORAGE_BUCKET_NAME=$DJANGO_AWS_STORAGE_BUCKET_NAME
             cd app 
-            git checkout main 
-            git fetch --all 
-            git reset --hard origin/main 
-            git pull origin main
+            git pull
             docker-compose -f docker-production.yaml up -d --build
