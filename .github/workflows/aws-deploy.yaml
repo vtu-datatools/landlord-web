@@ -13,7 +13,12 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: executing remote ssh commands using password
+        env:
+          DJANGO_AWS_ACCESS_KEY_ID: ${{ secrets.DJANGO_AWS_ACCESS_KEY_ID }}
+          DJANGO_AWS_SECRET_ACCESS_KEY: ${{ secrets.DJANGO_AWS_SECRET_ACCESS_KEY }}
+          DJANGO_AWS_STORAGE_BUCKET_NAME: ${{ secrets.DJANGO_AWS_STORAGE_BUCKET_NAME }}
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.AWS_HOSTNAME }}
