@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: deploy on ec2
 
 env:
   DOCKER_BUILDKIT: 1
@@ -8,32 +8,20 @@ on:
   push:
     branches: ["master", "main"]
     paths-ignore: ["docs/**"]
-
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Build the docker_compose
-        run: docker-compose -f docker-production.yaml build
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Deploy on EC2
-        env:
-          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-          HOSTNAME: ${{ secrets.AWS_HOSTNAME  }}
-          USER_NAME: ${{ secrets.AWS_USER_NAME  }}
-          DJANGO_AWS_ACCESS_KEY_ID: ${{ secrets.DJANGO_AWS_ACCESS_KEY_ID  }}
-          DJANGO_AWS_SECRET_ACCESS_KEY: ${{ secrets.DJANGO_AWS_SECRET_ACCESS_KEY  }}
-          DJANGO_AWS_STORAGE_BUCKET_NAME: ${{ secrets.DJANGO_AWS_STORAGE_BUCKET_NAME  }}
-        run: |
-          chmod +x ./deploy.sh
-          cat ./deploy.sh
-        shell: bash
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOSTNAME }}
+          username: ${{ secrets.AWS_USER_NAME }}
+          key: ${{ secrets.AWS_PRIVATE_KEY }}
+          envs: DJANGO_AWS_ACCESS_KEY_ID,DJANGO_AWS_SECRET_ACCESS_KEY,DJANGO_AWS_STORAGE_BUCKET_NAME
+          script: |
+            export DJANGO_AWS_ACCESS_KEY_ID=$DJANGO_AWS_ACCESS_KEY_ID
+            export DJANGO_AWS_SECRET_ACCESS_KEY=$DJANGO_AWS_SECRET_ACCESS_KEY
+            export DJANGO_AWS_STORAGE_BUCKET_NAME=$DJANGO_AWS_STORAGE_BUCKET_NAME
+            ./deploy.sh
