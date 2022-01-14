@@ -4,6 +4,8 @@ Pillow==8.4.0  # https://github.com/python-pillow/Pillow
 argon2-cffi==21.2.0  # https://github.com/hynek/argon2_cffi
 redis==3.5.3  # https://github.com/redis/redis-py
 hiredis==2.0.0  # https://github.com/redis/hiredis-py
+tqdm  # https://github.com/tqdm/tqdm
+PyYAML  # https://pypi.org/project/PyYAML/
 
 # Django
 # ------------------------------------------------------------------------------

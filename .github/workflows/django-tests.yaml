@@ -1,0 +1,27 @@
+name: Django Tests
+
+env:
+  DOCKER_BUILDKIT: 1
+  COMPOSE_DOCKER_CLI_BUILD: 1
+
+on:
+  pull_request:
+    branches: ["master", "main"]
+    paths-ignore: ["docs/**"]
+
+  push:
+    branches: ["master", "main"]
+    paths-ignore: ["docs/**"]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Triggered by a ${{ github.event_name }} event."
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Build the Django Image
+        run: docker-compose -f docker-local.yaml build
+      - name: Run Django tests
+        run: docker-compose -f docker-local.yaml run django sh -c "python manage.py test"

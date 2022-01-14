@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libpq-dev \
   # postgis postgis
   gdal-bin \
-  postgis \
+  postgis
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements .
