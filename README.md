@@ -1,4 +1,11 @@
 # VTU
+
+Web app for Vancouver focused landlord data.
+
+Stack:
+* Frontend: React.js (Maps with leaflet)
+* Backend: Django
+* Database: Postgis (hosted on AWS RDS)
 ## Run Locally
 One must first install:
 * [Docker](https://docs.docker.com/get-docker/)

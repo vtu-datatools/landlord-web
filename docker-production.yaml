@@ -12,25 +12,11 @@ services:
       dockerfile: ./compose/production/django/Dockerfile
     image: vtu_production_django
     depends_on:
-      - postgres
       - redis
     env_file:
       - ./.envs/.production/.django
       - ./.envs/.production/.postgres
     command: /start
-
-  postgres:
-    build:
-      context: .
-      dockerfile: ./compose/production/postgres/Dockerfile
-    image: vtu_production_postgres
-    volumes:
-      - production_postgres_data:/var/lib/postgresql/data:Z
-      - production_postgres_data_backups:/backups:z
-    env_file:
-      - ./.envs/.production/.postgres
-    ports:
-      - "5432:5432"
 
   traefik:
     build:
