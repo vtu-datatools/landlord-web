@@ -8,25 +8,43 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='CurrentIssues',
+            name="CurrentIssues",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('businessoperator', models.CharField(blank=True, max_length=255, null=True)),
-                ('detailurl', models.CharField(max_length=255, null=True)),
-                ('streetnumber', models.IntegerField(null=True)),
-                ('street', models.CharField(max_length=255, null=True)),
-                ('totaloutstanding', models.IntegerField(null=True)),
-                ('totalunits', models.IntegerField(null=True)),
-                ('geom', django.contrib.gis.db.models.fields.PointField(blank=True, null=True, srid=4326)),
-                ('geo_local_area', models.CharField(blank=True, max_length=255, null=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "businessoperator",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
+                ("detailurl", models.CharField(max_length=255, null=True)),
+                ("streetnumber", models.IntegerField(null=True)),
+                ("street", models.CharField(max_length=255, null=True)),
+                ("totaloutstanding", models.IntegerField(null=True)),
+                ("totalunits", models.IntegerField(null=True)),
+                (
+                    "geom",
+                    django.contrib.gis.db.models.fields.PointField(
+                        blank=True, null=True, srid=4326
+                    ),
+                ),
+                (
+                    "geo_local_area",
+                    models.CharField(blank=True, max_length=255, null=True),
+                ),
             ],
             options={
-                'db_table': 'current_issues',
+                "db_table": "current_issues",
             },
         ),
     ]
