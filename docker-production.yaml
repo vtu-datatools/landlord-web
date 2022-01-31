@@ -38,7 +38,7 @@ services:
     image: vtu_production_frontend
     depends_on:
       - django
-    command: npm run build
+    command: npm start
     stdin_open: true
 
   redis:
