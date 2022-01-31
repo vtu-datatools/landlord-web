@@ -12,6 +12,7 @@ import hash from "object-hash";
 
 import "leaflet/dist/leaflet.css";
 
+// This part is required to configure the default marker icons
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
@@ -19,7 +20,6 @@ let DefaultIcon = L.icon({
   iconUrl: icon,
   shadowUrl: iconShadow,
 });
-
 L.Marker.prototype.options.icon = DefaultIcon;
 
 const center = [49.25, -123.13];
@@ -53,6 +53,7 @@ function Markers() {
   });
 
   if (data) {
+    // hash is required here to force react-leaflet to re-render the geojson
     return <GeoJSON key={hash(data)} data={data} />;
   } else {
     return null;

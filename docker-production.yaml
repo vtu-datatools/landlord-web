@@ -31,6 +31,15 @@ services:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
 
+  frontend:
+    build:
+      context: .
+      dockerfile: ./compose/production/frontend/Dockerfile
+    image: vtu_production_frontend
+    depends_on:
+      - django
+    command: npm start
+    stdin_open: true
+
   redis:
     image: redis:6
-
