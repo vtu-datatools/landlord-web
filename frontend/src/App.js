@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import Map from './components/Map'
-import Sidebar from './components/Sidebar'
+import Map from "./components/Map";
+import Sidebar from "./components/Sidebar";
 import "./styles.scss";
 
 export default function App() {
-
-  const [map, setMap] = useState(null)
+  const [map, setMap] = useState(null);
 
   return (
     <div className="App">
@@ -13,5 +12,4 @@ export default function App() {
       p<Map setMap={setMap} />
     </div>
   );
-
 }

@@ -1,42 +1,84 @@
-import React, { useMemo } from 'react'
-import { MapContainer, TileLayer, ScaleControl, LayersControl, FeatureGroup, Marker } from 'react-leaflet'
+import React, { useMemo, useState } from "react";
+import L from "leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  useMap,
+  useMapEvents,
+  GeoJSON,
+} from "react-leaflet";
+import axios from "axios";
+import hash from "object-hash";
 
 import "leaflet/dist/leaflet.css";
 
-const center = [49.25, -123.13]
-const zoom = 13
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
-const Map = props => {
+let DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+});
 
-   const map = useMemo( () => {
-      return  (
-         <MapContainer 
-            doubleClickZoom={false}
-            id="mapId"
-            zoom={zoom}
-            center={center}
-            whenCreated={props.setMap}>
-   
-            <TileLayer
-               url="https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
-               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' />
+L.Marker.prototype.options.icon = DefaultIcon;
 
-            <ScaleControl />
+const center = [49.25, -123.13];
+const zoom = 13;
 
-            <LayersControl>
-               <LayersControl.Overlay name="Marker Overlay">
-                  <FeatureGroup>
-                     <Marker position={{lat: 57.8817, lng: -154.4253}} />
-                  </FeatureGroup>
-               </LayersControl.Overlay>
-            </LayersControl>
-   
-         </MapContainer>
-      )
-   }, [])
+function Markers() {
+  const [data, setData] = useState();
+  const map = useMap();
 
-   return  map
+  useMapEvents({
+    moveend: () => {
+      console.log(`Current map zoom is ${map.getZoom()}`);
+      const markers_url = `/api/landlord/?in_bbox=${map
+        .getBounds()
+        .toBBoxString()}`;
+      axios.get(markers_url).then((resp) => {
+        console.log(resp.data);
+        setData(resp.data);
+      });
+    },
+    zoomend: () => {
+      console.log(`Current map zoom is ${map.getZoom()}`);
+      const markers_url = `/api/landlord/?in_bbox=${map
+        .getBounds()
+        .toBBoxString()}`;
+      axios.get(markers_url).then((resp) => {
+        console.log(resp.data);
+        setData(resp.data);
+      });
+    },
+  });
 
+  if (data) {
+    return <GeoJSON key={hash(data)} data={data} />;
+  } else {
+    return null;
+  }
 }
 
-export default Map
+const Map = (props) => {
+  const map = useMemo(() => {
+    return (
+      <MapContainer
+        doubleClickZoom={false}
+        id="mapId"
+        zoom={zoom}
+        center={center}
+        whenCreated={props.setMap}
+      >
+        <Markers />
+        <TileLayer
+          url="https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        />
+      </MapContainer>
+    );
+  }, []);
+
+  return map;
+};
+
+export default Map;
