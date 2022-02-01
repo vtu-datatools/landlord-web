@@ -24,6 +24,7 @@ jobs:
           host: ${{ secrets.AWS_HOSTNAME }}
           username: ${{ secrets.AWS_USER_NAME }}
           key: ${{ secrets.AWS_PRIVATE_KEY }}
+          envs: DJANGO_AWS_ACCESS_KEY_ID,DJANGO_AWS_SECRET_ACCESS_KEY,DJANGO_AWS_STORAGE_BUCKET_NAME
           script: |
             cd app 
             git pull
