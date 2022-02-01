@@ -37,6 +37,16 @@ http:
       tls:
         # https://docs.traefik.io/master/routing/routers/#certresolver
         certResolver: letsencrypt
+    api:
+      rule: "(Host(`vanbelu.ga`) || Host(`www.vanbelu.ga`))  && (PathPrefix(`/api`))"
+      entryPoints:
+        - web-secure
+      middlewares:
+        - csrf
+      service: django
+      tls:
+        # https://docs.traefik.io/master/routing/routers/#certresolver
+        certResolver: letsencrypt
 
   middlewares:
     csrf:
@@ -46,10 +56,17 @@ http:
         hostsProxyHeaders: ["X-CSRFToken"]
 
   services:
+    frontend:
+      loadBalancer:
+        passHostHeader: false
+        servers:
+          - url: http://<bucket>.s3-website-<region>.amazonaws.com
+
     django:
       loadBalancer:
+        passHostHeader: true
         servers:
-          - url: http://frontend:3000
+          - url: http://django:5000
 
 providers:
   # https://docs.traefik.io/master/providers/file/

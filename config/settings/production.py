@@ -171,3 +171,10 @@ LOGGING = {
 }
 
 POSTGIS_VERSION = (3, 1)
+
+# Cors
+# ------------------------------------------------------------------------------
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://\w+\.vanbelu\.ga$",
+]
