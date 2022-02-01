@@ -13,6 +13,7 @@ services:
     image: vtu_production_django
     depends_on:
       - redis
+      - frontend
     env_file:
       - ./.envs/.production/.django
       - ./.envs/.production/.postgres
@@ -24,7 +25,7 @@ services:
       dockerfile: ./compose/production/traefik/Dockerfile
     image: vtu_production_traefik
     depends_on:
-      - frontend
+      - django
     volumes:
       - production_traefik:/etc/traefik/acme:z
     ports:
@@ -36,8 +37,6 @@ services:
       context: .
       dockerfile: ./compose/production/frontend/Dockerfile
     image: vtu_production_frontend
-    depends_on:
-      - django
     command: npm start
     stdin_open: true
 
