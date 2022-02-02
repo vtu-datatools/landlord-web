@@ -60,8 +60,7 @@ http:
       loadBalancer:
         passHostHeader: false
         servers:
-          # - url: http://react:3000
-          - url: http://vtu-assets.s3-website-us-west-2.amazonaws.com
+          - url: http://vtu-assets.s3-website-us-west-2.amazonaws.com/static/
 
     django:
       loadBalancer:
