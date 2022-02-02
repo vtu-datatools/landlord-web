@@ -31,22 +31,26 @@ function Markers() {
 
   useMapEvents({
     moveend: () => {
-      console.log(`Current map zoom is ${map.getZoom()}`);
       const markers_url = `/api/landlord/?in_bbox=${map
         .getBounds()
         .toBBoxString()}`;
       axios.get(markers_url).then((resp) => {
-        console.log(resp.data);
         setData(resp.data);
       });
     },
     zoomend: () => {
-      console.log(`Current map zoom is ${map.getZoom()}`);
       const markers_url = `/api/landlord/?in_bbox=${map
         .getBounds()
         .toBBoxString()}`;
       axios.get(markers_url).then((resp) => {
-        console.log(resp.data);
+        setData(resp.data);
+      });
+    },
+    layeradd: () => {
+      const markers_url = `/api/landlord/?in_bbox=${map
+        .getBounds()
+        .toBBoxString()}`;
+      axios.get(markers_url).then((resp) => {
         setData(resp.data);
       });
     },

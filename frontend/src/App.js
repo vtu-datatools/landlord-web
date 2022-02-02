@@ -9,7 +9,7 @@ export default function App() {
   return (
     <div className="App">
       {map && <Sidebar map={map} />}
-      p<Map setMap={setMap} />
+      <Map setMap={setMap} />
     </div>
   );
 }
