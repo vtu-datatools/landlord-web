@@ -81,7 +81,7 @@ AWS_DEFAULT_ACL = None
 # ------------------------
 STATICFILES_STORAGE = "landlord.utils.storages.StaticRootS3Boto3Storage"
 COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
-STATIC_URL = f"https://{aws_s3_domain}/static/"
+STATIC_URL = f"https://{aws_s3_domain}/"
 # MEDIA
 # ------------------------------------------------------------------------------
 DEFAULT_FILE_STORAGE = "landlord.utils.storages.MediaRootS3Boto3Storage"
