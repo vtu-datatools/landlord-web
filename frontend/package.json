@@ -25,12 +25,6 @@
     "test": "jasmine",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -44,11 +38,12 @@
     ]
   },
   "devDependencies": {
-    "jasmine": "^4.0.2",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^7.2.0",
+    "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-prettier": "^3.4.1",
     "eslint-plugin-react": "^7.28.0",
+    "jasmine": "^4.0.2",
     "prettier": "^2.5.1"
   }
 }

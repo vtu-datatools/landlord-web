@@ -1,6 +1,6 @@
 ARG PYTHON_VERSION=3.9-slim-bullseye
 
-
+FROM vtu_production_frontend AS frontend
 
 # define an alias for the specfic python version used in this file.
 FROM python:${PYTHON_VERSION} as python
@@ -76,11 +76,16 @@ RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 
 
+
 # copy application code to WORKDIR
 COPY --chown=django:django . ${APP_HOME}
 
 # make django owner of the WORKDIR directory as well.
 RUN chown django:django ${APP_HOME}
+
+# Copy frontend build directory to the backend project inside the django image. The settings.py does the rest.
+RUN mkdir -p /app/landlord/frontend/build && chown -R django:django /app/landlord/frontend/build
+COPY --from=frontend --chown=django:django /app/build/ /app/landlord/static
 
 USER django
 

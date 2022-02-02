@@ -38,8 +38,6 @@ services:
       context: .
       dockerfile: ./compose/production/frontend/Dockerfile
     image: vtu_production_frontend
-    command: npm start
-    stdin_open: true
 
   redis:
     image: redis:6
