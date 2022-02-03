@@ -29,5 +29,3 @@ jobs:
           script: |
             cd app 
             git pull
-            docker-compose -f docker-production.yaml up -d --remove-orphans --build 
-            docker-compose -f docker-production.yaml logs | grep django

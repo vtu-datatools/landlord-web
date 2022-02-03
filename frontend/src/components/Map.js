@@ -22,13 +22,23 @@ let DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
+// Vancouver
 const center = [49.25, -123.13];
 const zoom = 13;
 
-function Markers() {
+function Markers(props) {
+  // GeoJSON data of markers
   const [data, setData] = useState();
+  // Address state to lift up to Sidebar
+  const [address, setAddress] = useState();
   const map = useMap();
 
+  const handleClickMarker = (e) => {
+    setAddress(e.sourceTarget.feature.properties);
+    props.onClickMarker(e.sourceTarget.feature.properties);
+  };
+
+  // TODO: Refactor to avoid repeating code
   useMapEvents({
     moveend: () => {
       const markers_url = `/api/landlord/?in_bbox=${map
@@ -57,14 +67,28 @@ function Markers() {
   });
 
   if (data) {
-    // hash is required here to force react-leaflet to re-render the geojson
-    return <GeoJSON key={hash(data)} data={data} />;
+    return (
+      <GeoJSON
+        // hash is required here to force react-leaflet to re-render the geojson
+        key={hash(data)}
+        data={data}
+        eventHandlers={{ click: handleClickMarker }}
+        address={address}
+      />
+    );
   } else {
     return null;
   }
 }
 
-const Map = (props) => {
+function Map(props) {
+  const [address, setAddress] = useState();
+  // Lift up address from Markers
+  function handleClickMarker(address) {
+    setAddress(address);
+    props.onClickMarker(address);
+  }
+
   const map = useMemo(() => {
     return (
       <MapContainer
@@ -72,9 +96,10 @@ const Map = (props) => {
         id="mapId"
         zoom={zoom}
         center={center}
+        // Used to lift map to Sidebar
         whenCreated={props.setMap}
       >
-        <Markers />
+        <Markers address={address} onClickMarker={handleClickMarker} />
         <TileLayer
           url="https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -84,6 +109,6 @@ const Map = (props) => {
   }, []);
 
   return map;
-};
+}
 
 export default Map;

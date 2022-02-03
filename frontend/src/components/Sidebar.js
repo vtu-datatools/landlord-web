@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FiHome, FiChevronLeft, FiCompass, FiSettings } from "react-icons/fi";
 import { Sidebar, Tab } from "./sidetabs";
 
-const SidebarComponent = ({ map }) => {
+const SidebarComponent = ({ map, address }) => {
   const [openTab, setOpenTab] = useState("home");
 
   const onClose = () => {
@@ -12,7 +12,16 @@ const SidebarComponent = ({ map }) => {
   const onOpen = (id) => {
     setOpenTab(id);
   };
-
+  if (address == null) {
+    address = {
+      streenumber: "",
+      street: "",
+      businessoperator: 0,
+      totalunits: 0,
+      totaloutstanding: 0,
+      detailurl: "",
+    };
+  }
   return (
     <section className="Sidebar">
       <Sidebar
@@ -27,48 +36,34 @@ const SidebarComponent = ({ map }) => {
         rehomeControls
       >
         <Tab id="home" header="Home" icon={<FiHome />} active>
+          <h3>Welcome to Vancouver Landlords</h3>
+        </Tab>
+        <Tab id="props" header="Props" icon={<FiCompass />}>
+          <h3>
+            {address.streetnumber} {address.street}
+          </h3>
+          <h4>Landlord: {address.businessoperator}</h4>
           <p>
-            This sidebar is adapted from{" "}
-            <a
-              href="https://github.com/eferhatg/react-leaflet-sidetabs"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              react-leaflet-sidetabs
-            </a>{" "}
-            to be compatible with react-leaflet version 3.
+            Total Outstanding Property Violations: {address.totaloutstanding}
           </p>
+          <p>Total Apartment Units: {address.totalunits}</p>
           <p>
-            If you want to be able to influence the map from within the sidebar
-            tabs, you must{" "}
             <a
-              href="https://react-leaflet-v3.now.sh/docs/example-external-state"
+              href={address.detailurl}
               target="_blank"
               rel="noopener noreferrer"
             >
-              externalize the map context
+              More Details
             </a>
-            . This is also required if you want the map to adjust its center
-            when the sidebar opens as closes, as it does in this example.
           </p>
           <p>
             <button
               className="checkoutpropsbutton"
               onClick={() => setOpenTab("props")}
             >
-              Check out the second tab&nbsp;
+              More properties of same landlord
             </button>
-            to see the <code>props</code> for this component.
           </p>
-        </Tab>
-        <Tab id="props" header="Props" icon={<FiCompass />}>
-          <h3>Address</h3>
-          <h4>Landlord Name</h4>
-          <p>More information on building here.</p>
-
-          <h3>2nd Address</h3>
-          <h4>Landlord Name</h4>
-          <p>More information on building here.</p>
         </Tab>
         <Tab
           id="settings"
