@@ -1,1 +1,0 @@
-CREATE INDEX current_issues_street_idx on current_issues (street);
