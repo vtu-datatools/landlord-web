@@ -6,8 +6,9 @@ from pathlib import Path
 import environ
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
-# landlord/
-APPS_DIR = ROOT_DIR / "landlord"
+
+APPS_DIR = ROOT_DIR / "apps"
+
 env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
@@ -69,7 +70,6 @@ DJANGO_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
     "django.contrib.gis",
@@ -77,7 +77,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
-    "allauth.socialaccount",
+    # "allauth.socialaccount",
     "rest_framework",
     "rest_framework.authtoken",
     "rest_framework_gis",
@@ -87,7 +87,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "landlord",
+    "apps.user",
+    "apps.landlord",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -95,7 +96,11 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIGRATIONS
 # ---------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "landlord.contrib.sites.migrations"}
+MIGRATION_MODULES = {
+    "sites": "apps.migrations.sites",
+    "user": "apps.migrations.user",
+    "landlord": "apps.migrations.landlord",
+}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -197,10 +202,6 @@ TEMPLATES = [
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#form-renderer
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
-
-# http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
-CRISPY_TEMPLATE_PACK = "bootstrap5"
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 # FIXTURES
 # ------------------------------------------------------------------------------

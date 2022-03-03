@@ -2,8 +2,8 @@
 from rest_framework import viewsets
 from rest_framework_gis import filters
 
-from landlord.models import CurrentIssues
-from landlord.serializers import CurrentIssuesSerializer
+from .models import CurrentIssues
+from .serializers import CurrentIssuesSerializer
 
 
 class CurrentIssuesViewSet(viewsets.ReadOnlyModelViewSet):

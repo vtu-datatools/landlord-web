@@ -2,7 +2,7 @@
 
 from rest_framework_gis import serializers
 
-from landlord.models import CurrentIssues
+from .models import CurrentIssues
 
 
 class CurrentIssuesSerializer(serializers.GeoFeatureModelSerializer):

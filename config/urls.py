@@ -1,5 +1,3 @@
-"""VTU URL Configuration
-"""
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
@@ -8,8 +6,8 @@ from django.views import defaults as default_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/landlords/", include("landlord.api")),
-    path("api/users/", include("user.urls") )
+    path("api/landlords/", include("apps.landlord.api")),
+    path("api/users/", include("apps.user.urls")),
 ]
 
 

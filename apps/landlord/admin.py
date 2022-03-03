@@ -2,7 +2,7 @@
 
 from django.contrib.gis import admin
 
-from landlord.models import CurrentIssues
+from .models import CurrentIssues
 
 
 @admin.register(CurrentIssues)
