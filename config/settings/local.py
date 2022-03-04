@@ -20,9 +20,6 @@ CACHES = {
     }
 }
 
-# REACT STATIC FILES
-STATICFILES_DIRS.append(str(ROOT_DIR / "frontend" / "src"))
-
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
