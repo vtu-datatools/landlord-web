@@ -84,8 +84,7 @@ COPY --chown=django:django . ${APP_HOME}
 RUN chown django:django ${APP_HOME}
 
 # Copy frontend build directory to the backend project inside the django image. The settings.py does the rest.
-RUN mkdir -p /app/landlord/frontend/build && chown -R django:django /app/landlord/frontend/build
-COPY --from=frontend --chown=django:django /app/build/ /app/landlord/static
+COPY --from=frontend --chown=django:django /app/build/ /app/apps/static
 
 USER django
 
