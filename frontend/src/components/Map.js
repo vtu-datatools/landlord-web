@@ -41,7 +41,7 @@ function Markers(props) {
   // TODO: Refactor to avoid repeating code
   useMapEvents({
     moveend: () => {
-      const markers_url = `/api/landlord/?in_bbox=${map
+      const markers_url = `/api/landlords/?in_bbox=${map
         .getBounds()
         .toBBoxString()}`;
       axios.get(markers_url).then((resp) => {
@@ -49,7 +49,7 @@ function Markers(props) {
       });
     },
     zoomend: () => {
-      const markers_url = `/api/landlord/?in_bbox=${map
+      const markers_url = `/api/landlords/?in_bbox=${map
         .getBounds()
         .toBBoxString()}`;
       axios.get(markers_url).then((resp) => {
@@ -57,7 +57,7 @@ function Markers(props) {
       });
     },
     layeradd: () => {
-      const markers_url = `/api/landlord/?in_bbox=${map
+      const markers_url = `/api/landlords/?in_bbox=${map
         .getBounds()
         .toBBoxString()}`;
       axios.get(markers_url).then((resp) => {
