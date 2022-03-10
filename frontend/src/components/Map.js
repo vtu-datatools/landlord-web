@@ -6,11 +6,10 @@ import {
   useMap,
   useMapEvents,
   GeoJSON,
+  ZoomControl,
 } from "react-leaflet";
 import axios from "axios";
 import hash from "object-hash";
-
-import "leaflet/dist/leaflet.css";
 
 // This part is required to configure the default marker icons
 import icon from "leaflet/dist/images/marker-icon.png";
@@ -95,6 +94,7 @@ function Map(props) {
         doubleClickZoom={false}
         id="mapId"
         zoom={zoom}
+        zoomControl={false}
         center={center}
         // Used to lift map to Sidebar
         whenCreated={props.setMap}
@@ -104,6 +104,7 @@ function Map(props) {
           url="https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
+        <ZoomControl position="topright" />
       </MapContainer>
     );
   }, []);
