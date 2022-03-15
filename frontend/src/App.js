@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Map from "./components/Map";
 import Sidebar from "./components/Sidebar";
-import "./styles.scss";
+import { Button } from "semantic-ui-react";
+import "./css/App.css";
 
 export default function App() {
   const [map, setMap] = useState(null);
@@ -18,6 +19,9 @@ export default function App() {
         address={address}
         onClickMarker={handleClickMarker}
       />
+      <Button primary id="userbutton" size="small" zIndex={2000}>
+        Sign In
+      </Button>
     </div>
   );
 }

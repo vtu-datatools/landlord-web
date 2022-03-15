@@ -7,9 +7,9 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 // import { createLogger } from "redux-logger";
 
-import reducer from "./reducers";
+import reducer from "./redux/reducers";
 import App from "./App";
-import "./index.css";
+import "./css/index.css";
 
 const middleware = [thunk];
 

@@ -3,7 +3,7 @@ import {
   REQUEST_GEOCODE_RESULTS,
   RECEIVE_GEOCODE_RESULTS,
   UPDATE_CENTER,
-} from "../actions/actions";
+} from "../../actions/actions";
 
 import { combineReducers } from "redux";
 
