@@ -1,5 +1,11 @@
-@import "./variables.scss";
-
+:export {
+  sidebarS: 305px;
+  sidebarM: 390px;
+  sidebarL: 460px;
+  screenSmall: 768px;
+  screenMedium: 992px;
+  screenLarge: 1200px;
+}
 :root {
   --leaflet-sidetabs-width-s: 305px;
   --leaflet-sidetabs-width-m: 390px;
@@ -8,7 +14,6 @@
   --breakpoint-m: 992px;
   --breakpoint-l: 1200px;
 }
-
 .sidebar {
   position: absolute;
   top: 0;
@@ -18,12 +23,10 @@
   z-index: 2000;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
 }
-
 .sidebar.collapsed {
   width: 40px;
 }
-
-@media (min-width: $screen-small) and (max-width: $screen-medium) {
+@media (min-width: 768px) and (max-width: 992px) {
   .sidebar {
     width: var(--leaflet-sidetabs-width-s);
   }
@@ -31,27 +34,22 @@
     min-width: 265px;
   }
 }
-
-@media (min-width: $screen-medium) and (max-width: $screen-large) {
+@media (min-width: 992px) and (max-width: 1200px) {
   .sidebar {
     width: var(--leaflet-sidetabs-width-m);
   }
 }
-
-@media (min-width: $screen-large) {
+@media (min-width: 1200px) {
   .sidebar {
     width: var(--leaflet-sidetabs-width-l);
   }
 }
-
 .sidebar-left {
   left: 0;
 }
-
 .sidebar-right {
   right: 0;
 }
-
 @media (min-width: 768px) {
   .sidebar {
     top: 10px;
@@ -65,26 +63,21 @@
     right: 10px;
   }
 }
-
 .sidebar-tabs {
   top: 0;
   bottom: 0;
   height: 100%;
   background-color: #fff;
 }
-
 .sidebar-tab-button {
   cursor: pointer;
 }
-
 .sidebar-left .sidebar-tabs {
   left: 0;
 }
-
 .sidebar-right .sidebar-tabs {
   right: 0;
 }
-
 .sidebar-tabs,
 .sidebar-tabs > ul {
   position: absolute;
@@ -92,7 +85,6 @@
   margin: 0;
   padding: 0;
 }
-
 .sidebar-tabs > li,
 .sidebar-tabs > ul > li {
   width: 100%;
@@ -102,34 +94,28 @@
   overflow: hidden;
   transition: all 80ms;
 }
-
 .sidebar-tabs > li:hover,
 .sidebar-tabs > ul > li:hover {
   color: #000;
   background-color: #eee;
 }
-
 .sidebar-tabs > li.active,
 .sidebar-tabs > ul > li.active {
   color: #fff;
   background-color: #0074d9;
 }
-
 .sidebar-tabs > li.disabled,
 .sidebar-tabs > ul > li.disabled {
   color: rgba(51, 51, 51, 0.4);
 }
-
 .sidebar-tabs > li.disabled:hover,
 .sidebar-tabs > ul > li.disabled:hover {
   background: 0 0;
 }
-
 .sidebar-tabs > li.disabled > a,
 .sidebar-tabs > ul > li.disabled > a {
   cursor: default;
 }
-
 .sidebar-tabs > li > button,
 .sidebar-tabs > ul > li > button {
   display: block;
@@ -140,11 +126,9 @@
   text-decoration: none;
   text-align: center;
 }
-
 .sidebar-tabs > ul + ul {
   bottom: 0;
 }
-
 .sidebar-content {
   position: absolute;
   top: 0;
@@ -153,21 +137,17 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
-
 .sidebar-left .sidebar-content {
   left: 40px;
   right: 0;
 }
-
 .sidebar-right .sidebar-content {
   left: 0;
   right: 40px;
 }
-
 .sidebar.collapsed > .sidebar-content {
   overflow-y: hidden;
 }
-
 .sidebar-pane {
   display: none;
   left: 0;
@@ -175,11 +155,9 @@
   box-sizing: border-box;
   padding: 0px 10px;
 }
-
 .sidebar-pane.active {
   display: block;
 }
-
 .sidebar-header {
   margin: -10px -20px 0;
   height: 40px;
@@ -189,11 +167,9 @@
   color: #fff;
   background-color: #0074d9;
 }
-
 .sidebar-right .sidebar-header {
   padding-left: 40px;
 }
-
 .sidebar-close {
   position: absolute;
   top: 0;
@@ -202,33 +178,27 @@
   text-align: center;
   cursor: pointer;
 }
-
 .sidebar-left .sidebar-close {
   right: 0;
 }
-
 .sidebar-right .sidebar-close {
   left: 0;
 }
-
 .sidebar-left ~ .sidebar-map {
   margin-left: 40px;
 }
-
 .sidebar-right ~ .sidebar-map {
   margin-right: 40px;
 }
-
 .sidebar.leaflet-touch {
   box-shadow: none;
-  .sidebar-left ~ .sidebar-map .leaflet-left {
-    left: 315px;
-  }
-  .sidebar-right ~ .sidebar-map .leaflet-right {
-    right: 315px;
-  }
 }
-
+.sidebar.leaflet-touch .sidebar-left ~ .sidebar-map .leaflet-left {
+  left: 315px;
+}
+.sidebar.leaflet-touch .sidebar-right ~ .sidebar-map .leaflet-right {
+  right: 315px;
+}
 @media (min-width: 992px) and (max-width: 1199px) {
   .sidebar-pane {
     min-width: 350px;
@@ -240,7 +210,6 @@
     right: 400px;
   }
 }
-
 @media (min-width: 1200px) {
   .sidebar-pane {
     min-width: 420px;
@@ -252,7 +221,6 @@
     right: 470px;
   }
 }
-
 @media (min-width: 768px) {
   .sidebar-left ~ .sidebar-map {
     margin-left: 0;
@@ -279,45 +247,37 @@
     right: 50px;
   }
 }
-
 .sidebar-tabs > li > button,
 .sidebar-tabs > ul > li > button {
   background-color: transparent;
   border: none;
 }
-
 /* Rehomed controls css, if props.rehomeControls is true */
 .rehomed-top-left,
 .rehomed-bottom-left {
-  .collapsed & {
-    left: 40px;
-  }
   transition: left 500ms;
 }
-
+.collapsed .rehomed-top-left,
+.collapsed .rehomed-bottom-left {
+  left: 40px;
+}
 .rehomed-top-right,
 .rehomed-bottom-right {
-  .collapsed & {
-    right: 40px;
-  }
   transition: right 500ms;
 }
-
-.rehomed-top-left,
-.rehomed-top-right {
-  .leaflet-control:first-child {
-    margin-top: 0;
-  }
+.collapsed .rehomed-top-right,
+.collapsed .rehomed-bottom-right {
+  right: 40px;
 }
-
-.rehomed-bottom-left,
-.rehomed-bottom-right {
-  .leaflet-control:last-child {
-    margin-bottom: 0;
-  }
+.rehomed-top-left .leaflet-control:first-child,
+.rehomed-top-right .leaflet-control:first-child {
+  margin-top: 0;
 }
-
-@media (max-width: $screen-small) {
+.rehomed-bottom-left .leaflet-control:last-child,
+.rehomed-bottom-right .leaflet-control:last-child {
+  margin-bottom: 0;
+}
+@media (max-width: 768px) {
   .rehomed-top-left,
   .rehomed-bottom-left,
   .rehomed-top-right,
@@ -325,8 +285,7 @@
     display: none;
   }
 }
-
-@media (min-width: $screen-small) and (max-width: $screen-medium) {
+@media (min-width: 768px) and (max-width: 992px) {
   .rehomed-top-left,
   .rehomed-bottom-left {
     left: var(--leaflet-sidetabs-width-s);
@@ -336,8 +295,7 @@
     right: var(--leaflet-sidetabs-width-s);
   }
 }
-
-@media (min-width: $screen-medium) and (max-width: $screen-large) {
+@media (min-width: 992px) and (max-width: 1200px) {
   .rehomed-top-left,
   .rehomed-bottom-left {
     left: var(--leaflet-sidetabs-width-m);
@@ -347,8 +305,7 @@
     right: var(--leaflet-sidetabs-width-m);
   }
 }
-
-@media (min-width: $screen-large) {
+@media (min-width: 1200px) {
   .rehomed-top-left,
   .rehomed-bottom-left {
     left: var(--leaflet-sidetabs-width-l);
