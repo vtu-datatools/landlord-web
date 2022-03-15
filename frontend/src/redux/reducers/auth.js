@@ -3,9 +3,9 @@ import initial from "./initial";
 
 export default function authReducer(state = initial.accessToken, action) {
   switch (action.type) {
-    case types.LOGIN_USER_SUCCESS:
+    case types.LOGIN:
       return action.token;
-    case types.LOGOUT_USER:
+    case types.LOGOUT:
       return "";
     default:
       return state;
