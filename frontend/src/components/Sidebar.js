@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { FiHome, FiChevronLeft, FiCompass, FiSettings } from "react-icons/fi";
 import { Sidebar, Tab } from "./sidetabs";
 
 const SidebarComponent = ({ map, address }) => {
-  const isInitialMount = useRef(true);
   const [openTab, setOpenTab] = useState("home");
 
   const onClose = () => {
@@ -24,15 +23,6 @@ const SidebarComponent = ({ map, address }) => {
     };
   }
 
-  useEffect(() => {
-    // Set sidebar tab to show address info on marker click (change of address)
-    // Used this: https://stackoverflow.com/questions/55075604/react-hooks-useeffect-only-on-update
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      setOpenTab("props");
-    }
-  }, [address]);
   return (
     <section className="Sidebar">
       <Sidebar
@@ -49,7 +39,7 @@ const SidebarComponent = ({ map, address }) => {
         <Tab id="home" header="Home" icon={<FiHome />} active>
           <h3>Welcome to Vancouver Landlords</h3>
         </Tab>
-        <Tab id="props" header="Props" icon={<FiCompass />}>
+        <Tab id="props" header="Address" icon={<FiCompass />}>
           <h3>
             {address.streetnumber} {address.street}
           </h3>
