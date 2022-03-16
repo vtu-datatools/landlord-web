@@ -1,8 +1,7 @@
 import axiosAPI, { setNewHeaders } from "./axiosApi";
 
-export async function signUp(email, username, password) {
+export async function signUp(username, password) {
   const response = await axiosAPI.post("users/create/", {
-    email,
     username,
     password,
   });

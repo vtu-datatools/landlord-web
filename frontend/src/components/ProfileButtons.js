@@ -8,10 +8,9 @@ import { logoutUser } from "../redux/actions/auth";
 
 const ProfileButtons = ({ accessToken, logoutUser }) => {
   const navigate = useNavigate();
-
   const handleLogout = async () => {
     await logoutUser();
-    navigate.push("login/");
+    navigate("/");
   };
 
   return (
@@ -21,7 +20,7 @@ const ProfileButtons = ({ accessToken, logoutUser }) => {
           <Button primary as={NavLink} to="/profile">
             Profile
           </Button>
-          <Button primary as={NavLink} to="/logout" onClick={handleLogout}>
+          <Button primary onClick={handleLogout}>
             Logout
           </Button>
         </>

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const SignUpPage = () => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate.push("/");
+    navigate("/");
   };
   return (
     <div>

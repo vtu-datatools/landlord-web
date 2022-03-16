@@ -4,12 +4,12 @@ import axiosAPI from "../api/axiosApi";
 const ProfilePage = () => {
   const handleClick = async () => {
     const response = await axiosAPI.get("protected/");
-    alert(JSON.stringify(response.data));
+    console.log(JSON.stringify(response.data));
   };
   return (
     <div>
       <h1>Profile page</h1>
-      <p>Only logged in users should see this</p>
+      <p>Logged in as user:</p>
       <button onClick={handleClick}>GET protected</button>
     </div>
   );
