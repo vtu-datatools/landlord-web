@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Map from "./components/Map";
 import Sidebar from "./components/Sidebar";
+import ProfileButtons from "./components/ProfileButtons";
 
 // import PageNotFound from "./PageNotFound";
 import ProfilePage from "./components/auth/ProfilePage";
@@ -10,7 +11,6 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 import LoginPage from "./components/auth/LoginPage";
 import SignUpPage from "./components/auth/SignUpPage";
 
-import { Button } from "semantic-ui-react";
 import "./css/App.css";
 
 export default function App() {
@@ -28,14 +28,13 @@ export default function App() {
         address={address}
         onClickMarker={handleClickMarker}
       />
-      <Button primary id="userbutton" size="small" zIndex={2000}>
-        Sign In
-      </Button>
+      <ProfileButtons />
       <Routes>
-        <PrivateRoute exact path="/" element={<ProfilePage />} />
+        <Route exact path="/profile" element={<PrivateRoute />}>
+          <Route exact path="/profile" element={<ProfilePage />} />
+        </Route>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
-        {/* <Route component={PageNotFound} /> */}
+        <Route path="/sign-up" element={<SignUpPage />} />/
       </Routes>
     </div>
   );
