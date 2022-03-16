@@ -16,7 +16,7 @@ import { loginUser } from "../../redux/actions/auth";
 
 const LoginPage = ({ loginUser }) => {
   const [state, setState] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -52,8 +52,8 @@ const LoginPage = ({ loginUser }) => {
                 icon="user"
                 iconPosition="left"
                 name="username"
-                placeholder="E-mail address"
-                defaultValue={state.email}
+                placeholder="Username or Email address"
+                defaultValue={state.username}
                 onChange={handleChange}
               />
               <Form.Input

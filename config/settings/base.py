@@ -271,12 +271,13 @@ LOGGING = {
 # ------------------------------------------------------------------------------
 ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = "username"
 # ACCOUNT_ADAPTER = "landlord.users.adapters.AccountAdapter"
 # # https://django-allauth.readthedocs.io/en/latest/configuration.html
 # SOCIALACCOUNT_ADAPTER = "landlord.users.adapters.SocialAccountAdapter"

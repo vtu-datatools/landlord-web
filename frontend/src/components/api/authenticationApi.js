@@ -1,9 +1,12 @@
 import axiosAPI, { setNewHeaders } from "./axiosApi";
 
-export async function signUp(username, password) {
-  const response = await axiosAPI.post("users/create/", {
+export async function signUp(username, email, password, first_name, last_name) {
+  const response = await axiosAPI.post("create/", {
     username,
+    email,
     password,
+    first_name,
+    last_name,
   });
   localStorage.setItem("user", response.data);
   return response;
