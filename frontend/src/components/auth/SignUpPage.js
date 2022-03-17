@@ -97,6 +97,11 @@ const SignUpPage = ({ loginUser }) => {
               </Button>
             </Segment>
           </Form>
+          <Button
+            id="back_button"
+            content="Go Back"
+            onClick={() => navigate(-1)}
+          />
         </Grid.Column>
       </Grid>
     </div>

@@ -80,6 +80,11 @@ const LoginPage = ({ loginUser }) => {
             New to us?
             <Link to="/sign-up"> Sign Up</Link>
           </Message>
+          <Button
+            id="back_button"
+            content="Go Back"
+            onClick={() => navigate(-1)}
+          />
         </Grid.Column>
       </Grid>
     </div>
