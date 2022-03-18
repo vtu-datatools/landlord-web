@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiHome, FiChevronLeft, FiCompass, FiSettings } from "react-icons/fi";
+import { FiHome, FiChevronLeft, FiCompass } from "react-icons/fi";
 import { Sidebar, Tab } from "./sidetabs";
 
 const SidebarComponent = ({ map, address }) => {
@@ -37,7 +37,12 @@ const SidebarComponent = ({ map, address }) => {
         rehomeControls
       >
         <Tab id="home" header="Home" icon={<FiHome />} active>
-          <h3>Welcome to Vancouver Landlords</h3>
+          <h3>Vancouver Landlord Database</h3>
+          This is a work in progress by the data-tools working group of the{" "}
+          <a href="https://www.vancouvertenantsunion.ca/">
+            Vancouver Tenants Union
+          </a>
+          .
         </Tab>
         <Tab id="props" header="Address" icon={<FiCompass />}>
           <h3>
@@ -66,16 +71,14 @@ const SidebarComponent = ({ map, address }) => {
             </button>
           </p>
         </Tab>
-        <Tab
+        {/* <Tab
           id="settings"
           header="Settings"
           icon={<FiSettings />}
           anchor="bottom"
         >
-          <p>
-            The button for this tab can be anchored to the bottom by using the{" "}
-          </p>
-        </Tab>
+          Profile info will go here
+        </Tab> */}
       </Sidebar>
     </section>
   );

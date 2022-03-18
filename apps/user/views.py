@@ -16,7 +16,15 @@ user_create = UserCreate.as_view()
 
 class Protected(APIView):
     def get(self, request):
-        return Response(data={"type": "protected"})
+        user_data = request.user
+        return Response(
+            data={
+                "username": user_data.username,
+                "email": user_data.email,
+                "first_name": user_data.first_name,
+                "last_name": user_data.last_name,
+            }
+        )
 
 
 protected = Protected.as_view()
