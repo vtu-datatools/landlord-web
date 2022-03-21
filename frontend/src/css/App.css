@@ -25,7 +25,7 @@ nav {
   right: 10px;
   z-index: 2000;
 }
-button.ui.button {
+#back-button {
   margin-top: 1em;
 }
 .signup-page {
@@ -38,6 +38,7 @@ button.ui.button {
 .form.ui.large.form {
   min-width: 450px;
 }
+
 code {
   color: darkblue;
   background-color: lightgrey;

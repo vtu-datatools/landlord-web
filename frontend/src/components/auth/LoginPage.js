@@ -65,7 +65,9 @@ const LoginPage = ({ loginUser }) => {
           </Form>
         )}
       </Formik>
-      <Button onClick={() => navigate(-1)}>Back</Button>
+      <Button id="back-button" onClick={() => navigate(-1)}>
+        Back
+      </Button>
     </div>
   );
 };

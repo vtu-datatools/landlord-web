@@ -17,19 +17,19 @@ const ProfileButtons = ({ accessToken, logoutUser }) => {
     <nav>
       {accessToken ? (
         <>
-          <Button primary as={NavLink} to="/profile">
+          <Button id="profile-button" primary as={NavLink} to="/profile">
             Profile
           </Button>
-          <Button primary onClick={handleLogout}>
+          <Button id="logout-button" primary onClick={handleLogout}>
             Logout
           </Button>
         </>
       ) : (
         <>
-          <Button primary as={NavLink} to="/login">
+          <Button id="login-button" primary as={NavLink} to="/login">
             Login
           </Button>
-          <Button primary as={NavLink} to="/sign-up">
+          <Button id="signup-button" primary as={NavLink} to="/sign-up">
             Sign Up
           </Button>
         </>
