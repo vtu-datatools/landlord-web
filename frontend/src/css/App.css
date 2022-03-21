@@ -28,6 +28,16 @@ nav {
 button.ui.button {
   margin-top: 1em;
 }
+.signup-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.form.ui.large.form {
+  min-width: 450px;
+}
 code {
   color: darkblue;
   background-color: lightgrey;

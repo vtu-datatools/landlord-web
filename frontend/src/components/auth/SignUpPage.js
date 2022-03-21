@@ -1,109 +1,132 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { Button, Form, Grid, Header, Image, Segment } from "semantic-ui-react";
+import * as Yup from "yup";
+import { Formik } from "formik";
+import { Header, Image, FormGroup, Button } from "semantic-ui-react";
+import {
+  Form,
+  SubmitButton,
+  ResetButton,
+  Input,
+} from "formik-semantic-ui-react";
 
 import { loginUser } from "../../redux/actions/auth";
 import { signUp } from "../api/authenticationApi";
 
+const SignupSchema = Yup.object().shape({
+  username: Yup.string()
+    .required("Username is required")
+    .min(4, "Username must be at least 4 characters")
+    .max(20, "Username must not exceed 20 characters"),
+  email: Yup.string().required("Email is required").email("Email is invalid"),
+  first_name: Yup.string().required("First name is required"),
+  last_name: Yup.string().required("Last name is required"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters")
+    .max(40, "Password must not exceed 40 characters"),
+  confirm_password: Yup.string()
+    .required("Confirm Password is required")
+    .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
+});
+
 const SignUpPage = ({ loginUser }) => {
-  const [state, setState] = useState({
+  const navigate = useNavigate();
+  const initialValues = {
     username: "",
     email: "",
-    password: "",
     first_name: "",
     last_name: "",
-  });
-
-  const navigate = useNavigate();
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setState({ ...state, [name]: value });
+    password: "",
+    confirm_password: "",
   };
 
-  const createUser = async (event) => {
-    event.preventDefault();
-    const { username, email, password, first_name, last_name } = state;
-    await signUp(username, email, password, first_name, last_name);
-    console.log("signed up");
-    loginUser(username, password);
-    console.log("logged in?");
+  const onSubmit = async (values) => {
+    console.log("signing up...");
+    await signUp(
+      values.username,
+      values.email,
+      values.password,
+      values.first_name,
+      values.last_name
+    );
+    console.log("signed up up...");
+    loginUser(values.username, values.password);
     navigate("/");
   };
-
   return (
-    <div>
-      <Grid
-        textAlign="center"
-        style={{ height: "100vh" }}
-        verticalAlign="middle"
+    <div className="signup-page">
+      <Header as="h2" textAlign="center">
+        <Image src={process.env.PUBLIC_URL + "/VTU_logo.jpg"} /> Sign Up
+      </Header>
+      <Formik
+        id="sign-up-form"
+        initialValues={initialValues}
+        validationSchema={SignupSchema}
+        onSubmit={onSubmit}
       >
-        <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h2" textAlign="center">
-            <Image src={process.env.PUBLIC_URL + "/VTU_logo.jpg"} /> Sign Up
-          </Header>
-          <Form size="large" onSubmit={createUser}>
-            <Segment stacked>
-              <Form.Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                name="username"
-                placeholder="Username"
-                defaultValue={state.username}
-                onChange={handleChange}
-              />
-              <Form.Input
-                fluid
-                icon="envelope"
-                iconPosition="left"
-                name="email"
-                placeholder="E-mail address"
-                defaultValue={state.email}
-                onChange={handleChange}
-              />
-              <Form.Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                name="first_name"
-                placeholder="First Name"
-                defaultValue={state.first_name}
-                onChange={handleChange}
-              />
-              <Form.Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                name="last_name"
-                placeholder="Last Name"
-                defaultValue={state.last_name}
-                onChange={handleChange}
-              />
-              <Form.Input
-                fluid
-                icon="lock"
-                iconPosition="left"
-                name="password"
-                placeholder="Password"
-                type="password"
-                defaultValue={state.password}
-                onChange={handleChange}
-              />
-              <Button primary type="submit" fluid size="large">
+        {({ isSubmitting }) => (
+          <Form size="large">
+            <Input
+              id="input-username"
+              errorPrompt
+              name="username"
+              label="Username"
+              placeholder="Username"
+            />
+            <Input
+              id="input-email"
+              errorPrompt
+              name="email"
+              label="Email"
+              placeholder="Email"
+            />
+            <Input
+              id="input-first-name"
+              errorPrompt
+              name="first_name"
+              label="First Name"
+              placeholder="First Name"
+            />
+            <Input
+              id="input-last-name"
+              errorPrompt
+              name="last_name"
+              label="Last Name"
+              placeholder="Last Name"
+            />
+            <Input
+              id="input-password"
+              errorPrompt
+              name="password"
+              type="password"
+              label="Password"
+              placeholder="Password"
+              autoComplete="off"
+            />
+            <Input
+              id="input-confirm-password"
+              errorPrompt
+              name="confirm_password"
+              type="password"
+              label="Confirm Password"
+              autoComplete="off"
+            />
+
+            <FormGroup unstackable>
+              <SubmitButton primary fluid loading={isSubmitting} width={8}>
                 Submit
-              </Button>
-            </Segment>
+              </SubmitButton>
+              <ResetButton color="green" fluid width={8}>
+                Reset
+              </ResetButton>
+            </FormGroup>
           </Form>
-          <Button
-            id="back_button"
-            content="Go Back"
-            onClick={() => navigate(-1)}
-          />
-        </Grid.Column>
-      </Grid>
+        )}
+      </Formik>
+      <Button onClick={() => navigate(-1)}>Back</Button>
     </div>
   );
 };
