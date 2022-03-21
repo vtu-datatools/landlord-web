@@ -1,92 +1,71 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Image,
-  Message,
-  Segment,
-} from "semantic-ui-react";
+import * as Yup from "yup";
+import { Formik } from "formik";
+import { Header, Image, Button } from "semantic-ui-react";
+import { Form, SubmitButton, Input } from "formik-semantic-ui-react";
 
 import { loginUser } from "../../redux/actions/auth";
 
+const LoginSchema = Yup.object().shape({
+  username: Yup.string()
+    .required("Username is required")
+    .min(4, "Username must be at least 4 characters"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters"),
+});
+
 const LoginPage = ({ loginUser }) => {
-  const [state, setState] = useState({
+  const navigate = useNavigate();
+  const initialValues = {
     username: "",
     password: "",
-  });
-
-  const navigate = useNavigate();
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setState({ ...state, [name]: value });
   };
-  const login = async (event) => {
-    event.preventDefault();
-    const { username, password } = state;
-    await loginUser(username, password);
+  const onSubmit = async (values) => {
+    await loginUser(values.username, values.password);
     navigate("/");
   };
 
   return (
-    <div>
-      <Grid
-        textAlign="center"
-        style={{ height: "100vh" }}
-        verticalAlign="middle"
+    <div className="signup-page">
+      <Header as="h2" textAlign="center">
+        <Image src={process.env.PUBLIC_URL + "/VTU_logo.jpg"} /> Login
+      </Header>
+      <Formik
+        id="login-up-form"
+        initialValues={initialValues}
+        validationSchema={LoginSchema}
+        onSubmit={onSubmit}
       >
-        <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h2" textAlign="center">
-            <Image src={process.env.PUBLIC_URL + "/VTU_logo.jpg"} /> Log-in to
-            your account
-          </Header>
-          <Form size="large" onSubmit={login}>
-            <Segment stacked>
-              <Form.Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                name="username"
-                placeholder="Username or Email address"
-                defaultValue={state.username}
-                onChange={handleChange}
-              />
-              <Form.Input
-                fluid
-                icon="lock"
-                iconPosition="left"
-                name="password"
-                placeholder="Password"
-                type="password"
-                defaultValue={state.password}
-                onChange={handleChange}
-              />
-              <Message
-                error
-                header="Action Forbidden"
-                content="You can only sign up for an account once with a given e-mail address."
-              />
-              <Button primary type="submit" fluid size="large">
-                Login
-              </Button>
-            </Segment>
+        {({ isSubmitting }) => (
+          <Form size="large">
+            <Input
+              id="input-username"
+              errorPrompt
+              name="username"
+              label="Username or Email"
+              placeholder="Username or email"
+            />
+            <Input
+              id="input-password"
+              errorPrompt
+              name="password"
+              type="password"
+              label="Password"
+              placeholder="Password"
+              autoComplete="off"
+            />
+
+            <SubmitButton primary fluid loading={isSubmitting}>
+              Submit
+            </SubmitButton>
           </Form>
-          <Message>
-            New to us?
-            <Link to="/sign-up"> Sign Up</Link>
-          </Message>
-          <Button
-            id="back_button"
-            content="Go Back"
-            onClick={() => navigate(-1)}
-          />
-        </Grid.Column>
-      </Grid>
+        )}
+      </Formik>
+      <Button onClick={() => navigate(-1)}>Back</Button>
     </div>
   );
 };
