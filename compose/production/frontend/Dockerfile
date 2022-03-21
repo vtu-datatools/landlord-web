@@ -1,4 +1,4 @@
-FROM node:13.12.0-alpine
+FROM node:16.14.2-alpine
 ENV NODE_ENV=production
 ENV REACT_APP_PROD=true
 

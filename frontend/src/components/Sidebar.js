@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FiHome, FiChevronLeft, FiCompass } from "react-icons/fi";
+import { Image } from "semantic-ui-react";
 import { Sidebar, Tab } from "./sidetabs";
 
 const SidebarComponent = ({ map, address }) => {
@@ -38,6 +39,7 @@ const SidebarComponent = ({ map, address }) => {
       >
         <Tab id="home" header="Home" icon={<FiHome />} active>
           <h3>Vancouver Landlord Database</h3>
+          <Image src={process.env.PUBLIC_URL + "/VTU_logo.jpg"} />
           This is a work in progress by the data-tools working group of the{" "}
           <a href="https://www.vancouvertenantsunion.ca/">
             Vancouver Tenants Union
