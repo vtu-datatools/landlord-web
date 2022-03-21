@@ -44,7 +44,6 @@ const SignUpPage = ({ loginUser }) => {
   };
 
   const onSubmit = async (values) => {
-    console.log("signing up...");
     await signUp(
       values.username,
       values.email,
@@ -52,7 +51,6 @@ const SignUpPage = ({ loginUser }) => {
       values.first_name,
       values.last_name
     );
-    console.log("signed up up...");
     loginUser(values.username, values.password);
     navigate("/");
   };
