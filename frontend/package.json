@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:8000",
   "dependencies": {
+    "@redux-devtools/extension": "^3.2.2",
     "@semantic-ui-react/css-patch": "^1.0.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -58,7 +59,6 @@
     "eslint-plugin-react": "^7.28.0",
     "jasmine": "^4.0.2",
     "prettier": "^2.5.1",
-    "redux-devtools-extension": "^2.13.9",
     "webpack": "^5.70.0"
   }
 }
