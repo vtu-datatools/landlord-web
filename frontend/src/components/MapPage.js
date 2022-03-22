@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import Map from "./Map";
 import Sidebar from "./Sidebar";
-import ProfileButtons from "./ProfileButtons";
 
 export default function MapPage() {
   const [map, setMap] = useState(null);
@@ -20,7 +19,6 @@ export default function MapPage() {
         address={address}
         onClickMarker={handleClickMarker}
       />
-      <ProfileButtons />
     </div>
   );
 }

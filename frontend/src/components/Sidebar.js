@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { FiHome, FiChevronLeft, FiCompass } from "react-icons/fi";
-import { Image } from "semantic-ui-react";
+import { FiMenu, FiX, FiMap } from "react-icons/fi";
 import { Sidebar, Tab } from "./sidetabs";
+
+import ProfileButtons from "./ProfileButtons";
 
 const SidebarComponent = ({ map, address }) => {
   const [openTab, setOpenTab] = useState("home");
@@ -31,22 +32,18 @@ const SidebarComponent = ({ map, address }) => {
         position="left"
         collapsed={!openTab}
         selected={openTab}
-        closeIcon={<FiChevronLeft />}
+        closeIcon={<FiX />}
         onClose={onClose}
         onOpen={onOpen}
         panMapOnChange
         rehomeControls
       >
-        <Tab id="home" header="Home" icon={<FiHome />} active>
+        <Tab id="home" header="Home" icon={<FiMenu />} active>
           <h3>Vancouver Landlord Database</h3>
-          <Image src={process.env.PUBLIC_URL + "/VTU_logo.jpg"} />
-          This is a work in progress by the data-tools working group of the{" "}
-          <a href="https://www.vancouvertenantsunion.ca/">
-            Vancouver Tenants Union
-          </a>
-          .
+          <ProfileButtons />
+          <p>Work in Progress by VTU Data Tools</p>
         </Tab>
-        <Tab id="props" header="Address" icon={<FiCompass />}>
+        <Tab id="props" header="Address" icon={<FiMap />}>
           <h3>
             {address.streetnumber} {address.street}
           </h3>
