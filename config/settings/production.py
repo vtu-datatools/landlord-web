@@ -5,7 +5,7 @@ DEBUG = False
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["vanbelu.ga"])
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["vanlandlord.ga"])
 
 # DATABASES
 # ------------------------------------------------------------------------------
@@ -174,5 +174,5 @@ POSTGIS_VERSION = (3, 1)
 # ------------------------------------------------------------------------------
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://\w+\.vanbelu\.ga$",
+    r"^https://\w+\.vanlandlord\.ga$",
 ]

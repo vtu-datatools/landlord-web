@@ -28,7 +28,7 @@ certificatesResolvers:
 http:
   routers:
     web-secure-router:
-      rule: "Host(`vanbelu.ga`) || Host(`www.vanbelu.ga`)"
+      rule: "Host(`vanlandlord.ga`) || Host(`www.vanlandlord.ga`)"
       entryPoints:
         - web-secure
       middlewares:
@@ -38,7 +38,7 @@ http:
         # https://docs.traefik.io/master/routing/routers/#certresolver
         certResolver: letsencrypt
     api:
-      rule: "(Host(`vanbelu.ga`) || Host(`www.vanbelu.ga`))  && (PathPrefix(`/api`))"
+      rule: "(Host(`vanlandlord.ga`) || Host(`www.vanlandlord.ga`))  && (PathPrefix(`/api`))"
       entryPoints:
         - web-secure
       middlewares:

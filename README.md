@@ -1,6 +1,6 @@
 # VTU
 
-Web app for Vancouver landlord data (current address: https://www.vanbelu.ga)
+Web app for Vancouver landlord data (current address: http://www.vanlandlord.ga)
 
 Stack:
 * Frontend: React.js (Maps with leaflet)
