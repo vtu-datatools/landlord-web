@@ -9,7 +9,6 @@ Stack:
 
 ### TODO:
 * Add check when signup to see if username/email is available (convert login page to yup/formik as well)
-* When user clicks on marker, change to props tab of sidebar
 * Make profile page interactive (user can change email, etc.)
 * Bring in landlord data markers
 * Add ability for users to comment on marker/locations

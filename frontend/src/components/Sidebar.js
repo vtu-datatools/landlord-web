@@ -5,7 +5,7 @@ import { Sidebar, Tab } from "./sidetabs";
 import ProfileButtons from "./ProfileButtons";
 
 const SidebarComponent = ({ map, address }) => {
-  const [openTab, setOpenTab] = useState("home");
+  const [openTab, setOpenTab] = useState(false);
 
   const onClose = () => {
     setOpenTab(false);
