@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from rest_framework.serializers import ModelSerializer, EmailField, CharField
 from .models import CustomUser
 
@@ -18,6 +19,15 @@ class UserSerializer(ModelSerializer):
         if password is not None:
             instance.set_password(password)
 
+        send_mail(
+            subject="Welcome to Vancouver Landlords!",
+            message="A new user hass been registered with: Username: {} Email: {}".format(
+                validated_data["email"], validated_data["email"]
+            ),
+            from_email=None,
+            recipient_list=[validated_data["email"]],
+            fail_silently=False,
+        )
         instance.save()
 
         return instance
