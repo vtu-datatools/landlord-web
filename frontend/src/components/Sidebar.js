@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiMenu, FiX, FiMap } from "react-icons/fi";
 import { Sidebar, Tab } from "./sidetabs";
 
@@ -16,7 +16,7 @@ const SidebarComponent = ({ map, address }) => {
   };
   if (address == null) {
     address = {
-      streenumber: "",
+      streetnumber: "",
       street: "",
       businessoperator: 0,
       totalunits: 0,
@@ -24,6 +24,12 @@ const SidebarComponent = ({ map, address }) => {
       detailurl: "",
     };
   }
+
+  useEffect(() => {
+    if (address.streetnumber !== "") {
+      setOpenTab("props");
+    }
+  }, [address]);
 
   return (
     <section className="Sidebar">
