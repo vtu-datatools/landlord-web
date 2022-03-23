@@ -3,6 +3,7 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer
+from .models import CustomUser
 
 
 class UserCreate(CreateAPIView):
@@ -15,6 +16,7 @@ user_create = UserCreate.as_view()
 
 
 class Protected(APIView):
+    # Return user profile data
     def get(self, request):
         user_data = request.user
         return Response(
@@ -28,3 +30,28 @@ class Protected(APIView):
 
 
 protected = Protected.as_view()
+
+
+class UsernameAvailable(APIView):
+    permission_classes = (permissions.AllowAny,)
+    # Check to see if username is available (used before creation)
+    def get(self, request):
+        username = request.query_params["username"]
+        username_exists = CustomUser.objects.filter(username=username).exists()
+
+        return Response(data={"message": not username_exists})
+
+
+username_available = UsernameAvailable.as_view()
+
+
+class EmailAvailable(APIView):
+    permission_classes = (permissions.AllowAny,)
+    # Check to see if email is available (used before creation)
+    def get(self, request, *args, **kwargs):
+        email = self.request.GET["email"]
+        email_exists = CustomUser.objects.filter(email=email).exists()
+        return Response(data={"message": not email_exists})
+
+
+email_available = EmailAvailable.as_view()

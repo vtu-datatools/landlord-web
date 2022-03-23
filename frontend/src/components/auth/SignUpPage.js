@@ -13,14 +13,44 @@ import {
 } from "formik-semantic-ui-react";
 
 import { loginUser } from "../../redux/actions/auth";
-import { signUp } from "../api/authenticationApi";
+import {
+  signUp,
+  usernameAvailable,
+  emailAvailable,
+} from "../api/authenticationApi";
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
     .required("Username is required")
     .min(4, "Username must be at least 4 characters")
-    .max(20, "Username must not exceed 20 characters"),
-  email: Yup.string().required("Email is required").email("Email is invalid"),
+    .max(20, "Username must not exceed 20 characters")
+    .test(
+      "username-check",
+      "Username already exists",
+      async function validateUser(value) {
+        try {
+          const userAvailable = await usernameAvailable(value);
+          return userAvailable.data.message;
+        } catch (error) {
+          return true;
+        }
+      }
+    ),
+  email: Yup.string()
+    .required("Email is required")
+    .email("Email is invalid")
+    .test(
+      "email-check",
+      "Email already exists",
+      async function validateEmail(value) {
+        try {
+          const email = await emailAvailable(value);
+          return email.data.message;
+        } catch (error) {
+          return true;
+        }
+      }
+    ),
   first_name: Yup.string().required("First name is required"),
   last_name: Yup.string().required("Last name is required"),
   password: Yup.string()

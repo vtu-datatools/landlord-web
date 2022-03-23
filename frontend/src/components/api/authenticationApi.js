@@ -40,3 +40,21 @@ export const isAuthenticated = () => {
   const token = localStorage.getItem("access_token");
   return !!token;
 };
+
+export async function usernameAvailable(username) {
+  const response = await axiosAPI.get("available/username/", {
+    params: {
+      username: username,
+    },
+  });
+  return response;
+}
+
+export async function emailAvailable(email) {
+  const response = await axiosAPI.get("available/email/", {
+    params: {
+      email: email,
+    },
+  });
+  return response;
+}
