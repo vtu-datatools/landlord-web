@@ -94,6 +94,8 @@ const SignUpPage = ({ loginUser }) => {
         initialValues={initialValues}
         validationSchema={SignupSchema}
         onSubmit={onSubmit}
+        validateOnChange={false}
+        validateOnBlur={false}
       >
         {({ isSubmitting }) => (
           <Form size="large">
