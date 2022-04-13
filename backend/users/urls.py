@@ -1,7 +1,7 @@
 from django.urls import include, path
 from rest_framework_simplejwt import views as jwt_views
 
-from . import views
+from .api import views
 
 urlpatterns = [
     path("create/", views.user_create, name="sign-up"),

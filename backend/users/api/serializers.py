@@ -1,6 +1,6 @@
 from django.core.mail import send_mail
 from rest_framework.serializers import ModelSerializer, EmailField, CharField
-from .models import CustomUser
+from backend.users.models import User
 
 
 class UserSerializer(ModelSerializer):
@@ -9,7 +9,7 @@ class UserSerializer(ModelSerializer):
     password = CharField(min_length=8, write_only=True)
 
     class Meta:
-        model = CustomUser
+        model = User
         fields = ("username", "email", "password", "first_name", "last_name")
         extra_kwargs = {"password": {"write_only": True}}
 

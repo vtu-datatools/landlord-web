@@ -3,7 +3,7 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer
-from .models import CustomUser
+from backend.users.models import User
 
 
 class UserCreate(CreateAPIView):
@@ -37,7 +37,7 @@ class UsernameAvailable(APIView):
     # Check to see if username is available (used before creation)
     def get(self, request):
         username = request.query_params["username"]
-        username_exists = CustomUser.objects.filter(username=username).exists()
+        username_exists = User.objects.filter(username=username).exists()
 
         return Response(data={"message": not username_exists})
 
@@ -50,7 +50,7 @@ class EmailAvailable(APIView):
     # Check to see if email is available (used before creation)
     def get(self, request, *args, **kwargs):
         email = self.request.GET["email"]
-        email_exists = CustomUser.objects.filter(email=email).exists()
+        email_exists = User.objects.filter(email=email).exists()
         return Response(data={"message": not email_exists})
 
 
