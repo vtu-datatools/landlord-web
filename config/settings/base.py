@@ -8,7 +8,7 @@ import environ
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 
-APPS_DIR = ROOT_DIR / "apps"
+APPS_DIR = ROOT_DIR / "backend"
 
 env = environ.Env()
 
@@ -91,8 +91,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "apps.user",
-    "apps.landlord",
+    "backend.user",
+    "backend.landlord",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -101,9 +101,9 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # ---------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
 MIGRATION_MODULES = {
-    "sites": "apps.migrations.sites",
-    "user": "apps.migrations.user",
-    "landlord": "apps.migrations.landlord",
+    "sites": "backend.migrations.sites",
+    "user": "backend.migrations.user",
+    "landlord": "backend.migrations.landlord",
 }
 
 # AUTHENTICATION
