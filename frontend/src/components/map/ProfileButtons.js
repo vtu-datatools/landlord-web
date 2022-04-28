@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 
-import { logoutUser } from "../redux/actions/auth";
+import { logoutUser } from "../../redux/actions/auth";
 
 const ProfileButtons = ({ accessToken, logoutUser }) => {
   const navigate = useNavigate();

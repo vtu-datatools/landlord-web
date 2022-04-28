@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 // import PageNotFound from "./PageNotFound";
-import MapPage from "./components/MapPage";
+import MapPage from "./components/map/MapPage";
 import ProfilePage from "./components/auth/ProfilePage";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import LoginPage from "./components/auth/LoginPage";
