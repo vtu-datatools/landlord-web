@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import * as Yup from "yup";
 import { Formik } from "formik";
-import { Header, Image, Button } from "semantic-ui-react";
+import { Header, Button } from "semantic-ui-react";
 import { Form, SubmitButton, Input } from "formik-semantic-ui-react";
 
 import { loginUser } from "../../redux/actions/auth";
+import "./styles.css";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string()
@@ -32,8 +33,9 @@ const LoginPage = ({ loginUser }) => {
   return (
     <div className="signup-page">
       <Header as="h2" textAlign="center">
-        <Image src={process.env.PUBLIC_URL + "/VTU_logo.jpg"} /> Login
+        Login
       </Header>
+
       <Formik
         id="login-up-form"
         initialValues={initialValues}

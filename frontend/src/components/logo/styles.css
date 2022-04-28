@@ -1,0 +1,12 @@
+.logoContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 10px !important;
+    margin-left: -10px !important;
+  }
+  
+  .logo {
+    height: 60px;
+  }
