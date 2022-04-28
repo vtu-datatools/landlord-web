@@ -6,7 +6,7 @@ import MapPage from "./components/map/MapPage";
 import ProfilePage from "./components/auth/ProfilePage";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import LoginPage from "./components/login";
-import SignUpPage from "./components/auth/SignUpPage";
+import SignUpPage from "./components/register";
 
 import "./css/App.css";
 

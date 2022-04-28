@@ -15,9 +15,11 @@
     "formik": "^2.2.9",
     "formik-semantic-ui-react": "^2.0.0",
     "html-to-draftjs": "^1.5.0",
+    "immutable": "^4.0.0",
     "leaflet": "^1.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-draft-wysiwyg": "^1.14.7",
     "react-icons": "^4.3.1",
     "react-leaflet": "^3.2.2",
     "react-leaflet-sidebarv2": "^0.6.0",
@@ -54,7 +56,7 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
+    "eslint": "^8.14.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-prettier": "^3.4.1",

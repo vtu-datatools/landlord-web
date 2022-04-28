@@ -17,7 +17,7 @@ import {
   signUp,
   usernameAvailable,
   emailAvailable,
-} from "../api/authenticationApi";
+} from "../../api/authenticationApi";
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()

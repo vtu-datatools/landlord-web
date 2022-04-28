@@ -1,5 +1,5 @@
 import { LOGIN, LOGOUT } from "./types";
-import { obtainToken, logout } from "../../components/api/authenticationApi";
+import { obtainToken, logout } from "../../api/authenticationApi";
 
 export function loginUserSuccess(token) {
   return { type: LOGIN, token };
