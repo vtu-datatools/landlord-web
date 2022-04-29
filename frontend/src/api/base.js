@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { USER_TOKEN_REFRESH_URL } from "./constants";
+
 const baseURL = "/api/";
 const accessToken = localStorage.getItem("access_token");
 
@@ -19,7 +21,7 @@ axiosAPI.interceptors.response.use(
     const originalRequest = error.config; // Prevent infinite loops
     if (
       error.response.status === 401 &&
-      originalRequest.url === baseURL + "token/refresh/"
+      originalRequest.url === baseURL + USER_TOKEN_REFRESH_URL
     ) {
       window.location.href = "/login/";
       // eslint-disable-next-line no-undef
@@ -35,7 +37,7 @@ axiosAPI.interceptors.response.use(
         const now = Math.ceil(Date.now() / 1000);
         if (tokenParts.exp > now) {
           try {
-            const response = await axiosAPI.post("/token/refresh/", {
+            const response = await axiosAPI.post(USER_TOKEN_REFRESH_URL, {
               refresh,
             });
             setNewHeaders(response);

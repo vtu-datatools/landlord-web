@@ -13,11 +13,7 @@ import {
 } from "formik-semantic-ui-react";
 
 import { loginUser } from "../../redux/actions/auth";
-import {
-  signUp,
-  usernameAvailable,
-  emailAvailable,
-} from "../../api/user";
+import { signUp, usernameAvailable, emailAvailable } from "../../api/user";
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
