@@ -1,4 +1,4 @@
-import axiosAPI, { setNewHeaders } from "./axiosApi";
+import axiosAPI, { setNewHeaders } from "./jwt";
 
 export async function signUp(username, email, password, first_name, last_name) {
   const response = await axiosAPI.post("create/", {

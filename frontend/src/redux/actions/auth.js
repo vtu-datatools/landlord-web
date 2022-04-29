@@ -1,8 +1,8 @@
-import { LOGIN, LOGOUT } from "./types";
-import { obtainToken, logout } from "../../api/authenticationApi";
+import { LOGIN_SUCCESS, LOGOUT } from "./types";
+import { obtainToken, logout } from "../../api/auth";
 
 export function loginUserSuccess(token) {
-  return { type: LOGIN, token };
+  return { type: LOGIN_SUCCESS, token };
 }
 
 export function loginUser(username, password) {
