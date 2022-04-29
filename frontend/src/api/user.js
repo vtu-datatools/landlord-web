@@ -1,8 +1,16 @@
 import axiosAPI, { setNewHeaders } from "./jwt";
-import { USER_EDIT_URL, USER_URL } from "./constants";
+import {
+  USER_REGISTER_URL,
+  USER_TOKEN_OBTAIN_URL,
+  USER_TOKEN_REFRESH_URL,
+  USER_EDIT_URL,
+  USER_URL,
+  USER_AVAILABLE_USERNAME_URL,
+  USER_AVAILABLE_EMAIL_URL,
+} from "./constants";
 
 export async function signUp(username, email, password, first_name, last_name) {
-  const response = await axiosAPI.post("create/", {
+  const response = await axiosAPI.post(USER_REGISTER_URL, {
     username,
     email,
     password,
@@ -14,7 +22,7 @@ export async function signUp(username, email, password, first_name, last_name) {
 }
 
 export async function obtainToken(username, password) {
-  const response = await axiosAPI.post("token/obtain/", {
+  const response = await axiosAPI.post(USER_TOKEN_OBTAIN_URL, {
     username,
     password,
   });
@@ -23,7 +31,7 @@ export async function obtainToken(username, password) {
 }
 
 export async function refreshToken(refresh) {
-  const response = await axiosAPI.post("token/refresh/", {
+  const response = await axiosAPI.post(USER_TOKEN_REFRESH_URL, {
     refresh,
   });
   setNewHeaders(response);
@@ -43,7 +51,7 @@ export const isAuthenticated = () => {
 };
 
 export async function usernameAvailable(username) {
-  const response = await axiosAPI.get("available/username/", {
+  const response = await axiosAPI.get(USER_AVAILABLE_USERNAME_URL, {
     params: {
       username: username,
     },
@@ -52,7 +60,7 @@ export async function usernameAvailable(username) {
 }
 
 export async function emailAvailable(email) {
-  const response = await axiosAPI.get("available/email/", {
+  const response = await axiosAPI.get(USER_AVAILABLE_EMAIL_URL, {
     params: {
       email: email,
     },
