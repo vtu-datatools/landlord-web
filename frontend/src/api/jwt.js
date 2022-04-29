@@ -22,6 +22,7 @@ axiosAPI.interceptors.response.use(
       originalRequest.url === baseURL + "token/refresh/"
     ) {
       window.location.href = "/login/";
+      // eslint-disable-next-line no-undef
       return Promise.reject(error);
     }
     if (
@@ -53,6 +54,7 @@ axiosAPI.interceptors.response.use(
         window.location.href = "/login/";
       }
     } // specific error handling done elsewhere
+    // eslint-disable-next-line no-undef
     return Promise.reject(error);
   }
 );
