@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Header, Image, Grid } from "semantic-ui-react";
 
-import axiosAPI from "../../api/jwt";
+import axiosAPI from "../../api/base";
 
 const ProfilePage = () => {
   const [user, setUser] = useState([]);

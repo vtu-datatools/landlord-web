@@ -1,4 +1,4 @@
-import axiosAPI from "./jwt";
+import axiosAPI from "./base";
 import { FORUM_URL } from "./constants";
 
 export const fetchForumsApi = () => {

@@ -1,24 +1,23 @@
-import axios from "axios";
+import axiosAPI from "./base";
 import {
   THREAD_URL,
   THREAD_CREATE_URL,
   THREAD_EDIT_URL,
   THREAD_DELETE_URL,
 } from "./constants";
-import { getConfig } from "../utils/config";
 
 export const fetchThreadApi = (thread) => {
-  return axios.get(THREAD_URL + thread, getConfig());
+  return axiosAPI.get(THREAD_URL + thread);
 };
 
 export const createThreadApi = (newThread) => {
-  return axios.post(THREAD_CREATE_URL, newThread, getConfig());
+  return axiosAPI.post(THREAD_CREATE_URL, newThread);
 };
 
 export const deleteThreadApi = (id) => {
-  return axios.delete(THREAD_URL + id + THREAD_DELETE_URL, getConfig());
+  return axiosAPI.delete(THREAD_URL + id + THREAD_DELETE_URL);
 };
 
 export const editThreadApi = (id, data) => {
-  return axios.put(THREAD_URL + id + THREAD_EDIT_URL, data, getConfig());
+  return axiosAPI.put(THREAD_URL + id + THREAD_EDIT_URL, data);
 };

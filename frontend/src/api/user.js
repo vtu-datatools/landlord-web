@@ -1,4 +1,4 @@
-import axiosAPI, { setNewHeaders } from "./jwt";
+import axiosAPI, { setNewHeaders } from "./base";
 import {
   USER_REGISTER_URL,
   USER_TOKEN_OBTAIN_URL,
