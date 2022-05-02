@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Register from "../../components/register";
 import Modal from "../../components/modal";
 import {
@@ -9,54 +9,41 @@ import {
   register,
 } from "../../redux/actions";
 
-class RegisterModal extends Component {
-  //   componentWillMount() {
-  //     if (this.props.isAuthenticated) {
-  //       this.props.handleClose();
-  //     }
-  //   }
+function RegisterModal() {
+  const dispatch = useDispatch();
 
-  render() {
-    const {
-      isAuthenticated,
-      isLoading,
-      error,
-      handleRegister,
-      showLogin,
-      handleClose,
-    } = this.props;
-
-    return isAuthenticated ? null : (
-      <Modal onClose={handleClose}>
-        <Register
-          handleRegister={handleRegister}
-          showLogin={showLogin}
-          isLoading={isLoading}
-          error={error}
-        />
-      </Modal>
-    );
-  }
-}
-
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  error: state.register.error,
-  isLoading: state.register.isLoading,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleRegister: (data) => {
-    dispatch(register(data));
-  },
-  handleClose: () => {
+  const handleRegister = (data) => dispatch(register(data));
+  const handleClose = () => {
     dispatch(hideModal());
     dispatch(registerReset());
-  },
-  showLogin: () => {
+  };
+  const showLogin = () => {
     dispatch(showModal("LOGIN", {}));
     dispatch(registerReset());
-  },
-});
+  };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterModal);
+  const { isAuthenticated, error, isLoading } = useSelector((state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    error: state.register.error,
+    isLoading: state.register.isLoading,
+  }));
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      handleClose();
+    }
+  }, [dispatch]);
+
+  return isAuthenticated ? null : (
+    <Modal onClose={handleClose}>
+      <Register
+        handleRegister={handleRegister}
+        showLogin={showLogin}
+        isLoading={isLoading}
+        error={error}
+      />
+    </Modal>
+  );
+}
+
+export default RegisterModal;

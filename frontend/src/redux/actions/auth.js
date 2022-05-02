@@ -1,4 +1,10 @@
-import { LOGIN_SUCCESS, LOGOUT } from "./types";
+import {
+  LOGIN_SUCCESS,
+  LOGIN_REQUEST,
+  LOGOUT,
+  LOGIN_FAILURE,
+  LOGIN_RESET,
+} from "./types";
 import { obtainToken, logout } from "../../api/user";
 
 export function loginUserSuccess(token) {
@@ -15,6 +21,24 @@ export function loginUser(username, password) {
     }
   };
 }
+export const loginRequest = () => {
+  return {
+    type: LOGIN_REQUEST,
+  };
+};
+
+export const loginFailure = (error) => {
+  return {
+    type: LOGIN_FAILURE,
+    error,
+  };
+};
+
+export const loginReset = () => {
+  return {
+    type: LOGIN_RESET,
+  };
+};
 
 export function logoutUserSuccess() {
   return { type: LOGOUT };

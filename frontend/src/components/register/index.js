@@ -13,7 +13,7 @@ import {
 } from "formik-semantic-ui-react";
 
 import { loginUser } from "../../redux/actions/auth";
-import { signUp, usernameAvailable, emailAvailable } from "../../api/user";
+import { registerApi, usernameAvailable, emailAvailable } from "../../api/user";
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
@@ -70,7 +70,7 @@ const SignUpPage = ({ loginUser }) => {
   };
 
   const onSubmit = async (values) => {
-    await signUp(
+    await registerApi(
       values.username,
       values.email,
       values.password,

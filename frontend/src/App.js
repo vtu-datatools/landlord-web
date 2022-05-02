@@ -10,7 +10,7 @@ import SignUpPage from "./components/register";
 import HeaderContainer from "./containers/header";
 import UsersContainer from "./containers/users";
 import UserProfileContainer from "./containers/userprofile";
-// import ModalContainer from "./containers/modal";
+import ModalContainer from "./containers/modal";
 // import ForumContainer from "./containers/forum";
 
 import "./css/App.css";
@@ -32,7 +32,7 @@ export default function App() {
           {/* <Route path="/forums" element={<ForumContainer />} /> */}
         </Routes>
       </div>
-      {/* <ModalContainer /> */}
+      <ModalContainer />
     </Fragment>
   );
 }

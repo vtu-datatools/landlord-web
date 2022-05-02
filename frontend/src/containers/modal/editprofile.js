@@ -6,13 +6,11 @@ import { hideModal, editProfileReset, editProfile } from "../../redux/actions";
 
 function EditProfileModal() {
   useEffect(() => {
-    return () => {
-      if (!this.props.isAuthenticated) {
-        this.props.handleClose();
-      }
-    };
-  });
-  
+    if (!isAuthenticated) {
+      dispatch(fetchUsers());
+    }
+  }, [dispatch]);
+
   return !isAuthenticated ? null : (
     <Modal onClose={handleClose} dialogStyle={{ minWidth: "500px" }}>
       <EditProfile
