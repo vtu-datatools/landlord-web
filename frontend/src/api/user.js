@@ -68,12 +68,12 @@ export async function emailAvailable(email) {
   return response;
 }
 
-export async function fetchUserProfile(username) {
+export async function fetchUserProfileApi(username) {
   const response = await axiosAPI.get(USER_URL + username);
   return response;
 }
 
-export async function editProfile(username, newProfile) {
+export async function editProfileApi(username, newProfile) {
   const response = await axiosAPI.put(
     USER_URL + username + USER_EDIT_URL,
     newProfile
@@ -81,7 +81,7 @@ export async function editProfile(username, newProfile) {
   return response;
 }
 
-export async function fetchUsers() {
+export async function fetchUsersApi() {
   const response = await axiosAPI.get(USER_URL);
   return response;
 }

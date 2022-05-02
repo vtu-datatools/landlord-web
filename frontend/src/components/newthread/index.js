@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {getSelectedBlock} from 'draftjs-utils';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { getSelectedBlock } from 'draftjs-utils';
 import htmlToDraft from 'html-to-draftjs';
-import {List} from 'immutable';
+import { List } from 'immutable';
 import {
   EditorState,
   ContentState,

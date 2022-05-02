@@ -7,7 +7,7 @@ from django.views import defaults as default_views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/landlords/", include("backend.landlord.api")),
-    path("api/users/", include("backend.users.urls")),
+    path("api/users/", include("backend.users.api.urls")),
     path("api/forums/", include("backend.forums.api.urls")),
     path("api/threads/", include("backend.threads.api.urls")),
     path("api/posts/", include("backend.posts.api.urls")),

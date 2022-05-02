@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router";
 import Avatar from "../avatar";
 import { Menu, Dropdown } from "semantic-ui-react";
 import "./styles.css";
@@ -40,4 +39,4 @@ class UserNav extends Component {
   }
 }
 
-export default withRouter(UserNav);
+export default UserNav;

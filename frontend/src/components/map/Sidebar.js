@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { FiMenu, FiX, FiMap } from "react-icons/fi";
 import { Sidebar, Tab } from "./sidetabs";
 
-import ProfileButtons from "./ProfileButtons";
-
 const SidebarComponent = ({ map, address }) => {
   const [openTab, setOpenTab] = useState(false);
 
@@ -46,7 +44,6 @@ const SidebarComponent = ({ map, address }) => {
       >
         <Tab id="home" header="Home" icon={<FiMenu />} active>
           <h3>Vancouver Landlord Database</h3>
-          <ProfileButtons />
           <p>Work in Progress by VTU Data Tools</p>
         </Tab>
         <Tab id="props" header="Address" icon={<FiMap />}>

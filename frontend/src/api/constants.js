@@ -1,5 +1,5 @@
 export const USER_URL = "users/";
-export const USER_REGISTER_URL = USER_URL + "create/";
+export const USER_REGISTER_URL = USER_URL + "register/";
 export const USER_TOKEN_URL = USER_URL + "token/";
 export const USER_TOKEN_OBTAIN_URL = USER_TOKEN_URL + "obtain/";
 export const USER_TOKEN_REFRESH_URL = USER_TOKEN_URL + "refresh/";
