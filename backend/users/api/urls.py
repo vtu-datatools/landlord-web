@@ -10,6 +10,7 @@ from .views import (
     UsernameAvailable,
     EmailAvailable,
     ProtectedView,
+    UserTokenObtainPairView,
 )
 
 urlpatterns = [
@@ -18,7 +19,7 @@ urlpatterns = [
     path("<slug:username>/", UserDetailAPIView.as_view(), name="user-detail"),
     path("<slug:username>/edit/", UserUpdateAPIView.as_view(), name="user-update"),
     path("<slug:username>/delete/", UserDeleteAPIView.as_view(), name="user-delete"),
-    path("token/obtain/", jwt_views.TokenObtainPairView.as_view(), name="token-create"),
+    path("token/obtain/", UserTokenObtainPairView.as_view(), name="token-create"),
     path("token/refresh/", jwt_views.TokenRefreshView.as_view(), name="token-refresh"),
     path("protected/", ProtectedView.as_view(), name="protected"),
     path("available/username/", UsernameAvailable.as_view(), name="username-available"),

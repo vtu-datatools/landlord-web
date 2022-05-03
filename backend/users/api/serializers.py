@@ -8,12 +8,14 @@ from rest_framework.serializers import (
     SlugField,
     ValidationError,
 )
-from django.core.mail import send_mail
-from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth import authenticate
 from rest_framework.validators import UniqueValidator
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.core.mail import send_mail
+from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from django.contrib.humanize.templatetags.humanize import naturaltime
+
 from backend.users.models import UserProfile
 
 
@@ -243,3 +245,14 @@ class UserCreateSerializer(ModelSerializer):
         )
         profile.save()
         return user
+
+
+class UserTokenSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        refresh = self.get_token(self.user)
+        data["refresh"] = str(refresh)
+        data["access"] = str(refresh.access_token)
+        data["username"] = self.user.username
+        data["is_staff"] = self.user.is_staff
+        return data

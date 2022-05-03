@@ -121,18 +121,11 @@ const EditProfile = () => {
               placeholder="Email"
             />
             <Input
-              id="input-first-name"
+              id="input-name"
               errorPrompt
-              name="first_name"
-              label="First Name"
-              placeholder="First Name"
-            />
-            <Input
-              id="input-last-name"
-              errorPrompt
-              name="last_name"
-              label="Last Name"
-              placeholder="Last Name"
+              name="name"
+              label="Name"
+              placeholder="Name"
             />
             <Input
               id="input-password"

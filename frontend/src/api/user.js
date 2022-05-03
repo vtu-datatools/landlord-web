@@ -9,19 +9,12 @@ import {
   USER_AVAILABLE_EMAIL_URL,
 } from "./constants";
 
-export async function registerApi(
-  username,
-  email,
-  password,
-  first_name,
-  last_name
-) {
+export async function registerApi(username, email, password, name) {
   const response = await axiosAPI.post(USER_REGISTER_URL, {
     username,
     email,
     password,
-    first_name,
-    last_name,
+    name,
   });
   localStorage.setItem("user", response.data);
   return response;

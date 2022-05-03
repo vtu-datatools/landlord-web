@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import AllowAny
 from rest_framework.generics import (
     CreateAPIView,
@@ -19,6 +20,7 @@ from .serializers import (
     UserDetailSerializer,
     UserListSerializer,
     UserUpdateSerializer,
+    UserTokenSerializer,
 )
 
 
@@ -65,8 +67,7 @@ class ProtectedView(APIView):
             data={
                 "username": user_data.username,
                 "email": user_data.email,
-                "first_name": user_data.first_name,
-                "last_name": user_data.last_name,
+                "name": user_data.name,
             }
         )
 
@@ -88,3 +89,7 @@ class EmailAvailable(APIView):
         email = self.request.GET["email"]
         email_exists = User.objects.filter(email=email).exists()
         return Response(data={"message": not email_exists})
+
+
+class UserTokenObtainPairView(TokenObtainPairView):
+    serializer_class = UserTokenSerializer

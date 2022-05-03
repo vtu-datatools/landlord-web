@@ -13,15 +13,20 @@ import { useSelector } from "react-redux";
 import { obtainToken, logout, editProfileApi } from "../../api/user";
 import { apiErrorHandler } from "../../utils/errorhandler";
 
-export function loginUserSuccess(token) {
-  return { type: LOGIN_SUCCESS, token };
+export function loginUserSuccess(data) {
+  return {
+    type: LOGIN_SUCCESS,
+    token: data.access,
+    username: data.username,
+    isStaff: data.is_staff,
+  };
 }
 
 export function loginUser(username, password) {
   return async function (dispatch) {
     try {
       const response = await obtainToken(username, password);
-      dispatch(loginUserSuccess(response.data.access));
+      dispatch(loginUserSuccess(response.data));
     } catch (error) {
       console.log("Error obtaining token. " + error);
     }

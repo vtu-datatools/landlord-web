@@ -21,9 +21,7 @@ const ProfilePage = () => {
         <Image src="/VTU_logo.jpg" /> Profile
       </Header>
       <p>Username: {user.username}</p>
-      <p>
-        Name: {user.first_name} {user.last_name}
-      </p>
+      <p>Name: {user.name}</p>
       <p>Email: {user.email}</p>
       <Button id="back_button" content="Back" onClick={() => navigate(-1)} />
       <Grid />
