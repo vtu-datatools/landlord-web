@@ -1,6 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik } from "formik";
@@ -57,8 +56,9 @@ const SignupSchema = Yup.object().shape({
     .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
 });
 
-const SignUpPage = ({ loginUser }) => {
+const SignUpPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const initialValues = {
     username: "",
     email: "",
@@ -74,7 +74,7 @@ const SignUpPage = ({ loginUser }) => {
       values.password,
       values.name
     );
-    loginUser(values.username, values.password);
+    dispatch(loginUser(values.username, values.password));
     navigate("/");
   };
   return (
@@ -148,10 +148,5 @@ const SignUpPage = ({ loginUser }) => {
     </div>
   );
 };
-SignUpPage.propTypes = {
-  loginUser: PropTypes.func.isRequired,
-};
-const mapDispatchToProps = {
-  loginUser,
-};
-export default connect(null, mapDispatchToProps)(SignUpPage);
+
+export default SignUpPage;
