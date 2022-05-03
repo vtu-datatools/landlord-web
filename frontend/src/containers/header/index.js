@@ -1,64 +1,53 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Navlink from "../../components/navlink";
 import UserMenu from "../../components/usermenu";
 import "./styles.css";
 import { showModal, logoutUser } from "../../redux/actions";
 
-class HeaderContainer extends Component {
-  render() {
-    const {
-      isAuthenticated,
-      username,
-      name,
-      avatar,
-      handleLogout,
-      isLoading,
-      showRegister,
-      showLogin,
-      showEditProfile,
-    } = this.props;
+function HeaderContainer() {
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
+  const showRegister = () => {
+    dispatch(showModal("REGISTER", {}));
+  };
 
-    return (
-      <div className="headerContainer">
-        <Navlink />
-        <UserMenu
-          isAuthenticated={isAuthenticated}
-          username={username}
-          name={name}
-          avatar={avatar}
-          logout={handleLogout}
-          isLoading={isLoading}
-          showRegister={showRegister}
-          showLogin={showLogin}
-          showEditProfile={showEditProfile}
-        />
-      </div>
-    );
-  }
+  const showLogin = () => {
+    dispatch(showModal("LOGIN", {}));
+  };
+
+  const showEditProfile = () => {
+    dispatch(showModal("EDIT_PROFILE", {}));
+  };
+
+  const { username, name, avatar, isAuthenticated, isLoading } = useSelector(
+    (state) => ({
+      username: state.auth.username,
+      name: state.auth.name,
+      avatar: state.auth.avatar,
+      isAuthenticated: state.auth.isAuthenticated,
+      isLoading: state.auth.isLoading,
+    })
+  );
+
+  return (
+    <div className="headerContainer">
+      <Navlink />
+      <UserMenu
+        isAuthenticated={isAuthenticated}
+        username={username}
+        name={name}
+        avatar={avatar}
+        logout={handleLogout}
+        isLoading={isLoading}
+        showRegister={showRegister}
+        showLogin={showLogin}
+        showEditProfile={showEditProfile}
+      />
+    </div>
+  );
 }
 
-const mapStateToProps = (state) => ({
-  username: state.auth.username,
-  name: state.auth.name,
-  avatar: state.auth.avatar,
-  isAuthenticated: state.auth.isAuthenticated,
-  isLoading: state.auth.isLoading,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleLogout: () => {
-    dispatch(logoutUser());
-  },
-  showRegister: () => {
-    dispatch(showModal("REGISTER", {}));
-  },
-  showLogin: () => {
-    dispatch(showModal("LOGIN", {}));
-  },
-  showEditProfile: () => {
-    dispatch(showModal("EDIT_PROFILE", {}));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
+export default HeaderContainer;

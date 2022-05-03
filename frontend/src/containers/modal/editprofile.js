@@ -1,13 +1,37 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EditProfile from "../../components/editprofile";
 import Modal from "../../components/modal";
-import { hideModal, editProfileReset, editProfile } from "../../redux/actions";
+import {
+  hideModal,
+  editProfileReset,
+  editProfileAction,
+} from "../../redux/actions";
 
 function EditProfileModal() {
+  const dispatch = useDispatch();
+
+  const editProfile = (newProfile) => {
+    dispatch(editProfileAction(newProfile));
+  };
+  const handleClose = () => {
+    dispatch(hideModal());
+    dispatch(editProfileReset());
+  };
+
+  const { isAuthenticated, isEditing, error, avatar, name, success } =
+    useSelector((state) => ({
+      isAuthenticated: state.auth.isAuthenticated,
+      isEditing: state.auth.isEditing,
+      error: state.auth.editError,
+      avatar: state.auth.avatar,
+      name: state.auth.name,
+      success: state.auth.editSuccess,
+    }));
+
   useEffect(() => {
     if (!isAuthenticated) {
-      dispatch(fetchUsers());
+      dispatch(handleClose());
     }
   }, [dispatch]);
 
@@ -25,23 +49,4 @@ function EditProfileModal() {
   );
 }
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  isEditing: state.auth.isEditing,
-  error: state.auth.editError,
-  avatar: state.auth.avatar,
-  name: state.auth.name,
-  success: state.auth.editSuccess,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  editProfile: (newProfile) => {
-    dispatch(editProfile(newProfile));
-  },
-  handleClose: () => {
-    dispatch(hideModal());
-    dispatch(editProfileReset());
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditProfileModal);
+export default EditProfileModal;

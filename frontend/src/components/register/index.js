@@ -47,8 +47,7 @@ const SignupSchema = Yup.object().shape({
         }
       }
     ),
-  first_name: Yup.string().required("First name is required"),
-  last_name: Yup.string().required("Last name is required"),
+  name: Yup.string().required("Name is required"),
   password: Yup.string()
     .required("Password is required")
     .min(6, "Password must be at least 6 characters")
@@ -63,8 +62,7 @@ const SignUpPage = ({ loginUser }) => {
   const initialValues = {
     username: "",
     email: "",
-    first_name: "",
-    last_name: "",
+    name: "",
     password: "",
     confirm_password: "",
   };
@@ -74,8 +72,7 @@ const SignUpPage = ({ loginUser }) => {
       values.username,
       values.email,
       values.password,
-      values.first_name,
-      values.last_name
+      values.name
     );
     loginUser(values.username, values.password);
     navigate("/");
@@ -110,18 +107,11 @@ const SignUpPage = ({ loginUser }) => {
               placeholder="Email"
             />
             <Input
-              id="input-first-name"
+              id="input-name"
               errorPrompt
-              name="first_name"
-              label="First Name"
-              placeholder="First Name"
-            />
-            <Input
-              id="input-last-name"
-              errorPrompt
-              name="last_name"
-              label="Last Name"
-              placeholder="Last Name"
+              name="name"
+              label="Name"
+              placeholder="Name"
             />
             <Input
               id="input-password"
