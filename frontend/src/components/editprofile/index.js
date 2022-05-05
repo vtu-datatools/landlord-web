@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import Dropzone from "react-dropzone";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import { Header, Image, FormGroup } from "semantic-ui-react";
@@ -11,6 +11,8 @@ import {
   Input,
 } from "formik-semantic-ui-react";
 import { editProfileAction } from "../../redux/actions/auth";
+import { fetchUserProfile } from "../../redux/actions/userprofile";
+import StatusMessage from "../../components/statusmessage";
 // import { imageUploadApi } from "../../api/image";
 import "./styles.css";
 
@@ -29,26 +31,45 @@ const EditSchema = Yup.object().shape({
 });
 
 const EditProfile = () => {
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  const { username, name, email, avatar } = useSelector((state) => ({
-    username: state.auth.username,
-    name: state.auth.name,
-    email: state.auth.email,
-    avatar: state.auth.avatar,
-    isLoading: state.auth.isLoading,
-  }));
+  const { username, token, isLoading, profile, error } = useSelector(
+    (state) => ({
+      username: state.auth.username,
+      token: state.auth.token,
+      isLoading: state.userProfile.isLoading,
+      profile: state.userProfile.profile,
+      error: state.userProfile.error,
+    })
+  );
+
+  useEffect(() => {
+    dispatch(fetchUserProfile(username));
+  }, [dispatch]);
+
+  if (error || !profile || isLoading) {
+    return (
+      <StatusMessage
+        error={error || !profile}
+        errorClassName="userProfile-error"
+        errorMessage={error}
+        loading={isLoading}
+        loadingMessage={`We are fetching the user profile for you`}
+        type="default"
+      />
+    );
+  }
 
   const initialValues = {
-    username: { username },
-    email: { email },
-    name: { name },
+    username: username,
+    bio: profile.bio,
+    name: profile.name,
     current_password: "",
     new_password: "",
   };
-  console.log(username, name, email, avatar);
   const onSubmit = (values) => {
-    editProfileAction(values);
+    console.log(values);
+    dispatch(editProfileAction(values.username, token, values));
   };
 
   //   const onImageDrop = (files) => {
@@ -92,13 +113,14 @@ const EditProfile = () => {
   //   const avatarURL = avatarFile ? avatarFile.preview : avatar;
 
   return (
-    <div className="signup-page">
+    <div className="edit-page">
       <Header as="h2" textAlign="center">
-        <Image src={process.env.PUBLIC_URL + "/VTU_logo.jpg"} /> Sign Up
+        <Image src={process.env.PUBLIC_URL + "/VTU_logo.jpg"} /> Edit Profile
       </Header>
       <Formik
-        id="registration-form"
+        id="edit-form"
         initialValues={initialValues}
+        enableReinitialize={true}
         validationSchema={EditSchema}
         onSubmit={onSubmit}
         validateOnChange={false}
@@ -121,6 +143,13 @@ const EditProfile = () => {
               placeholder="Email"
             />
             <Input
+              id="input-bio"
+              errorPrompt
+              name="bio"
+              label="Bio"
+              placeholder="Bio"
+            />
+            <Input
               id="input-name"
               errorPrompt
               name="name"
@@ -130,18 +159,19 @@ const EditProfile = () => {
             <Input
               id="input-password"
               errorPrompt
-              name="password"
+              name="current_password"
               type="password"
-              label="Password"
-              placeholder="Password"
+              label="Current Password"
+              placeholder="Current Password"
               autoComplete="off"
             />
             <Input
-              id="input-confirm-password"
+              id="input-new-password"
               errorPrompt
-              name="confirm_password"
+              name="cnew_password"
               type="password"
-              label="Confirm Password"
+              label="New Password"
+              placeholder="New Password"
               autoComplete="off"
             />
 
