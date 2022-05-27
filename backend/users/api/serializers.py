@@ -228,7 +228,7 @@ class UserCreateSerializer(ModelSerializer):
 
         avatar = profile_data.get("avatar") or None
         if not avatar:
-            avatar = "https://api.adorable.io/avatar/200/" + username
+            avatar = "https://i.imgur.com/7o5cwt8.png"
         profile = UserProfile(
             user=user,
             bio=profile_data.get("bio", ""),

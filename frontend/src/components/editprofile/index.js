@@ -12,7 +12,7 @@ import {
 import { editProfileAction } from "../../redux/actions/auth";
 import { fetchUserProfile } from "../../redux/actions/userprofile";
 import StatusMessage from "../../components/statusmessage";
-// import { imageUploadApi } from "../../api/image";
+import { imageUploadApi } from "../../api/image";
 import UploadComponent from "./upload";
 import "./styles.css";
 
@@ -68,6 +68,11 @@ const EditProfile = () => {
     avatar: profile.avatar,
   };
   const onSubmit = async (values) => {
+    if ("files" in values) {
+      await imageUploadApi(values.files[0]).then((response) => {
+        values.avatar = response.data.secure_url;
+      });
+    }
     dispatch(editProfileAction(values.username, values));
   };
 
