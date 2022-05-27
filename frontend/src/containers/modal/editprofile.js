@@ -10,7 +10,6 @@ import {
 
 function EditProfileModal() {
   const dispatch = useDispatch();
-
   const editProfile = (newProfile) => {
     dispatch(editProfileAction(newProfile));
   };
@@ -30,10 +29,10 @@ function EditProfileModal() {
     }));
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      dispatch(handleClose());
+    if (success) {
+      handleClose();
     }
-  }, [dispatch]);
+  }, [dispatch, success]);
 
   return !isAuthenticated ? null : (
     <Modal onClose={handleClose} dialogStyle={{ minWidth: "500px" }}>

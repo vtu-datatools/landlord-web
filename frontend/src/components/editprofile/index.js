@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import Dropzone from "react-dropzone";
 import { useSelector, useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { Formik } from "formik";
@@ -14,11 +13,13 @@ import { editProfileAction } from "../../redux/actions/auth";
 import { fetchUserProfile } from "../../redux/actions/userprofile";
 import StatusMessage from "../../components/statusmessage";
 // import { imageUploadApi } from "../../api/image";
+import UploadComponent from "./upload";
 import "./styles.css";
 
 const EditSchema = Yup.object().shape({
   bio: Yup.string().notRequired("Tell us about yourself!"),
   name: Yup.string().required("Name is required"),
+  email: Yup.string().email().required("Email address"),
   current_password: Yup.string()
     .required("Password is required")
     .min(6, "Password must be at least 6 characters")
@@ -28,21 +29,18 @@ const EditSchema = Yup.object().shape({
     .min(6, "Password must be at least 6 characters")
     .max(40, "Password must not exceed 40 characters"),
   status: Yup.string().notRequired("Status"),
+  avatar: Yup.mixed().notRequired(),
 });
 
 const EditProfile = () => {
   const dispatch = useDispatch();
 
-  const { username, token, isLoading, profile, error } = useSelector(
-    (state) => ({
-      username: state.auth.username,
-      token: state.auth.token,
-      isLoading: state.userProfile.isLoading,
-      profile: state.userProfile.profile,
-      error: state.userProfile.error,
-    })
-  );
-
+  const { username, isLoading, profile, error } = useSelector((state) => ({
+    username: state.auth.username,
+    isLoading: state.userProfile.isLoading,
+    profile: state.userProfile.profile,
+    error: state.userProfile.error,
+  }));
   useEffect(() => {
     dispatch(fetchUserProfile(username));
   }, [dispatch]);
@@ -63,54 +61,15 @@ const EditProfile = () => {
   const initialValues = {
     username: username,
     bio: profile.bio,
+    email: profile.email,
     name: profile.name,
     current_password: "",
     new_password: "",
+    avatar: profile.avatar,
   };
-  const onSubmit = (values) => {
-    console.log(values);
-    dispatch(editProfileAction(values.username, token, values));
+  const onSubmit = async (values) => {
+    dispatch(editProfileAction(values.username, values));
   };
-
-  //   const onImageDrop = (files) => {
-  //     setState({
-  //       avatarFile: files[0],
-  //     });
-  //   };
-
-  //   handleSubmit = () => {
-  //     const { currentPassword, avatarFile } = this.state;
-
-  //     if (currentPassword !== "") {
-  //       if (!avatarFile) {
-  //         // no new avatar
-  //         editProfile();
-  //       } else {
-  //         setState({
-  //           avatarUploading: true,
-  //         });
-
-  //         imageUploadApi(avatarFile)
-  //           .then((response) => {
-  //             setState({
-  //               avatar: response.data.secure_url,
-  //               avatarUploading: false,
-  //             });
-  //             editProfile();
-  //           })
-  //           .catch((error) => {
-  //             console.log(error);
-  //             setState({
-  //               avatarError: "Image Upload Error",
-  //               avatarFile: null,
-  //               avatarUploading: false,
-  //             });
-  //           });
-  //       }
-  //     }
-  //   };
-
-  //   const avatarURL = avatarFile ? avatarFile.preview : avatar;
 
   return (
     <div className="edit-page">
@@ -126,8 +85,9 @@ const EditProfile = () => {
         validateOnChange={false}
         validateOnBlur={false}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, setFieldValue }) => (
           <Form size="large">
+            <UploadComponent setFieldValue={setFieldValue} />
             <Input
               id="input-username"
               errorPrompt

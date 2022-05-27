@@ -24,6 +24,7 @@ class UserDetailSerializer(ModelSerializer):
     avatar = URLField(source="profile.avatar")
     status = URLField(source="profile.status")
     name = CharField(source="profile.name")
+    email = EmailField()
     threads = HyperlinkedRelatedField(
         many=True, read_only=True, view_name="thread-detail", lookup_field="pk"
     )
@@ -39,6 +40,7 @@ class UserDetailSerializer(ModelSerializer):
             "name",
             "bio",
             "avatar",
+            "email",
             "status",
             "is_staff",
             "date_joined",

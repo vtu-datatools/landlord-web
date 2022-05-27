@@ -25,17 +25,7 @@ export function loginUser(username, password) {
   return async function (dispatch) {
     try {
       const response = await obtainToken(username, password);
-      var i;
 
-      console.log("local storage");
-      for (i = 0; i < localStorage.length; i++) {
-        console.log(
-          localStorage.key(i) +
-            "=[" +
-            localStorage.getItem(localStorage.key(i)) +
-            "]"
-        );
-      }
       dispatch(loginUserSuccess(response.data));
     } catch (error) {
       console.log("Error obtaining token. " + error);
@@ -74,19 +64,7 @@ export function logoutUser() {
 export function editProfileAction(username, newProfile) {
   return async function (dispatch) {
     try {
-      const response = await editProfileApi(username, newProfile);
-      console.log(response);
-      var i;
-
-      console.log("local storage");
-      for (i = 0; i < localStorage.length; i++) {
-        console.log(
-          localStorage.key(i) +
-            "=[" +
-            localStorage.getItem(localStorage.key(i)) +
-            "]"
-        );
-      }
+      await editProfileApi(username, newProfile);
 
       dispatch(editProfileSuccess(newProfile));
     } catch (error) {
