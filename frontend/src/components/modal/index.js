@@ -41,8 +41,8 @@ function Modal(props) {
           onClick={onDialogClick}
         >
           <Icon
-            name="window close outline"
-            size="large"
+            name="close"
+            size="big"
             className="modal-close-div"
             onClick={closeModal}
           />

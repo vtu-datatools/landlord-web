@@ -47,7 +47,7 @@ const UploadComponent = (props) => {
         {isDragActive ? (
           <p>Drop the image here ...</p>
         ) : (
-          <p>Drag and drop image or click to select image</p>
+          <p>To change avatar click or drop new image</p>
         )}
         {thumbs}
       </div>

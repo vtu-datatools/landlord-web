@@ -18,6 +18,8 @@ export function loginUserSuccess(data) {
     token: data.access,
     username: data.username,
     isStaff: data.is_staff,
+    avatar: data.avatar,
+    name: data.name,
   };
 }
 
@@ -25,7 +27,6 @@ export function loginUser(username, password) {
   return async function (dispatch) {
     try {
       const response = await obtainToken(username, password);
-
       dispatch(loginUserSuccess(response.data));
     } catch (error) {
       console.log("Error obtaining token. " + error);

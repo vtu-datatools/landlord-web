@@ -59,3 +59,8 @@
     border-radius: 12px;
     background: white;
   }
+
+  .form {
+    padding-left: 10px;
+    padding-right: 10px;
+  }

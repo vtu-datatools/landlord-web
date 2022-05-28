@@ -256,5 +256,7 @@ class UserTokenSerializer(TokenObtainPairSerializer):
         data["refresh"] = str(refresh)
         data["access"] = str(refresh.access_token)
         data["username"] = self.user.username
+        data["avatar"] = self.user.profile.avatar
+        data["name"] = self.user.profile.name
         data["is_staff"] = self.user.is_staff
         return data
