@@ -19,8 +19,8 @@ class AccountsTestCase(APITestCase):
 
     def test_create_user(self):
         data = {
-            "username": "poochinski",
-            "email": "poochinski@tester.com",
+            "username": "poochinski2",
+            "email": "poochinski2@tester.com",
             "password": "somepassword123",
         }
 
@@ -52,7 +52,11 @@ class AccountsTestCase(APITestCase):
         self.assertEqual(len(response.data["username"]), 1)
 
     def test_create_user_with_preexisting_username(self):
-        data = {"username": "test", "email": "user@example.com", "password": "testuser"}
+        data = {
+            "username": "poochinski",
+            "email": "poochinski3@tester.com",
+            "password": "somepassword123",
+        }
 
         response = self.client.post(self.create_url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -69,7 +73,7 @@ class AccountsTestCase(APITestCase):
 
     def test_create_user_with_preexisting_email(self):
         data = {
-            "username": "poochinski",
+            "username": "poochinski3",
             "email": "poochinski@tester.com",
             "password": "somepassword123",
         }
