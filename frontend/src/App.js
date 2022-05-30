@@ -14,7 +14,7 @@ import ModalContainer from "./containers/modal";
 import ForumListContainer from "./containers/forumlist";
 import ForumContainer from "./containers/forum";
 
-import "./css/App.css";
+import "./App.css";
 
 export default function App() {
   return (

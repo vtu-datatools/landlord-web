@@ -2,7 +2,7 @@ import React from "react";
 import { PropTypes } from "prop-types";
 import Tab from "./Tab";
 import MenuButton from "./MenuButton";
-import "../../../css/sidebar.css";
+import "./sidebar.css";
 
 const breakpoints = [
   parseInt(
