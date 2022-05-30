@@ -69,9 +69,9 @@ class AccountsTestCase(APITestCase):
 
     def test_create_user_with_preexisting_email(self):
         data = {
-            "username": "testuser2",
-            "email": "test@rengorum.com",
-            "password": "testuser",
+            "username": "poochinski",
+            "email": "poochinski@tester.com",
+            "password": "somepassword123",
         }
 
         response = self.client.post(self.create_url, data, format="json")
