@@ -49,9 +49,16 @@ const ForumContainer = () => {
   useEffect(() => {
     dispatch(fetchForum(forum));
   }, [dispatch]);
-
   return (
     <div>
+      <ThreadList
+        isLoading={isLoading}
+        name={name}
+        slug={slug}
+        description={description}
+        threads={threads}
+        error={error}
+      />
       <NewThread
         forum={slug}
         isAuthenticated={isAuthenticated}
@@ -66,14 +73,6 @@ const ForumContainer = () => {
         updateNewThread={createThreadSave}
         toggleShowEditor={createThreadToggle}
         maxLength={2000}
-      />
-      <ThreadList
-        isLoading={isLoading}
-        name={name}
-        slug={slug}
-        description={description}
-        threads={threads}
-        error={error}
       />
     </div>
   );

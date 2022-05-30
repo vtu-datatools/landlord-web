@@ -1,31 +1,50 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 // import { getSelectedBlock } from "draftjs-utils";
 // import htmlToDraft from "html-to-draftjs";
 // import { List } from "immutable";
-import { EditorState } from "draft-js";
+import { EditorState, convertToRaw } from "draft-js";
 import { Form, Icon, Divider, Button } from "semantic-ui-react";
 import "./styles.css";
 import RichEditor from "../richeditor";
 import StatusMessage from "../statusmessage";
 
 const NewThread = (props) => {
+  const dispatch = useDispatch();
+  const [showEditor, setShowEditor] = useState(false);
+  const [threadName, setThreadName] = useState("");
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-  console.log(props);
+
   const {
-    isAuthenticated,
     isLoading,
+    isAuthenticated,
+    forum,
+    createThread,
     success,
     id,
     error,
-    showEditor,
-    toggleShowEditor,
   } = props;
+
   if (!isAuthenticated) {
     return <div className="newThread-none" />;
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const content = JSON.stringify(
+      convertToRaw(editorState.getCurrentContent())
+    );
+    let newThread = {
+      name: threadName,
+      forum: forum,
+      content: content,
+    };
+    dispatch(createThread(newThread));
+  };
+
   const statusMessage = (
     <StatusMessage
       error={error}
@@ -39,9 +58,8 @@ const NewThread = (props) => {
       type="modal"
     />
   );
-
+  const toggleShowEditor = () => setShowEditor((value) => !value);
   if (!showEditor) {
-    console.log("HERE");
     return (
       <div>
         {statusMessage} {/*this will only show the success message*/}
@@ -63,7 +81,11 @@ const NewThread = (props) => {
   return (
     <div className="newThread-show">
       {statusMessage}
-      <Form loading={isLoading} className="attached fluid segment">
+      <Form
+        loading={isLoading}
+        onSubmit={handleSubmit}
+        className="attached fluid segment"
+      >
         <Form.Input
           required
           fluid
@@ -74,48 +96,23 @@ const NewThread = (props) => {
           placeholder="Name"
           type="text"
           name="name"
-          value={name}
-          onChange={this.onNameChange}
+          value={threadName}
+          onChange={(threadName) => setThreadName(threadName.target.value)}
         />
         <Divider />
         <RichEditor
-          placeholder="Start typing your thread content here..."
           editorState={editorState}
-          onEditorStateChange={setEditorState}
-          // wrapperClassName="newThread-wrapper"
-          // toolbarClassName="newThread-toolbar"
-          // editorClassName="newThread-editor"
-          // handleBeforeInput={this.handleBeforeInput}
-          // handlePastedText={this.handlePastedText}
+          onChange={(editorState) => setEditorState(editorState)}
         />
         <Button
           color="blue"
           size="small"
+          type="submit"
           loading={isLoading}
           disabled={isLoading}
-          onClick={this.onSubmit}
         >
           <Icon name="edit" />
-          Post thread
-        </Button>
-        <Button
-          color="red"
-          role="none"
-          size="small"
-          disabled={isLoading}
-          onClick={this.onSave}
-        >
-          <Icon name="save" />
-          Save Draft
-        </Button>
-        <Button
-          role="none"
-          size="small"
-          disabled={isLoading}
-          onClick={this.onCancel}
-        >
-          <Icon name="cancel" />
-          Clear
+          Post Thread
         </Button>
       </Form>
     </div>

@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import * as Yup from "yup";
 import { Formik } from "formik";
-import { Header, Button } from "semantic-ui-react";
+import { Header } from "semantic-ui-react";
 import { Form, SubmitButton, Input } from "formik-semantic-ui-react";
 
 import { loginUser } from "../../redux/actions/auth";
@@ -20,14 +19,12 @@ const LoginSchema = Yup.object().shape({
 });
 
 const LoginPage = ({ loginUser }) => {
-  const navigate = useNavigate();
   const initialValues = {
     username: "",
     password: "",
   };
   const onSubmit = async (values) => {
     await loginUser(values.username, values.password);
-    navigate("/");
   };
 
   return (
@@ -67,9 +64,6 @@ const LoginPage = ({ loginUser }) => {
           </Form>
         )}
       </Formik>
-      <Button id="back-button" onClick={() => navigate(-1)}>
-        Back
-      </Button>
     </div>
   );
 };

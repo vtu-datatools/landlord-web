@@ -95,7 +95,7 @@ export default class Thread extends Component {
     return (
       <div className="threadContainer">
         <div className="thread-title">
-          <Icon name={pinned ? "pin" : "talk outline"} />
+          <Icon name={pinned ? "pin" : "talk"} />
           {name}
         </div>
         <Segment.Group className="thread-list">

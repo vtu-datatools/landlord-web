@@ -74,7 +74,7 @@ const ThreadList = (props) => {
                 />
                 <div className="forum-column">
                   <div>
-                    <Icon name={pinned ? "pin" : "talk outline"} />
+                    <Icon name={pinned ? "pin" : "talk"} />
                     <Link to={`/thread/${id}`}>{name}</Link>
                   </div>
                   <div className="forum-meta">
