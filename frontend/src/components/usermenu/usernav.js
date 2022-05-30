@@ -4,7 +4,7 @@ import Avatar from "../avatar";
 import { Menu, Dropdown } from "semantic-ui-react";
 import "./styles.css";
 
-function UserNav(props) {
+const UserNav = (props) => {
   const navigate = useNavigate();
   const { username, avatar, logout, showEditProfile, name } = props;
   const myProfile = () => {
@@ -31,6 +31,6 @@ function UserNav(props) {
       </Menu>
     </div>
   );
-}
+};
 
 export default UserNav;

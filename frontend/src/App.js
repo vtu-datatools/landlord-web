@@ -11,7 +11,8 @@ import HeaderContainer from "./containers/header";
 import UsersContainer from "./containers/users";
 import UserProfileContainer from "./containers/userprofile";
 import ModalContainer from "./containers/modal";
-// import ForumContainer from "./containers/forum";
+import ForumListContainer from "./containers/forumlist";
+import ForumContainer from "./containers/forum";
 
 import "./css/App.css";
 
@@ -29,7 +30,8 @@ export default function App() {
           </Route>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
-          {/* <Route path="/forums" element={<ForumContainer />} /> */}
+          <Route path="/forums" element={<ForumListContainer />} />
+          <Route path="/forum/:forum" element={<ForumContainer />} />
         </Routes>
       </div>
       <ModalContainer />

@@ -13,6 +13,10 @@ const Navlink = () => {
         <Link to="/">Home</Link>
       </div>
       <div className="link">
+        <Icon name="discussions" className="navlinkIcon" />
+        <Link to="/forums">Forums</Link>
+      </div>
+      <div className="link">
         <Icon name="users" className="navlinkIcon" />
         <Link to="/users">Users</Link>
       </div>

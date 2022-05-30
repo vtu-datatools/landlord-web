@@ -4,6 +4,9 @@ import users from "./users";
 import userProfile from "./userprofile";
 import register from "./register";
 import modal from "./modal";
+import forum from "./forum";
+import forumlist from "./forumlist";
+import thread from "./thread";
 
 const rootReducer = combineReducers({
   auth,
@@ -11,6 +14,9 @@ const rootReducer = combineReducers({
   userProfile,
   register,
   modal,
+  forum,
+  forumlist,
+  thread,
 });
 
 export default rootReducer;

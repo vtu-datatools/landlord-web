@@ -3,7 +3,7 @@ import StatusMessage from "../statusmessage";
 import UserCard from "../usercard";
 import "./styles.css";
 
-function UserList(props) {
+const UserList = (props) => {
   const { error, users, isLoading } = props.users;
   if (error || !users || isLoading || users.length === 0) {
     return (
@@ -36,6 +36,6 @@ function UserList(props) {
   });
 
   return <div className="usersContainer">{userCardList}</div>;
-}
+};
 
 export default UserList;
