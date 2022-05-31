@@ -21,7 +21,7 @@ const Post = (props) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createWithContent(convertFromRaw(JSON.parse(content)))
   );
-  console.log(typeof content);
+
   const onDelete = (props) => {
     const { deleteAction, id, threadID, isThread } = props;
     if (isThread) {

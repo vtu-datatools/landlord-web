@@ -20,3 +20,5 @@ export const POST_URL = "posts/";
 export const POST_CREATE_URL = POST_URL + "create/";
 export const POST_EDIT_URL = "/edit/";
 export const POST_DELETE_URL = "/delete/";
+export const LANDLORDS_URL = "landlords/";
+export const LANDLORDS_ISSUES_URL = LANDLORDS_URL + "issues/";

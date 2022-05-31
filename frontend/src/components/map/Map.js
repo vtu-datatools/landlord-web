@@ -8,8 +8,8 @@ import {
   GeoJSON,
   ZoomControl,
 } from "react-leaflet";
-import axios from "axios";
 import hash from "object-hash";
+import { getLandlordIssues } from "../../api/";
 
 // This part is required to configure the default marker icons
 import icon from "leaflet/dist/images/marker-icon.png";
@@ -37,31 +37,18 @@ function Markers(props) {
     props.onClickMarker(e.sourceTarget.feature.properties);
   };
 
-  // TODO: Refactor to avoid repeating code
   useMapEvents({
-    moveend: () => {
-      const markers_url = `/api/landlords/issues/?in_bbox=${map
-        .getBounds()
-        .toBBoxString()}`;
-      axios.get(markers_url).then((resp) => {
-        setData(resp.data);
-      });
+    moveend: async () => {
+      const resp = await getLandlordIssues(map);
+      setData(resp.data);
     },
-    zoomend: () => {
-      const markers_url = `/api/landlords/issues/?in_bbox=${map
-        .getBounds()
-        .toBBoxString()}`;
-      axios.get(markers_url).then((resp) => {
-        setData(resp.data);
-      });
+    zoomend: async () => {
+      const resp = await getLandlordIssues(map);
+      setData(resp.data);
     },
-    layeradd: () => {
-      const markers_url = `/api/landlords/issues/?in_bbox=${map
-        .getBounds()
-        .toBBoxString()}`;
-      axios.get(markers_url).then((resp) => {
-        setData(resp.data);
-      });
+    layeradd: async () => {
+      const resp = await getLandlordIssues(map);
+      setData(resp.data);
     },
   });
 
