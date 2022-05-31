@@ -7,7 +7,7 @@ const accessToken = localStorage.getItem("access_token");
 
 const axiosAPI = axios.create({
   baseURL: baseURL,
-  timeout: 5000,
+  timeout: 8000,
   headers: {
     Authorization: accessToken ? "JWT " + accessToken : null,
     "Content-Type": "application/json",

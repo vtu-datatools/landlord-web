@@ -6,5 +6,6 @@ export const fetchForumsApi = () => {
 };
 
 export const fetchForumApi = (forum) => {
+  console.log(FORUM_URL + forum);
   return axiosAPI.get(FORUM_URL + forum);
 };
