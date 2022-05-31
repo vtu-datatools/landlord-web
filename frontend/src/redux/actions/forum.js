@@ -11,7 +11,6 @@ export function fetchForum(forum) {
     dispatch(fetchForumRequest());
     try {
       const response = await fetchForumApi(forum);
-      console.log(response);
       dispatch(fetchForumSuccess(response.data));
     } catch (error) {
       const errorMessage = apiErrorHandler(error);
