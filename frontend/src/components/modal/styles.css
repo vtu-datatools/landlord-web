@@ -55,6 +55,7 @@
     vertical-align: middle;
     box-sizing: border-box;
     max-width: auto;
+    min-width: 400px;
     cursor: default;
     border-radius: 12px;
     background: white;
@@ -63,4 +64,7 @@
   .form {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .signup-page {
+    padding: 20px;
   }

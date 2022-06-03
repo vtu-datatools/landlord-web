@@ -1,11 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Segment, Icon } from "semantic-ui-react";
+import { showModal } from "../../redux/actions";
 import StatusMessage from "../statusmessage";
 import Post from "../post";
 import NewPost from "../newpost";
 import "./styles.css";
 
 const Thread = (props) => {
+  const dispatch = useDispatch();
   const {
     id,
     isLoading,
@@ -29,6 +32,14 @@ const Thread = (props) => {
     deleteError,
     deleteThread,
   } = props;
+
+  const showRegister = () => {
+    dispatch(showModal("REGISTER", {}));
+  };
+
+  const showLogin = () => {
+    dispatch(showModal("LOGIN", {}));
+  };
 
   if (error || deleteError || isLoading || isDeleting || !name) {
     let loadingMessage = "We are fetching the thread for you";
@@ -108,6 +119,8 @@ const Thread = (props) => {
         success={newPostSuccess}
         isLoading={newPostLoading}
         error={newPostError}
+        showRegister={showRegister}
+        showLogin={showLogin}
         maxLength={2000}
       />
     </div>

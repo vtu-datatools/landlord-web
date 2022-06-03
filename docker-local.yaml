@@ -35,3 +35,15 @@ services:
       - ./.envs/.local/.postgres
     ports:
       - "5432:5432"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./compose/local/frontend/Dockerfile
+    image: vtu_local_frontend
+    container_name: frontend
+    depends_on:
+      - django
+    command: npm start
+    ports:
+      - "3000:3000"

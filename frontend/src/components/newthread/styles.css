@@ -15,9 +15,10 @@
     font-family: Roboto;
     text-align: left;
     margin-bottom: 5px;
+    margin-left: 20px;
   }
   
-  .newThread-none {;
+  .newThread-none {
     margin-top: 40px;
   }
   

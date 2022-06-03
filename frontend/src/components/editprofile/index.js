@@ -8,6 +8,7 @@ import {
   SubmitButton,
   ResetButton,
   Input,
+  TextArea,
 } from "formik-semantic-ui-react";
 import { editProfileAction } from "../../redux/actions/auth";
 import { fetchUserProfile } from "../../redux/actions/userprofile";
@@ -107,7 +108,7 @@ const EditProfile = () => {
               label="Email"
               placeholder="Email"
             />
-            <Input
+            <TextArea
               id="input-bio"
               errorPrompt
               name="bio"

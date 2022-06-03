@@ -10,6 +10,7 @@ import {
 } from "react-leaflet";
 import hash from "object-hash";
 import { getLandlordIssues } from "../../api/";
+import "./styles.css";
 
 // This part is required to configure the default marker icons
 import icon from "leaflet/dist/images/marker-icon.png";

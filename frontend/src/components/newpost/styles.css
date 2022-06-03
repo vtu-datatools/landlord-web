@@ -67,3 +67,55 @@
   .newPost-editor a{
     color: blue;
   }
+
+  .btn-sign-in {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 12px;
+    background-color: #2185d0;
+    height: 40px;
+    color: white;
+    border: 2px solid white;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .btn-sign-in:hover {
+    background-color: #145485;
+    color: white;
+  }
+  
+  .btn-sign-in:active {
+    box-shadow: 0 5px #145485;
+    transform: translateY(4px);
+  }
+  
+  .btn-register {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    margin-right: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 12px;
+    background-color: #2185d0;
+    height: 40px;
+    color: white;
+    border: 2px solid white;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .btn-register:hover {
+    background-color: #145485;
+    color: white;
+  }
+  
+  .btn-register:active {
+    box-shadow: 0 5px #145485;
+    transform: translateY(4px);
+  }

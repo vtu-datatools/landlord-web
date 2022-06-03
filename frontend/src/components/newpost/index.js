@@ -12,7 +12,15 @@ const NewPost = (props) => {
     EditorState.createEmpty()
   );
 
-  const { isAuthenticated, isLoading, error, threadID, createPost } = props;
+  const {
+    isAuthenticated,
+    isLoading,
+    error,
+    threadID,
+    createPost,
+    showRegister,
+    showLogin,
+  } = props;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,9 +36,24 @@ const NewPost = (props) => {
 
   if (!isAuthenticated) {
     return (
-      <div className="newPost-none">{"Please sign in to post a reply"}</div>
+      <div className="newPost-none">
+        Please
+        <br />
+        <Button.Group size="large">
+          <Button className="btn-sign-in" onClick={showLogin}>
+            Login
+          </Button>
+          <Button.Or />
+          <Button className="btn-register" onClick={showRegister}>
+            Register
+          </Button>
+        </Button.Group>
+        <br />
+        To post
+      </div>
     );
   }
+
   const statusMessage = (
     <StatusMessage
       error={error}
