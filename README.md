@@ -10,6 +10,10 @@ Stack:
 ### TODO:
 * Bring in landlord data markers
 * Add ability for users to comment on marker/locations
+* Clean up vote submission message
+* Add link for voting page?
+* Clean up JWT code to use httpOnly
+
 ## Run Locally
 One must first install:
 * [Docker](https://docs.docker.com/get-docker/)

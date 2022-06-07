@@ -1,4 +1,4 @@
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, RetrieveAPIView
@@ -57,6 +57,10 @@ class VoteAPIView(APIView):
                 created_instance.save()
 
             except IntegrityError:
+                return Response(
+                    {"message": "Already voted"}, status=status.HTTP_400_BAD_REQUEST
+                )
+            except transaction.TransactionManagementError:
                 return Response(
                     {"message": "Already voted"}, status=status.HTTP_400_BAD_REQUEST
                 )

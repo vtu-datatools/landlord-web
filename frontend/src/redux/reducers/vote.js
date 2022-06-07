@@ -1,39 +1,66 @@
 import {
-  FETCH_VOTE_OPTIONS_REQUEST,
-  FETCH_VOTE_OPTIONS_SUCCESS,
-  FETCH_VOTE_OPTIONS_FAILURE,
+  FETCH_VOTE_QUESTION_REQUEST,
+  FETCH_VOTE_QUESTION_SUCCESS,
+  FETCH_VOTE_QUESTION_FAILURE,
+  CAST_VOTE_REQUEST,
+  CAST_VOTE_SUCCESS,
+  CAST_VOTE_FAILURE,
 } from "../actions/types";
 
 const initialState = {
   isLoading: false,
-  voteOptions: null,
+  questionText: null,
+  choices: null,
   error: null,
+  voteCastLoading: false,
+  voteCastError: null,
+  voteCastSuccess: false,
 };
 
-const options = (state = initialState, action) => {
+const votes = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_VOTE_OPTIONS_REQUEST:
+    case FETCH_VOTE_QUESTION_REQUEST:
       return {
         ...state,
         isLoading: true,
         error: null,
       };
-    case FETCH_VOTE_OPTIONS_SUCCESS:
-      console.log("in reducer!");
-      console.log(action);
+    case FETCH_VOTE_QUESTION_SUCCESS:
       return {
         isLoading: false,
-        voteOptions: action.voteOptions,
+        questionText: action.questionText,
+        choices: action.choices,
         error: null,
       };
-    case FETCH_VOTE_OPTIONS_FAILURE:
+    case FETCH_VOTE_QUESTION_FAILURE:
       return {
         ...initialState,
         error: action.error,
+      };
+    case CAST_VOTE_REQUEST:
+      return {
+        ...state,
+        voteCastLoading: true,
+        voteCastError: null,
+        voteCastSuccess: false,
+      };
+    case CAST_VOTE_SUCCESS:
+      return {
+        ...state,
+        voteCastLoading: false,
+        voteCastError: null,
+        voteCastSuccess: true,
+      };
+    case CAST_VOTE_FAILURE:
+      return {
+        ...state,
+        voteCastLoading: false,
+        voteCastError: action.error,
+        voteCastSuccess: false,
       };
     default:
       return state;
   }
 };
 
-export default options;
+export default votes;

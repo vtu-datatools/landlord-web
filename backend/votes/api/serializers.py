@@ -48,11 +48,10 @@ class ResultsSerializer(serializers.ModelSerializer):
 
 
 class VoteSerializer(serializers.ModelSerializer):
-    name = serializers.CharField()
+    id = serializers.IntegerField()
 
     def create(self, validated_data):
-        print(validated_data)
-        choice = get_object_or_404(Choice, name=validated_data["name"])
+        choice = get_object_or_404(Choice, id=validated_data["id"])
         vote = Vote()
         vote.choice = choice
         try:
@@ -63,4 +62,4 @@ class VoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Vote
-        exclude = ("id", "ip_address", "choice")
+        exclude = ("ip_address", "choice")

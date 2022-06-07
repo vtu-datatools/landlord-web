@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-// import { getSelectedBlock } from "draftjs-utils";
-// import htmlToDraft from "html-to-draftjs";
-// import { List } from "immutable";
 import { EditorState, convertToRaw } from "draft-js";
 import { Form, Icon, Divider, Button } from "semantic-ui-react";
 import "./styles.css";

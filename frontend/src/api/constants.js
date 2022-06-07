@@ -22,4 +22,5 @@ export const POST_EDIT_URL = "/edit/";
 export const POST_DELETE_URL = "/delete/";
 export const LANDLORDS_URL = "landlords/";
 export const LANDLORDS_ISSUES_URL = LANDLORDS_URL + "issues/";
-export const VOTE_OPTIONS_URL = "votes/";
+export const VOTE_URL = "votes/";
+export const CAST_VOTE_URL = VOTE_URL + "vote/";

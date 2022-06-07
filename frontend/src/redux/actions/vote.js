@@ -1,40 +1,79 @@
 import {
-  FETCH_VOTE_OPTIONS_REQUEST,
-  FETCH_VOTE_OPTIONS_SUCCESS,
-  FETCH_VOTE_OPTIONS_FAILURE,
+  FETCH_VOTE_QUESTION_REQUEST,
+  FETCH_VOTE_QUESTION_SUCCESS,
+  FETCH_VOTE_QUESTION_FAILURE,
+  CAST_VOTE_REQUEST,
+  CAST_VOTE_SUCCESS,
+  CAST_VOTE_FAILURE,
 } from "./types";
-import { fetchVoteOptionsApi } from "../../api";
+import { fetchVoteQuestionApi, castVoteApi } from "../../api";
+import { apiErrorHandler } from "../../utils/errorhandler";
 
-export const fetchOptions = () => (dispatch) => {
-  dispatch(fetchVoteOptionsRequest());
+export const fetchQuestion = (question) => (dispatch) => {
+  dispatch(fetchVoteQuestionRequest());
 
-  fetchVoteOptionsApi()
+  fetchVoteQuestionApi(question)
     .then((response) => {
-      console.log("here");
-      console.log(response.data);
-      dispatch(fetchVoteOptionsSucess(response.data));
+      dispatch(fetchVoteQuestionSucess(response.data));
     })
     .catch((error) => {
-      console.log("Error obtaining token. " + error);
+      const errorMessage = apiErrorHandler(error);
+      dispatch(fetchVoteQuestionFailure(errorMessage));
+      alert("You are only allowed to vote once");
     });
 };
 
-export const fetchVoteOptionsRequest = () => {
+export const fetchVoteQuestionRequest = () => {
   return {
-    type: FETCH_VOTE_OPTIONS_REQUEST,
+    type: FETCH_VOTE_QUESTION_REQUEST,
   };
 };
 
-export const fetchVoteOptionsSucess = (data) => {
+export const fetchVoteQuestionSucess = (data) => {
   return {
-    type: FETCH_VOTE_OPTIONS_SUCCESS,
-    voteOptions: data,
+    type: FETCH_VOTE_QUESTION_SUCCESS,
+    questionText: data.question_text,
+    choices: data.choices,
   };
 };
 
-export const fetchVoteOptionsFailure = (error) => {
+export const fetchVoteQuestionFailure = (error) => {
   return {
-    type: FETCH_VOTE_OPTIONS_FAILURE,
+    type: FETCH_VOTE_QUESTION_FAILURE,
+    error,
+  };
+};
+
+export const castVote = (choice_id) => (dispatch) => {
+  dispatch(castVoteRequest());
+
+  castVoteApi(choice_id)
+    .then(() => {
+      dispatch(castVoteSuccess());
+    })
+    .catch((error) => {
+      const errorMessage = apiErrorHandler(error);
+      dispatch(castVoteFailure(errorMessage));
+    });
+};
+
+export const castVoteRequest = (choice_id) => {
+  return {
+    type: CAST_VOTE_REQUEST,
+    choice_id,
+  };
+};
+
+export const castVoteSuccess = (choice_id) => {
+  return {
+    type: CAST_VOTE_SUCCESS,
+    choice_id,
+  };
+};
+
+export const castVoteFailure = (error) => {
+  return {
+    type: CAST_VOTE_FAILURE,
     error,
   };
 };

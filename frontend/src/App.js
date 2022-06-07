@@ -14,7 +14,7 @@ import ModalContainer from "./containers/modal";
 import ForumListContainer from "./containers/forumlist";
 import ForumContainer from "./containers/forum";
 import ThreadContainer from "./containers/thread";
-import FormContainer from "./containers/form";
+import FormContainer from "./containers/vote";
 
 import "./App.css";
 
@@ -35,7 +35,7 @@ export default function App() {
           <Route path="/forums" element={<ForumListContainer />} />
           <Route path="/forum/:forum" element={<ForumContainer />} />
           <Route path="/thread/:thread" element={<ThreadContainer />} />
-          <Route path="/vote" element={<FormContainer />} />
+          <Route path="/vote/:question" element={<FormContainer />} />
         </Routes>
       </div>
       <ModalContainer />
