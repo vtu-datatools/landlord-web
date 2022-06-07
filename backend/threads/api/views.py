@@ -6,8 +6,6 @@ from rest_framework.permissions import (
     IsAdminUser,
 )
 from .permissions import IsOwnerOrAdminOrReadOnly
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
-from rest_framework.response import Response
 
 from .serializers import (
     ThreadListSerializer,

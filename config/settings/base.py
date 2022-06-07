@@ -96,6 +96,7 @@ LOCAL_APPS = [
     "backend.forums",
     "backend.threads",
     "backend.posts",
+    "backend.votes",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -110,6 +111,7 @@ MIGRATION_MODULES = {
     "forums": "backend.migrations.forums",
     "threads": "backend.migrations.threads",
     "posts": "backend.migrations.posts",
+    "votes": "backend.migrations.votes",
 }
 
 # AUTHENTICATION

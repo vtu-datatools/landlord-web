@@ -11,6 +11,7 @@ urlpatterns = [
     path("api/forums/", include("backend.forums.api.urls")),
     path("api/threads/", include("backend.threads.api.urls")),
     path("api/posts/", include("backend.posts.api.urls")),
+    path("api/votes/", include("backend.votes.api.urls")),
 ]
 
 

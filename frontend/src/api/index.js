@@ -4,3 +4,4 @@ export * from "./thread";
 export * from "./post";
 export * from "./image";
 export * from "./map";
+export * from "./vote";

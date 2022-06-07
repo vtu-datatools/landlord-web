@@ -7,6 +7,7 @@ import modal from "./modal";
 import forum from "./forum";
 import forumlist from "./forumlist";
 import thread from "./thread";
+import vote from "./vote";
 
 const rootReducer = combineReducers({
   auth,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   forum,
   forumlist,
   thread,
+  vote,
 });
 
 export default rootReducer;
