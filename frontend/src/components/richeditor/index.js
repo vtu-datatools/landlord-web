@@ -7,6 +7,7 @@ import "./styles.css";
 const RichEditor = (props) => {
   const { editorState, onChange, readOnly } = props;
   const uploadImageCallBack = (file) => {
+    // eslint-disable-next-line no-undef
     return new Promise((resolve, reject) => {
       imageUploadApi(file, false)
         .then((response) => {

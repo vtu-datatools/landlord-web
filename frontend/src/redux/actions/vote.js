@@ -19,6 +19,7 @@ export const fetchQuestion = (question) => (dispatch) => {
     .catch((error) => {
       const errorMessage = apiErrorHandler(error);
       dispatch(fetchVoteQuestionFailure(errorMessage));
+      // eslint-disable-next-line no-undef
       alert("You are only allowed to vote once");
     });
 };

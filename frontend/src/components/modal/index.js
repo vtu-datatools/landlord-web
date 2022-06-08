@@ -19,6 +19,7 @@ function Modal(props) {
 
   useEffect(() => {
     if (props.onClose) {
+      // eslint-disable-next-line no-undef
       window.removeEventListener("keydown", listenKeyboard, true);
     }
   }, []);
