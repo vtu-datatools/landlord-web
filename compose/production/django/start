@@ -4,6 +4,13 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+if [ "$DJANGO_SUPERUSER_USERNAME" ]
+then
+    python manage.py createsuperuser \
+        --noinput \
+        --username $DJANGO_SUPERUSER_USERNAME \
+        --email $DJANGO_SUPERUSER_EMAIL || true
+fi
 
 python /app/manage.py collectstatic --noinput
 python /app/manage.py makemigrations
