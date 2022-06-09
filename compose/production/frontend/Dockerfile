@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY --chown=node:node ./frontend/ ./src
 # This is due to a bug in npm 7 see: https://github.com/npm/cli/issues/2011
-RUN mkdir node_modules && chown node:node node_modules
+# RUN mkdir node_modules && chown node:node node_modules
 
 RUN npm ci --only=production
 
