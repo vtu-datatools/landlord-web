@@ -28,7 +28,7 @@ certificatesResolvers:
 http:
   routers:
     web-secure-router:
-      rule: "(Host(`vanlandlord.ga`) || Host(`www.vanlandlord.ga`)) && (PathPrefix(`/`)"
+      rule: "(Host(`vanlandlord.ga`) || Host(`www.vanlandlord.ga`)) && (PathPrefix(`/`))"
       entryPoints:
         - web-secure
       middlewares:
