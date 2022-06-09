@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "proxy": "http://django:8000/",
   "dependencies": {
     "@redux-devtools/extension": "^3.2.2",
