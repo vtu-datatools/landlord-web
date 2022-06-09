@@ -38,7 +38,7 @@ http:
         # https://docs.traefik.io/master/routing/routers/#certresolver
         certResolver: letsencrypt
     api:
-      rule: "(Host(`vanlandlord.ga`) || Host(`www.vanlandlord.ga`))  && (PathPrefix(`/api`) || PathPrefix(`/vtuadmin`))"
+      rule: "(Host(`vanlandlord.ga`) || Host(`www.vanlandlord.ga`))  && (PathPrefix(`/api`) || PathPrefix(`/admin`))"
       entryPoints:
         - web-secure
       middlewares:
