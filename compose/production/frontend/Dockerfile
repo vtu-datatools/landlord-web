@@ -3,14 +3,17 @@ ENV NODE_ENV=production
 ENV REACT_APP_PROD=true
 
 WORKDIR /app
+RUN chown -R node:node /app
 
-COPY --chown=node:node ./frontend/ ./src
+
+COPY ./frontend/package.json ./frontend/package-lock.json ./
 # This is due to a bug in npm 7 see: https://github.com/npm/cli/issues/2011
 # RUN mkdir node_modules && chown node:node node_modules
-
-RUN npm ci
-
+USER node
+RUN npm ci --verbose
 ENV PATH /app/node_modules/.bin:$PATH
 
-USER node
+COPY --chown=node:node ./frontend/src/ ./src
+COPY --chown=node:node ./frontend/public/ ./public
+
 RUN npm run build
