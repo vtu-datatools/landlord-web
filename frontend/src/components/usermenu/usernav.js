@@ -6,9 +6,12 @@ import "./styles.css";
 
 const UserNav = (props) => {
   const navigate = useNavigate();
-  const { username, avatar, logout, showEditProfile, name } = props;
+  const { username, avatar, logout, isStaff, showEditProfile, name } = props;
   const myProfile = () => {
     navigate(`/user/${username}`);
+  };
+  const admin = () => {
+    navigate(`/admin/`);
   };
 
   return (
@@ -19,12 +22,19 @@ const UserNav = (props) => {
         </Menu.Item>
         <Dropdown item simple text={name || username} direction="left">
           <Dropdown.Menu>
-            <Dropdown.Item onClick={myProfile} icon="user" text="My profile" />
+            <Dropdown.Item onClick={myProfile} icon="user" text="My Profile" />
             <Dropdown.Item
               onClick={showEditProfile}
               icon="setting"
-              text="Edit profile"
+              text="Edit Profile"
             />
+            {isStaff && (
+              <Dropdown.Item
+                onClick={admin}
+                icon="settings"
+                text="Admin Page"
+              />
+            )}
             <Dropdown.Item onClick={logout} icon="sign out" text="Logout" />
           </Dropdown.Menu>
         </Dropdown>

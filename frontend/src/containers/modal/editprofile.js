@@ -35,7 +35,7 @@ function EditProfileModal() {
   }, [dispatch, success]);
 
   return !isAuthenticated ? null : (
-    <Modal onClose={handleClose} dialogStyle={{ minWidth: "500px" }}>
+    <Modal onClose={handleClose} dialogStyle={{ minWidth: "300px" }}>
       <EditProfile
         avatar={avatar}
         name={name}

@@ -5,6 +5,7 @@ import UserNav from "./usernav";
 const UserMenu = (props) => {
   const {
     isAuthenticated,
+    isStaff,
     username,
     name,
     avatar,
@@ -24,6 +25,7 @@ const UserMenu = (props) => {
         logout={logout}
         showEditProfile={showEditProfile}
         isLoading={isLoading}
+        isStaff={isStaff}
       />
     );
   } else {

@@ -64,7 +64,6 @@ const VoteForm = (props) => {
           <Popup
             content={bio}
             trigger={<Checkbox label={name} onChange={toggleHandler(choice)} />}
-            offset={[0, 50]}
             position="right center"
             wide
           ></Popup>

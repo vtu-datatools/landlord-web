@@ -22,21 +22,22 @@ function HeaderContainer() {
     dispatch(showModal("EDIT_PROFILE", {}));
   };
 
-  const { username, name, avatar, isAuthenticated, isLoading } = useSelector(
-    (state) => ({
+  const { username, name, avatar, isAuthenticated, isStaff, isLoading } =
+    useSelector((state) => ({
       username: state.auth.username,
       name: state.auth.name,
       avatar: state.auth.avatar,
       isAuthenticated: state.auth.isAuthenticated,
+      isStaff: state.auth.isStaff,
       isLoading: state.auth.isLoading,
-    })
-  );
+    }));
 
   return (
     <div className="headerContainer">
       <Navlink />
       <UserMenu
         isAuthenticated={isAuthenticated}
+        isStaff={isStaff}
         username={username}
         name={name}
         avatar={avatar}

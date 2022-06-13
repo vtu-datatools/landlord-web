@@ -16,14 +16,6 @@ const Navlink = () => {
         <Icon name="discussions" className="navlinkIcon" />
         <Link to="/forums">Forums</Link>
       </div>
-      <div className="link">
-        <Icon name="users" className="navlinkIcon" />
-        <Link to="/users">Users</Link>
-      </div>
-      <div className="link">
-        <Icon name="github" className="navlinkIcon" />
-        <a href="https://www.vancouvertenantsunion.ca/">VTU Homepage</a>
-      </div>
     </div>
   );
 };

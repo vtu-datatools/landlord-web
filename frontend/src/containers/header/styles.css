@@ -1,10 +1,16 @@
 .headerContainer {
     background-color: #2185d0;
-    height: 60px;
+    height: 56px;
     display: flex;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
     justify-content: space-between;
     z-index: 10;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .headerContainer {
+      height: 44px;
+    }
   }

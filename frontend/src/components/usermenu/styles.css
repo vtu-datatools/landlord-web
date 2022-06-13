@@ -3,6 +3,7 @@
     align-items: center;
     color: white !important;
     height: inherit;
+    flex-shrink: 0;
   }
   
   .userMenu-avatar{
@@ -15,7 +16,7 @@
   }
   
   .guestMenu {
-    padding: 20px;
+    padding: 5px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -25,10 +26,10 @@
   .btn-sign-in {
     margin-top: auto;
     margin-bottom: auto;
-    margin-left: 15px;
-    margin-right: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-radius: 12px;
     background-color: #2185d0;
     height: 40px;
@@ -53,8 +54,8 @@
     margin-bottom: auto;
     margin-left: 10px;
     margin-right: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-radius: 12px;
     background-color: #2185d0;
     height: 40px;
@@ -72,4 +73,13 @@
   .btn-register:active {
     box-shadow: 0 5px #145485;
     transform: translateY(4px);
+  }
+
+  @media only screen and (max-width: 600px) {
+    .userMenu-avatar{
+      margin-right: -25px;
+    }
+    .divider {
+      display: none !important;
+    }
   }

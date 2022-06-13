@@ -1,12 +1,18 @@
 .logoContainer {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: flex-start;
-    margin-right: 10px !important;
-    /* margin-left: 5px !important; */
+    display: flex; 
+    top:0; 
+    left:0;
+    min-width: 60px;
+    height: 56px;
   }
   
   .logo {
-    height: 60px;
+    height: 100%;
+    width: 100%
+  }
+
+  @media only screen and (max-width: 600px) {
+    .logoContainer {
+      height: 44px;
+    }
   }
