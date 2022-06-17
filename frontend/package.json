@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://django:8000/",
+  "proxy": "http://localhost:8000/",
   "dependencies": {
     "@redux-devtools/extension": "^3.2.2",
     "@semantic-ui-react/css-patch": "^1.0.0",

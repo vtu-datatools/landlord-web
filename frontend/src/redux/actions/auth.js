@@ -15,7 +15,6 @@ import { apiErrorHandler } from "../../utils/errorhandler";
 export function loginUserSuccess(data) {
   return {
     type: LOGIN_SUCCESS,
-    token: data.access,
     username: data.username,
     isStaff: data.is_staff,
     avatar: data.avatar,
@@ -25,10 +24,12 @@ export function loginUserSuccess(data) {
 
 export function loginUser(username, password) {
   return async function (dispatch) {
+    dispatch(loginRequest());
     try {
       const response = await obtainToken(username, password);
       dispatch(loginUserSuccess(response.data));
     } catch (error) {
+      dispatch(loginFailure(error));
       console.log("Error obtaining token. " + error);
     }
   };
@@ -55,6 +56,7 @@ export const loginReset = () => {
 export function logoutUserSuccess() {
   return { type: LOGOUT };
 }
+
 export function logoutUser() {
   return async function (dispatch) {
     await logout();
@@ -64,6 +66,7 @@ export function logoutUser() {
 
 export function editProfileAction(username, newProfile) {
   return async function (dispatch) {
+    dispatch(editProfileRequest());
     try {
       await editProfileApi(username, newProfile);
 

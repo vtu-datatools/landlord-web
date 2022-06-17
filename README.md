@@ -11,8 +11,8 @@ Stack:
 * Bring in landlord data markers
 * Add ability for users to comment on marker/locations
 * Clean up vote submission message
-* Add link for voting page?
-* Clean up JWT code to use httpOnly
+* Add link to users page back
+* Blacklist JWT after refresh and remove on backend
 
 ## Run Locally
 One must first install:

@@ -16,7 +16,6 @@ export async function registerApi(username, email, password, name) {
     password,
     name,
   });
-  localStorage.setItem("user", response.data);
   return response;
 }
 

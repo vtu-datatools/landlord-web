@@ -7,6 +7,7 @@ import { showModal, logoutUser } from "../../redux/actions";
 
 function HeaderContainer() {
   const dispatch = useDispatch();
+
   const handleLogout = () => {
     dispatch(logoutUser());
   };

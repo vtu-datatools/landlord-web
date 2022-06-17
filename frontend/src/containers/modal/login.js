@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Message } from "semantic-ui-react";
 import Login from "../../components/login";
 import Modal from "../../components/modal";
 import {
@@ -42,6 +43,13 @@ function LoginModal() {
         isLoading={isLoading}
         error={error}
       />
+      {error && (
+        <Message negative>
+          <Message.Header>
+            Invalid Username or Incorrect Password
+          </Message.Header>
+        </Message>
+      )}
     </Modal>
   );
 }

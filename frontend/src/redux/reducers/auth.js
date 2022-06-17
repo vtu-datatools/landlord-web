@@ -16,7 +16,6 @@ const loginInitialState = {
   username: null,
   name: null,
   avatar: null,
-  token: null,
   isStaff: false,
   error: null,
 };
@@ -46,7 +45,6 @@ const auth = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isAuthenticated: true,
-        token: action.token,
         username: action.username,
         avatar: action.avatar,
         name: action.name,
