@@ -20,7 +20,7 @@ const UserNav = (props) => {
         <Menu.Item disabled className="userMenu-avatar">
           <Avatar avatar={avatar} />
         </Menu.Item>
-        <Dropdown item simple text={name || username} direction="left">
+        <Dropdown item text={name || username} direction="left">
           <Dropdown.Menu>
             <Dropdown.Item onClick={myProfile} icon="user" text="My Profile" />
             <Dropdown.Item

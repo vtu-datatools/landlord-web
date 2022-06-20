@@ -10,11 +10,13 @@ import {
   Input,
   TextArea,
 } from "formik-semantic-ui-react";
+
 import { editProfileAction } from "../../redux/actions/auth";
 import { fetchUserProfile } from "../../redux/actions/userprofile";
 import StatusMessage from "../../components/statusmessage";
 import { imageUploadApi } from "../../api/image";
 import UploadComponent from "./upload";
+
 import "./styles.css";
 
 const EditSchema = Yup.object().shape({

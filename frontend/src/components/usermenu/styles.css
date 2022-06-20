@@ -14,65 +14,33 @@
     background-color: #2185d0 !important;
     height: inherit;
   }
-  
+
   .guestMenu {
-    padding: 5px;
     display: flex;
+    align-items: center;
+    color: white !important;
+    height: inherit;
+    flex-shrink: 0;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: right;
   }
-  
-  .btn-sign-in {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 10px;
-    margin-right: 10px;
-    padding-left: 10px;
+
+  .guestMenu-big {
+    display: flex;
+    align-items: center;
+    color: white !important;
+    height: inherit;
     padding-right: 10px;
-    border-radius: 12px;
-    background-color: #2185d0;
-    height: 40px;
-    color: white;
-    border: 2px solid white;
-    outline: none;
-    cursor: pointer;
+    flex-shrink: 0;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: right;
   }
-  
-  .btn-sign-in:hover {
-    background-color: #145485;
-    color: white;
-  }
-  
-  .btn-sign-in:active {
-    box-shadow: 0 5px #145485;
-    transform: translateY(4px);
-  }
-  
-  .btn-register {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 10px;
-    margin-right: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 12px;
-    background-color: #2185d0;
-    height: 40px;
-    color: white;
-    border: 2px solid white;
-    outline: none;
-    cursor: pointer;
-  }
-  
-  .btn-register:hover {
-    background-color: #145485;
-    color: white;
-  }
-  
-  .btn-register:active {
-    box-shadow: 0 5px #145485;
-    transform: translateY(4px);
+
+  .guestMenu-menu{
+    background-color: #2185d0 !important;
+    height: inherit;
   }
 
   @media only screen and (max-width: 600px) {

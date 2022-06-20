@@ -15,6 +15,7 @@ import ForumListContainer from "./containers/forumlist";
 import ForumContainer from "./containers/forum";
 import ThreadContainer from "./containers/thread";
 import FormContainer from "./containers/vote";
+import NotFoundPage from "./components/notfoundpage";
 
 import "./App.css";
 
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/forum/:forum" element={<ForumContainer />} />
           <Route path="/thread/:thread" element={<ThreadContainer />} />
           <Route path="/vote/:question" element={<FormContainer />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
       <ModalContainer />

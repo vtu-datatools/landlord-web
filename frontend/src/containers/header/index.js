@@ -1,9 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import Navlink from "../../components/navlink";
 import UserMenu from "../../components/usermenu";
-import "./styles.css";
 import { showModal, logoutUser } from "../../redux/actions";
+
+import "./styles.css";
 
 function HeaderContainer() {
   const dispatch = useDispatch();

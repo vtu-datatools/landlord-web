@@ -18,9 +18,15 @@
     color: white;
   }
 
-  @media only screen and (max-width: 600px) {
-    .navlinkContainer .link {
-      font-size: 16px;
-      margin: 0 5px;
-    }
+  .navlinkContainer-mobile {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    width: 100%;
+    height: inherit;
+  }
+
+  .navlinkDrop{
+    background-color: #2185d0 !important;
+    height: inherit;
   }
