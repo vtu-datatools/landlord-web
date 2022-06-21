@@ -14,8 +14,8 @@ const UserMenu = (props) => {
     showRegister,
     showLogin,
     showEditProfile,
+    isBigScreen,
   } = props;
-
   if (isAuthenticated) {
     return (
       <UserNav
@@ -29,7 +29,13 @@ const UserMenu = (props) => {
       />
     );
   } else {
-    return <GuestNav showRegister={showRegister} showLogin={showLogin} />;
+    return (
+      <GuestNav
+        showRegister={showRegister}
+        showLogin={showLogin}
+        isBigScreen={isBigScreen}
+      />
+    );
   }
 };
 

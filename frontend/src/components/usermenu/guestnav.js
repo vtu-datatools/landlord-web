@@ -1,11 +1,9 @@
 import React from "react";
 import { Button, Dropdown, Menu } from "semantic-ui-react";
-import { useMediaQuery } from "react-responsive";
 import "./styles.css";
 
 const GuestNav = (props) => {
-  const { showLogin, showRegister } = props;
-  const isBigScreen = useMediaQuery({ query: "(min-width: 900px)" });
+  const { showLogin, showRegister, isBigScreen } = props;
 
   if (isBigScreen) {
     return (

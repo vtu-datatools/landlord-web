@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useMediaQuery } from "react-responsive";
 import { Icon, Dropdown, Menu } from "semantic-ui-react";
+
 import "./styles.css";
 
-const Navlink = () => {
-  const isBigScreen = useMediaQuery({ query: "(min-width: 900px)" });
+const Navlink = (props) => {
+  const { isBigScreen } = props;
   const navigate = useNavigate();
   const homeClick = useCallback(() => navigate("/"));
   const forumsClick = useCallback(() => navigate("/forums"));

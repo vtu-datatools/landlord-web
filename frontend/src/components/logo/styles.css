@@ -1,14 +1,13 @@
 .logoContainer {
     display: flex; 
-    top:0; 
-    left:0;
     min-width: 60px;
     height: 56px;
+    justify-content: center;
+    flex: 1 0 auto;
   }
   
   .logo {
     height: 100%;
-    width: 100%
   }
 
   @media only screen and (max-width: 600px) {
