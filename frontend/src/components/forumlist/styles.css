@@ -1,8 +1,8 @@
 .homeContainer {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 40px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-top: 20px;
     margin-bottom: 30px;
     margin-left: auto;
     margin-right: auto;
@@ -52,7 +52,6 @@
   .home-stats {
     font-size: 14px;
     vertical-align: middle;
-    left: 25%;
   }
   
   .home-meta a {
@@ -74,4 +73,8 @@
     font-size: 12px;
     font-weight: bold;
     text-align: center;
+  }
+
+  .forumTitle {
+    font-size: 24px;
   }

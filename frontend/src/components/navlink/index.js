@@ -16,19 +16,27 @@ const Navlink = () => {
       <div className="navlinkContainer">
         <div className="link">
           <Icon name="home" className="navlinkIcon" />
-          <Link to="/">Home</Link>
+          <Link to="/" className="navlinkHeader">
+            Home
+          </Link>
         </div>
         <div className="link">
           <Icon name="discussions" className="navlinkIcon" />
-          <Link to="/forums">Forums</Link>
+          <Link to="/forums" className="navlinkHeader">
+            Forums
+          </Link>
         </div>
         <div className="link">
           <Icon name="users" className="navlinkIcon" />
-          <Link to="/users">Users</Link>
+          <Link to="/users" className="navlinkHeader">
+            Users
+          </Link>
         </div>
         <div className="link">
           <Icon name="wordpress forms" className="navlinkIcon" />
-          <Link to="/votes">Elections</Link>
+          <Link to="/votes" className="navlinkHeader">
+            Elections
+          </Link>
         </div>
       </div>
     );

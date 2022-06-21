@@ -9,7 +9,7 @@
     font-size: 18px;
     font-weight: 300;
     margin: 0 10px;
-    color: white;
+    color: white !important;
   }
   
   .navlinkIcon {
@@ -24,9 +24,16 @@
     align-items: center;
     width: 100%;
     height: inherit;
+    color: white !important;
   }
 
   .navlinkDrop{
     background-color: #2185d0 !important;
     height: inherit;
+  }
+  .navlinkHeader {
+    color:white
+  }
+  .navlinkHeader:hover {
+    color:rgb(224, 224, 224)
   }

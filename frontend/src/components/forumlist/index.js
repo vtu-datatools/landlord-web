@@ -1,12 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Segment, Grid, Icon } from "semantic-ui-react";
+import { Header, Segment, Grid } from "semantic-ui-react";
+import { useMediaQuery } from "react-responsive";
+import ForumCardList from "./forumcardlist";
 import StatusMessage from "../statusmessage";
-import Avatar from "../avatar";
 import "./styles.css";
 
 const ForumList = (props) => {
   const { isLoading, error, forums } = props;
+  const isBigScreen = useMediaQuery({ query: "(min-width: 900px)" });
 
   if (error || !forums || isLoading || forums.length === 0) {
     return (
@@ -23,89 +24,46 @@ const ForumList = (props) => {
       />
     );
   }
-
-  const forumCardList = forums.map((forum) => {
-    const {
-      name,
-      slug,
-      description,
-      posts_count,
-      threads_count,
-      last_activity,
-    } = forum;
-
-    let lastActivity = (
-      <div className="home-text home-vertical">{"—  No activity —"}</div>
-    );
-
-    if (last_activity) {
-      let { thread_id, thread_name, username, avatar, pinned, naturaltime } =
-        last_activity;
-
-      thread_name =
-        thread_name.length > 43
-          ? thread_name.substring(0, 43) + "..."
-          : thread_name;
-      lastActivity = (
-        <div className="home-row">
-          <Avatar
-            className="home-avatar"
-            avatar={avatar}
-            centered={false}
-            link={`/user/${username}`}
-          />
-          <div className="home-column">
-            <div>
-              <Icon name={pinned ? "pin" : "talk"} />
-              <Link to={`/thread/${thread_id}`}>{thread_name}</Link>
-            </div>
-            <div className="home-meta">
-              <Link to={`/user/${username}`}>
-                <Icon name="user" />
-                {username}
-              </Link>
-              <b>{`  —  ${naturaltime}`}</b>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
+  if (isBigScreen) {
     return (
-      <Segment vertical key={slug}>
-        <Grid textAlign="left" padded="horizontally">
-          <Grid.Column width={7}>
-            <Grid.Row>
-              <Icon name="edit" />
-              <Link to={`/forum/${slug}`}>{name}</Link>
-            </Grid.Row>
-            <Grid.Row>{description}</Grid.Row>
-          </Grid.Column>
-          <Grid.Column width={3}>
-            <div className="home-column home-stats home-vertical">
-              <div style={{ paddingBottom: "5px" }}>
-                <Icon name="write" />
-                {threads_count}
-                {threads_count > 1 ? " threads" : " thread"}
-              </div>
-              <div>
-                <Icon name="comment outline" />
-                {posts_count}
-                {posts_count > 1 ? " posts" : " post"}
-              </div>
-            </div>
-          </Grid.Column>
-          <Grid.Column width={6}>{lastActivity}</Grid.Column>
-        </Grid>
-      </Segment>
+      <div className="homeContainer">
+        <div className="homeHeaders">
+          <Grid columns={3} padded="horizontally">
+            <Grid.Column width={10}>
+              <Header>Forum</Header>
+            </Grid.Column>
+            <Grid.Column width={1}>
+              <Header>Posts</Header>
+            </Grid.Column>
+            <Grid.Column width={3} floated="right">
+              <Header>Most recent</Header>
+            </Grid.Column>
+          </Grid>
+        </div>
+        <Segment.Group className="home-list">
+          <ForumCardList forums={forums} isBigScreen={isBigScreen} />
+        </Segment.Group>
+      </div>
     );
-  });
-
-  return (
-    <div className="homeContainer">
-      <Segment.Group className="home-list">{forumCardList}</Segment.Group>
-    </div>
-  );
+  } else {
+    return (
+      <div className="homeContainer">
+        <div className="homeHeaders">
+          <Grid columns={2} padded="horizontally">
+            <Grid.Column width={10}>
+              <Header>Forum</Header>
+            </Grid.Column>
+            <Grid.Column width={3} floated="right">
+              <Header>Posts</Header>
+            </Grid.Column>
+          </Grid>
+        </div>
+        <Segment.Group className="home-list">
+          <ForumCardList forums={forums} isBigScreen={isBigScreen} />
+        </Segment.Group>
+      </div>
+    );
+  }
 };
 
 export default ForumList;
