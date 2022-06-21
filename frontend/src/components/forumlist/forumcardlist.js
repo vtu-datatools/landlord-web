@@ -18,7 +18,6 @@ const ForumCardList = (props) => {
       last_activity,
     } = forum;
     const total_posts = posts_count + threads_count;
-    console.log(total_posts);
     let lastActivity = (
       <div className="home-text home-vertical">{"—  No activity —"}</div>
     );
@@ -28,8 +27,8 @@ const ForumCardList = (props) => {
         last_activity;
 
       thread_name =
-        thread_name.length > 43
-          ? thread_name.substring(0, 43) + "..."
+        thread_name.length > 20
+          ? thread_name.substring(0, 20) + "..."
           : thread_name;
       lastActivity = (
         <div className="home-row">
@@ -58,10 +57,9 @@ const ForumCardList = (props) => {
     if (isBigScreen) {
       return (
         <Segment vertical key={slug}>
-          <Grid textAlign="left" padded="horizontally" divided>
+          <Grid textAlign="left" padded="horizontally">
             <Grid.Column width={10}>
               <Grid.Row>
-                <Icon name="edit" />
                 <Link to={`/forum/${slug}`} className="forumTitle">
                   {name}
                 </Link>
@@ -82,10 +80,9 @@ const ForumCardList = (props) => {
     } else {
       return (
         <Segment vertical key={slug}>
-          <Grid textAlign="left" padded="horizontally" divided>
+          <Grid textAlign="left" padded="horizontally">
             <Grid.Column width={10}>
               <Grid.Row>
-                <Icon name="edit" />
                 <Link to={`/forum/${slug}`} className="forumTitle">
                   {name}
                 </Link>
@@ -93,7 +90,7 @@ const ForumCardList = (props) => {
               <Grid.Row>{description}</Grid.Row>
             </Grid.Column>
             <Grid.Column width={3} floated="right">
-              <div className="home-column home-stats home-vertical">
+              <div className="home-column home-stats-mobile home-vertical">
                 <Header>{total_posts}</Header>
               </div>
             </Grid.Column>

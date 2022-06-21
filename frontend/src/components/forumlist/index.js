@@ -30,13 +30,19 @@ const ForumList = (props) => {
         <div className="homeHeaders">
           <Grid columns={3} padded="horizontally">
             <Grid.Column width={10}>
-              <Header>Forum</Header>
+              <Header size="large" color="grey">
+                Forum
+              </Header>
             </Grid.Column>
             <Grid.Column width={1}>
-              <Header>Posts</Header>
+              <Header size="large" color="grey">
+                Posts
+              </Header>
             </Grid.Column>
             <Grid.Column width={3} floated="right">
-              <Header>Most recent</Header>
+              <Header size="large" color="grey">
+                Most recent
+              </Header>
             </Grid.Column>
           </Grid>
         </div>
@@ -50,11 +56,15 @@ const ForumList = (props) => {
       <div className="homeContainer">
         <div className="homeHeaders">
           <Grid columns={2} padded="horizontally">
-            <Grid.Column width={10}>
-              <Header>Forum</Header>
+            <Grid.Column width={9}>
+              <Header size="large" color="grey">
+                Forum
+              </Header>
             </Grid.Column>
-            <Grid.Column width={3} floated="right">
-              <Header>Posts</Header>
+            <Grid.Column width={4} floated="right">
+              <Header size="large" color="grey" className="posts">
+                Posts
+              </Header>
             </Grid.Column>
           </Grid>
         </div>

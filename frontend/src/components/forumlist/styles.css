@@ -52,6 +52,13 @@
   .home-stats {
     font-size: 14px;
     vertical-align: middle;
+    text-align: center;
+  }
+
+  .home-stats-mobile {
+    font-size: 14px;
+    vertical-align: right;
+    text-align: right;
   }
   
   .home-meta a {
@@ -77,4 +84,7 @@
 
   .forumTitle {
     font-size: 24px;
+  }
+  .posts {
+    text-align: right;
   }

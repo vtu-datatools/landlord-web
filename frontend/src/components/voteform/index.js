@@ -43,8 +43,7 @@ const VoteForm = (props) => {
         let id_object = {
           id: id,
         };
-        const response = await dispatch(castVote(id_object));
-        console.log(response);
+        await dispatch(castVote(id_object));
         setHasVoted(true);
       }
     }
