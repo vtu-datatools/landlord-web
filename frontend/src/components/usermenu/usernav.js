@@ -10,9 +10,6 @@ const UserNav = (props) => {
   const myProfile = () => {
     navigate(`/user/${username}`);
   };
-  const admin = () => {
-    navigate(`/admin/`);
-  };
 
   return (
     <div className="userMenu">
@@ -30,7 +27,7 @@ const UserNav = (props) => {
             />
             {isStaff && (
               <Dropdown.Item
-                onClick={admin}
+                href={process.env.PUBLIC_URL + "/admin/"}
                 icon="settings"
                 text="Admin Page"
               />

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Segment, Grid, Icon, Dropdown } from "semantic-ui-react";
 import RichEditor from "../richeditor";
@@ -9,6 +10,7 @@ import "./styles.css";
 const Post = (props) => {
   const {
     id,
+    threadID,
     isThread,
     content,
     createdAt,
@@ -16,18 +18,19 @@ const Post = (props) => {
     authenticatedUsername,
     authenticatedIsStaff,
     deletePostList,
+    deleteAction,
   } = props;
+  const dispatch = useDispatch();
 
   const [editorState, setEditorState] = useState(() =>
     EditorState.createWithContent(convertFromRaw(JSON.parse(content)))
   );
 
-  const onDelete = (props) => {
-    const { deleteAction, id, threadID, isThread } = props;
+  const onDelete = () => {
     if (isThread) {
-      deleteAction(threadID);
+      dispatch(deleteAction(threadID));
     } else {
-      deleteAction(id, threadID);
+      dispatch(deleteAction(id, threadID));
     }
   };
 
@@ -43,6 +46,7 @@ const Post = (props) => {
     </div>
   );
   const isLoading = !isThread && deletePostList.indexOf(id) >= 0;
+
   return (
     <Segment loading={isLoading} color={color}>
       <Grid textAlign="left" padded="horizontally">

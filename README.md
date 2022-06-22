@@ -3,15 +3,17 @@
 Web app for Vancouver landlord data (current address: http://www.vanlandlord.ga)
 
 Stack:
-* Frontend: React (Maps with leaflet)
-* Backend: Django Rest API
-* Database: Postgis (AWS RDS)
+* Frontend: React
+* Backend: Django
+* Database: Postgis
 
 ### TODO:
+* Harden CI/CD
 * Bring in landlord data markers
 * Add ability for users to comment on marker/locations
+* Clean up mobile/desktop forum and thread experience
+* Add election/voting page
 * Clean up vote submission message
-* Add link to users page back
 * Blacklist JWT after refresh and remove on backend
 
 ## Run Locally

@@ -105,7 +105,7 @@ const Thread = (props) => {
   return (
     <div className="threadContainer">
       <div className="thread-title">
-        <Icon name={pinned ? "pin" : "talk"} />
+        {pinned && <Icon name="pin" />}
         {name}
       </div>
       <Segment.Group className="thread-list">
