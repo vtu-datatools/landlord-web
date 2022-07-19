@@ -26,7 +26,7 @@ certificatesResolvers:
 http:
   routers:
     web-secure-router:
-      rule: "(Host(`vanlandlord.ga`) || Host(`www.vanlandlord.ga`)) && (PathPrefix(`/`))"
+      rule: "(Host(`vanlandlord.ga`) || Host(`www.vanlandlord.ga`) || Host(`www.annaclarkwedding.gq`) || Host(`annaclarkwedding.gq`)) && (PathPrefix(`/`))"
       entryPoints:
         - web-secure
       middlewares:
@@ -35,7 +35,7 @@ http:
       tls:
         certResolver: letsencrypt
     api:
-      rule: "(Host(`vanlandlord.ga`) || Host(`www.vanlandlord.ga`))  && (PathPrefix(`/api`) || PathPrefix(`/admin`))"
+      rule: "(Host(`vanlandlord.ga`) || Host(`www.vanlandlord.ga`) || Host(`www.annaclarkwedding.gq`) || Host(`annaclarkwedding.gq`))  && (PathPrefix(`/api`) || PathPrefix(`/admin`))"
       entryPoints:
         - web-secure
       middlewares:
